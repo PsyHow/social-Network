@@ -1,0 +1,42 @@
+.dialogs {
+    display: grid;
+    grid-template-columns: 2fr 10fr;
+    grid-column-gap: 10px;
+}
+
+.dialogsItems {
+    padding: 10px;
+    text-decoration: none;
+    background-color: azure;
+    height: 1000px;
+}
+
+.messages {
+    padding: 10px;
+    background-color: azure;
+}
+
+.dialog a {
+    text-decoration: none;
+    color: #6f828a;
+    font-weight: bold;
+}
+
+.dialog a:hover {
+    color: gold;
+}
+
+.dialog a.active {
+    color: black;
+}
+
+.dialog img {
+    width: 15px;
+    height: 15px;
+    margin-right: 10px;
+}
+
+.answer {
+    text-align: right;
+    background-color: white;
+}

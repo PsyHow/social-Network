@@ -1,0 +1,25 @@
+.nav {
+    grid-area: n;
+    background-color: #6f828a;
+    text-align: right;
+    padding: 10px;
+    height: 100%;
+}
+
+.item a {
+    color: white;
+    border: 1px solid transparent;
+    text-decoration: none;
+}
+
+.item:hover a {
+    color: gold;
+}
+.item a.active {
+    color: black;
+}
+
+.nav img {
+    width: 20px;
+    height: 20px;
+}
