@@ -26,16 +26,14 @@ export type RootStateType = {
     sideBar: SidebarType
 }
 type SidebarType = {}
-
- type AddPostActionType = {
+type AddPostActionType = {
     type: 'ADD-POST'
 }
- type ChangePostActionTextType = {
+type ChangePostActionTextType = {
     type: 'CHANGE-POST-TEXT'
     newPostText: string
 }
 export type ActionsType = AddPostActionType | ChangePostActionTextType
-
 export type StoreType = {
     _state: RootStateType
     dispatch: (action: ActionsType) => void
@@ -43,6 +41,9 @@ export type StoreType = {
     subscribe: (observer: () => void) => void
     getState: () => RootStateType
 }
+
+const ADD_POST = 'ADD-POST';
+const CHANGE_POST_TEXT = 'CHANGE-POST-TEXT';
 
 export let store: StoreType = {
     _state: {
@@ -85,7 +86,7 @@ export let store: StoreType = {
         this.callSubscriber = observer
     },
     dispatch(action) {
-        if (action.type === 'ADD-POST') {
+        if (action.type === ADD_POST) {
             const newPost: postType = {
                 id: 6,
                 message: this._state.profilePage.postText,
@@ -93,12 +94,19 @@ export let store: StoreType = {
             }
             this._state.profilePage.post.push(newPost)
             this.callSubscriber()
-        } else if (action.type === 'CHANGE-POST-TEXT') {
+        } else if (action.type === CHANGE_POST_TEXT) {
             this._state.profilePage.postText = action.newPostText
             this.callSubscriber()
         }
     }
 
 }
+
+export const addPostActionCreator = (): AddPostActionType => ({type: ADD_POST})
+
+
+export const changePostTextActionCreator = (newPostText: string): ChangePostActionTextType =>
+    ({type: CHANGE_POST_TEXT, newPostText: newPostText})
+
 //action это объект(действие) который описывает какое действие
 //совершить { type: 'ADD-POST' }
