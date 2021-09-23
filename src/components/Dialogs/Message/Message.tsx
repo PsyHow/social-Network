@@ -12,7 +12,6 @@ export const Message = (props: messagesType) => {
     return(
             <div>
                 <div className={s.message}>{props.message}</div>
-                <div className={s.answer}>...</div>
             </div>
     )
 }

@@ -15,6 +15,7 @@ type messagesType = {
 type dialogsPageType = {
     dialogs: Array<dialogType>
     messages: Array<messagesType>
+    newMessageText: string
 }
 export type profilePageType = {
     post: Array<postType>
@@ -33,7 +34,14 @@ type ChangePostActionTextType = {
     type: 'CHANGE-POST-TEXT'
     newPostText: string
 }
-export type ActionsType = AddPostActionType | ChangePostActionTextType
+type ChangeMessageActionTextType = {
+    type: 'CHANGE-MESSAGE-TEXT'
+    newMessageText: string
+}
+type SendMessageActionType = {
+    type: 'SEND-MESSAGE'
+}
+export type ActionsType = AddPostActionType | ChangePostActionTextType | ChangeMessageActionTextType | SendMessageActionType
 export type StoreType = {
     _state: RootStateType
     dispatch: (action: ActionsType) => void
@@ -44,6 +52,8 @@ export type StoreType = {
 
 const ADD_POST = 'ADD-POST';
 const CHANGE_POST_TEXT = 'CHANGE-POST-TEXT';
+const CHANGE_MESSAGE_TEXT = 'CHANGE-MESSAGE-TEXT';
+const SEND_MESSAGE = 'SEND-MESSAGE';
 
 export let store: StoreType = {
     _state: {
@@ -71,7 +81,8 @@ export let store: StoreType = {
                 {id: 3, message: 'Yopta'},
                 {id: 4, message: 'Ku'},
                 {id: 5, message: 'Cho kogo?'}
-            ]
+            ],
+            newMessageText: ''
 
         },
         sideBar: {}
@@ -97,16 +108,33 @@ export let store: StoreType = {
         } else if (action.type === CHANGE_POST_TEXT) {
             this._state.profilePage.postText = action.newPostText
             this.callSubscriber()
+        } else if (action.type === CHANGE_MESSAGE_TEXT) {
+            this._state.dialogsPage.newMessageText = action.newMessageText
+            this.callSubscriber()
+        } else if (action.type === SEND_MESSAGE) {
+            //let body = this._state.dialogsPage.newMessageText
+            const newMessage: messagesType = {id:6 , message : this._state.dialogsPage.newMessageText}
+            this._state.dialogsPage.messages.push(newMessage)
+            this.callSubscriber()
         }
     }
 
 }
 
 export const addPostActionCreator = (): AddPostActionType => ({type: ADD_POST})
-
-
 export const changePostTextActionCreator = (newPostText: string): ChangePostActionTextType =>
     ({type: CHANGE_POST_TEXT, newPostText: newPostText})
+export const changeMessageTextActionCreator = (newMessage:string):ChangeMessageActionTextType => {
+    return {
+        type: CHANGE_MESSAGE_TEXT,
+        newMessageText: newMessage
+    }
+}
+export const sendMessageTextActionCreator = ():SendMessageActionType => {
+    return {
+        type: SEND_MESSAGE
+    }
+}
 
 //action это объект(действие) который описывает какое действие
 //совершить { type: 'ADD-POST' }

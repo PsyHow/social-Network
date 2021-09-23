@@ -39,7 +39,10 @@ const App = (props:PropsType) => {
                 <Header/>
                 <Nav/>
                 <div className={'app-wrapper-content'}>
-                    <Route path={'/dialogs'} render={() => <Dialogs state={props.store}/>}/>
+                    <Route path={'/dialogs'} render={() => <Dialogs state={props.store}
+                                                                    dispatch={props.dispatch}
+                                                                    messageText={props.store._state.dialogsPage.newMessageText}/>}
+                                                                    />
                     <Route path={'/profile'} render={() => <Profile store={props.store}
                                                                     PostText={props.store._state.profilePage.postText}
                                                                     dispatch={props.dispatch}/>}/>
