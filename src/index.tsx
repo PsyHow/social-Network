@@ -6,19 +6,19 @@ import './index.css';
 import App from './App';
 
 
-export const callSubscriber = () => {  // создаем функцию которая перерисовывает весь наш сайт
+export const rerenderEntireTree = () => {  // создаем функцию которая перерисовывает весь наш сайт
     ReactDOM.render(
         <React.StrictMode>
-            <App store={store}/>
+            <App store={store}
+                 dispatch={store.dispatch.bind(store)}/>
         </React.StrictMode>,
         document.getElementById('root')
     );
 }
 
-callSubscriber(); //Вызываем эту функцию чтобы отрисовать наш сайт
+rerenderEntireTree(); //Вызываем эту функцию чтобы отрисовать наш сайт
 
-store.subscribe(callSubscriber)
-
+store.subscribe(rerenderEntireTree)
 
 
 

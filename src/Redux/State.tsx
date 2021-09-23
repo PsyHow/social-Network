@@ -23,23 +23,29 @@ export type profilePageType = {
 export type RootStateType = {
     profilePage: profilePageType
     dialogsPage: dialogsPageType
-    sideBar:SidebarType
+    sideBar: SidebarType
 }
-type SidebarType = {
+type SidebarType = {}
 
+ type AddPostActionType = {
+    type: 'ADD-POST'
 }
+ type ChangePostActionTextType = {
+    type: 'CHANGE-POST-TEXT'
+    newPostText: string
+}
+export type ActionsType = AddPostActionType | ChangePostActionTextType
 
 export type StoreType = {
-    _state:RootStateType
-    changePostText:(NewPostText: string)=> void
-    addPost:(postText: string)=>void
-    callSubscriber:() => void
-    subscribe:(observer: ()=> void)=>void
-    getState:()=> RootStateType
+    _state: RootStateType
+    dispatch: (action: ActionsType) => void
+    callSubscriber: () => void
+    subscribe: (observer: () => void) => void
+    getState: () => RootStateType
 }
 
 export let store: StoreType = {
-    _state:  {
+    _state: {
         profilePage: {
             post: [
                 {id: 1, message: 'Hello', likesCount: 12},
@@ -69,26 +75,30 @@ export let store: StoreType = {
         },
         sideBar: {}
     },
-    getState(){
+    getState() {
         return this._state
     },
     callSubscriber() {
         console.log('State is changed')
     },
-    addPost (postText: string) {
-        const newPost:postType = {
-            id: 6,
-            message: this._state.profilePage.postText,
-            likesCount: 0
-        }
-        this._state.profilePage.post.push(newPost)
-        this.callSubscriber()
-    },
-    changePostText(NewPostText: string){
-        this._state.profilePage.postText = NewPostText
-        this.callSubscriber()
-    },
-    subscribe(observer){
+    subscribe(observer) {
         this.callSubscriber = observer
+    },
+    dispatch(action) {
+        if (action.type === 'ADD-POST') {
+            const newPost: postType = {
+                id: 6,
+                message: this._state.profilePage.postText,
+                likesCount: 0
+            }
+            this._state.profilePage.post.push(newPost)
+            this.callSubscriber()
+        } else if (action.type === 'CHANGE-POST-TEXT') {
+            this._state.profilePage.postText = action.newPostText
+            this.callSubscriber()
+        }
     }
+
 }
+//action это объект(действие) который описывает какое действие
+//совершить { type: 'ADD-POST' }
