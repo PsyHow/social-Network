@@ -2,10 +2,10 @@ import React from 'react';
 import s from './Profile.module.css'
 import MyPost from './MyPosts/MyPost';
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
-import {RootStateType} from "../../Redux/State";
+import {RootStateType, StoreType} from "../../Redux/State";
 
 type propsType = {
-    state:RootStateType
+    state:StoreType
     addPost:(postText: string)=>void
     PostText:string
     changePostText:(NewPostText:string)=>void
@@ -18,7 +18,7 @@ const Profile = (props:propsType) => {
             <ProfileInfo/>
             <MyPost state={props.state}
                     addPost={props.addPost}
-                    postText={props.state.profilePage.postText}
+                    postText={props.state._state.profilePage.postText}
                     changePostText={props.changePostText}/>
         </div>
     )

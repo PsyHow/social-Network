@@ -2,16 +2,17 @@ import React from "react";
 import s from './Dialogs.module.css'
 import {DialogsItem} from "./DialogsItem/DialogsItem";
 import {Message} from "./Message/Message";
-import {RootStateType} from "../../Redux/State";
+import {StoreType} from "../../Redux/State";
 
-type stateType = {
-    state: RootStateType
+type propsType = {
+    state:StoreType
 }
 
 
-export const Dialogs = (props: stateType) => {
-    let dialogsElements = props.state.dialogsPage.dialogs.map(d => <DialogsItem name={d.name} id={d.id}/>)
-    let messagesElements = props.state.dialogsPage.messages.map(m => <Message message={m.message} id={m.id}/>)
+export const Dialogs = (props: propsType) => {
+    //let state = props.state.getState
+    let dialogsElements = props.state._state.dialogsPage.dialogs.map(d => <DialogsItem name={d.name} id={d.id}/>)
+    let messagesElements = props.state._state.dialogsPage.messages.map(m => <Message message={m.message} id={m.id}/>)
 
     const messageElements = React.createRef<HTMLTextAreaElement>()
 

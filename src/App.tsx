@@ -8,11 +8,9 @@ import {Dialogs} from "./components/Dialogs/Dialogs";
 import {News} from "./components/News/News";
 import {Settings} from './components/Settings/Settings';
 import {Music} from "./components/Music/Music";
-import {addPost, changePostText, RootStateType} from "./Redux/State";
+import {StoreType} from "./Redux/State";
 
-type propsType = {
-    state: RootStateType
-}
+
 
 export const SiteBar = () => {
     return (
@@ -28,18 +26,23 @@ export const SiteBar = () => {
     )
 }
 
-function App(props: propsType) {
+type PropsType = {
+    store:StoreType
+}
+
+const App = (props:PropsType) => {
+
     return (
         <BrowserRouter>
             <div className={'app-wrapper'}>
                 <Header/>
                 <Nav/>
                 <div className={'app-wrapper-content'}>
-                    <Route path={'/dialogs'} render={() => <Dialogs state={props.state}/>}/>
-                    <Route path={'/profile'} render={() => <Profile state={props.state}
-                                                                    addPost={addPost}
-                                                                    PostText={props.state.profilePage.postText}
-                                                                    changePostText={changePostText}/>}/>
+                    <Route path={'/dialogs'} render={() => <Dialogs state={props.store}/>}/>
+                    <Route path={'/profile'} render={() => <Profile state={props.store}
+                                                                    addPost={props.store.addPost.bind(props.store)}
+                                                                    PostText={props.store._state.profilePage.postText}
+                                                                    changePostText={props.store.changePostText.bind(props.store)}/>}/>
                     <Route path={'/news'} component={News}/>
                     <Route path={'/settings'} component={Settings}/>
                     <Route path={'/music'} component={Music}/>

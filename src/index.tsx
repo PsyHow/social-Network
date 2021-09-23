@@ -1,23 +1,24 @@
 import reportWebVitals from './reportWebVitals';
-import {state, subscribe} from './Redux/State';
+import {store} from './Redux/State';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 
 
-export const rerenderEntireTree = () => {  // создаем функцию которая перерисовывает весь наш сайт
+export const callSubscriber = () => {  // создаем функцию которая перерисовывает весь наш сайт
     ReactDOM.render(
         <React.StrictMode>
-            <App state={state}/>
+            <App store={store}/>
         </React.StrictMode>,
         document.getElementById('root')
     );
 }
 
-rerenderEntireTree(); //Вызываем эту функцию чтобы отрисовать наш сайт
+callSubscriber(); //Вызываем эту функцию чтобы отрисовать наш сайт
 
-subscribe(rerenderEntireTree)
+store.subscribe(callSubscriber)
+
 
 
 

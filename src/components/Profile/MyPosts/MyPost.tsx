@@ -1,17 +1,17 @@
 import React, {ChangeEvent} from 'react';
 import s from './MyPosts.module.css';
 import Post from "./Post/Post";
-import {RootStateType} from "../../../Redux/State";
+import {RootStateType, StoreType} from "../../../Redux/State";
 
 type propsType = {
-    state: RootStateType
+    state:StoreType
     addPost:(postText: string)=>void
     postText:string
     changePostText:(NewPostText: string)=>void
 }
 
 const MyPost = (props: propsType) => {
-    let myPosts = props.state.profilePage.post.map(p => <Post message={p.message} likescount={p.likesCount}/>)
+    let myPosts = props.state._state.profilePage.post.map(p => <Post message={p.message} likescount={p.likesCount}/>)
 
 
 
