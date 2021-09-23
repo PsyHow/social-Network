@@ -2,3 +2,24 @@
 .descriptionBlock {
     padding: 20px;
 }
+
+.wrapper {
+    display: grid;
+    grid-template-columns: 50% 50%;
+}
+
+.ava {
+    border: 1px solid black;
+    height: 300px;
+}
+
+.img {
+    margin: 50px;
+    height: 200px;
+    text-align: center;
+}
+
+.description{
+    border: 1px solid black;
+    height: 300px;
+}

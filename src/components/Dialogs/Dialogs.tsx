@@ -2,8 +2,8 @@ import React, {ChangeEvent} from "react";
 import s from './Dialogs.module.css'
 import {DialogsItem} from "./DialogsItem/DialogsItem";
 import {Message} from "./Message/Message";
-import {ActionsType, changeMessageTextActionCreator, sendMessageTextActionCreator, StoreType} from "../../Redux/State";
-
+import { changeMessageTextActionCreator, sendMessageTextActionCreator} from "../../Redux/dialogsReducer";
+import {ActionsType, StoreType} from "../../Redux/State";
 type propsType = {
     state:StoreType
     dispatch:(action: ActionsType)=> void
