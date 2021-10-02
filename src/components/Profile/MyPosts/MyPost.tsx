@@ -7,17 +7,19 @@ import {
     changePostTextActionCreator,
 
 } from "../../../Redux/profileReducer";
-import {ActionsType, StoreType} from "../../../Redux/State"
+import {ActionsType} from "../../../Redux/state";
+import {AppStateType} from "../../../Redux/redux-store";
+
 
 type propsType = {
-    store: StoreType
-    postText: string
-    dispatch: (action: ActionsType) => void
+    store: AppStateType
+    dispatch:(action:ActionsType)=> void
 }
 
 
 const MyPost = (props: propsType) => {
-    let myPosts = props.store._state.profilePage.post.map(p => <Post message={p.message} likescount={p.likesCount}/>)
+    debugger
+    let myPosts = props.store.profileReducer.post.map(p => <Post key={p.id} message={p.message} likescount={p.likesCount}/>)
 
 
     const addPostHandler = () => {
@@ -27,14 +29,14 @@ const MyPost = (props: propsType) => {
 
 
     const onPostChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
-        props.dispatch(changePostTextActionCreator(props.postText))
+        props.dispatch(changePostTextActionCreator(props.store.profileReducer.postText))
         props.dispatch(changePostTextActionCreator(event.currentTarget.value))
     }
 
     return (
         <div>
             <div >
-                  <textarea value={props.postText}
+                  <textarea value={props.store.profileReducer.postText}
                             onChange={onPostChange}/>
             </div>
             <div>

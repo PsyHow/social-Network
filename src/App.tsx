@@ -8,44 +8,51 @@ import {Dialogs} from "./components/Dialogs/Dialogs";
 import {News} from "./components/News/News";
 import {Settings} from './components/Settings/Settings';
 import {Music} from "./components/Music/Music";
-import {ActionsType, StoreType} from "./Redux/State";
-
+import {ActionsType} from "./Redux/state";
+import {AppStateType} from "./Redux/redux-store";
 
 
 export const SiteBar = () => {
     return (
         <div className={'sitebar'}>
             <h2>Friends</h2>
-            <img src={'https://cdn1.iconfinder.com/data/icons/user-interface-design-flat/60/017_-_Male_User-ui-user-interface-avatar-512.png'}/>
+            <img
+                src={'https://cdn1.iconfinder.com/data/icons/user-interface-design-flat/60/017_-_Male_User-ui-user-interface-avatar-512.png'}/>
             <div>Andrei</div>
-            <img src={'https://cdn1.iconfinder.com/data/icons/user-interface-design-flat/60/017_-_Male_User-ui-user-interface-avatar-512.png'}/>
+            <img
+                src={'https://cdn1.iconfinder.com/data/icons/user-interface-design-flat/60/017_-_Male_User-ui-user-interface-avatar-512.png'}/>
             <div>Andrei</div>
-            <img src={'https://cdn1.iconfinder.com/data/icons/user-interface-design-flat/60/017_-_Male_User-ui-user-interface-avatar-512.png'}/>
+            <img
+                src={'https://cdn1.iconfinder.com/data/icons/user-interface-design-flat/60/017_-_Male_User-ui-user-interface-avatar-512.png'}/>
             <div>Andrei</div>
         </div>
     )
 }
 
 type PropsType = {
-    store:StoreType
-    dispatch:(action:ActionsType)=> void
+    state: AppStateType
+    dispatch:(action: ActionsType) => void
 }
 
-const App = (props:PropsType) => {
-
+const App = (props: PropsType) => {
+    debugger
     return (
         <BrowserRouter>
             <div className={'app-wrapper'}>
                 <Header/>
                 <Nav/>
                 <div className={'app-wrapper-content'}>
-                    <Route path={'/dialogs'} render={() => <Dialogs state={props.store}
-                                                                    dispatch={props.dispatch}
-                                                                    messageText={props.store._state.dialogsPage.newMessageText}/>}
-                                                                    />
-                    <Route path={'/profile'} render={() => <Profile store={props.store}
-                                                                    PostText={props.store._state.profilePage.postText}
-                                                                    dispatch={props.dispatch}/>}/>
+                    <Route path={'/dialogs'}
+                           render={() => <Dialogs
+                               store={props.state}
+                               dispatch={props.dispatch}
+                               />}
+                    />
+
+                    <Route path={'/profile'}
+                           render={() => <Profile state={props.state}
+                                                  dispatch={props.dispatch}/>}/>
+
                     <Route path={'/news'} component={News}/>
                     <Route path={'/settings'} component={Settings}/>
                     <Route path={'/music'} component={Music}/>

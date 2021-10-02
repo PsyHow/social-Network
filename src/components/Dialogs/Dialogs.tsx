@@ -3,17 +3,17 @@ import s from './Dialogs.module.css'
 import {DialogsItem} from "./DialogsItem/DialogsItem";
 import {Message} from "./Message/Message";
 import { changeMessageTextActionCreator, sendMessageTextActionCreator} from "../../Redux/dialogsReducer";
-import {ActionsType, StoreType} from "../../Redux/State";
+import {ActionsType} from "../../Redux/state";
+import {AppStateType} from "../../Redux/redux-store";
 type propsType = {
-    state:StoreType
-    dispatch:(action: ActionsType)=> void
-    messageText: string
+    store: AppStateType
+    dispatch:(action:ActionsType)=> void
 }
 
 
 export const Dialogs = (props: propsType) => {
-    let dialogsElements = props.state._state.dialogsPage.dialogs.map(d => <DialogsItem name={d.name} id={d.id}/>)
-    let messagesElements = props.state._state.dialogsPage.messages.map(m => <Message message={m.message} id={m.id}/>)
+    let dialogsElements = props.store.dialogsReducer.dialogs.map(d => <DialogsItem key={d.id} name={d.name} id={d.id}/>)
+    let messagesElements = props.store.dialogsReducer.messages.map(m => <Message key={m.id} message={m.message} id={m.id}/>)
 
 
 
@@ -23,7 +23,7 @@ export const Dialogs = (props: propsType) => {
     }
 
     const onChangeHandler = (event:ChangeEvent<HTMLTextAreaElement>) => {
-        props.dispatch(changeMessageTextActionCreator(props.messageText))
+        props.dispatch(changeMessageTextActionCreator(props.store.dialogsReducer.newMessageText))
         props.dispatch(changeMessageTextActionCreator(event.currentTarget.value))
     }
 
@@ -35,7 +35,7 @@ export const Dialogs = (props: propsType) => {
             <div className={s.messages}>
                 <div>{messagesElements}</div>
                 <div>
-                    <textarea value={props.messageText} onChange={onChangeHandler}/>
+                    <textarea value={props.store.dialogsReducer.newMessageText} onChange={onChangeHandler}/>
                 </div>
                 <div>
                     <button onClick={sendMessage}>send</button>

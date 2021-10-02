@@ -44,7 +44,9 @@ export type ChangeMessageActionTextType = {
 export type SendMessageActionType = {
     type: 'SEND-MESSAGE'
 }
-export type ActionsType = AddPostActionType | ChangePostActionTextType | ChangeMessageActionTextType | SendMessageActionType
+export type ActionsType = AddPostActionType | ChangePostActionTextType
+    | ChangeMessageActionTextType |
+    SendMessageActionType
 export type StoreType = {
     _state: RootStateType
     dispatch: (action: ActionsType) => void
@@ -53,7 +55,7 @@ export type StoreType = {
     getState: () => RootStateType
 }
 
-export let store: StoreType = {
+export let state: StoreType = {
     _state: {
         profilePage: {
             post: [
@@ -96,13 +98,11 @@ export let store: StoreType = {
     },
     dispatch(action) {
 
-        store._state.profilePage = profileReducer(store._state.profilePage, action)
-        store._state.dialogsPage = dialogsReducer(store._state.dialogsPage, action)
+        state._state.profilePage = profileReducer(state._state.profilePage, action)
+        state._state.dialogsPage = dialogsReducer(state._state.dialogsPage, action)
         this.callSubscriber()
     }
 }
-
-
 
 
 //action это объект(действие) который описывает какое действие

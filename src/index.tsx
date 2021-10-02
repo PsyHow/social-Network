@@ -1,16 +1,17 @@
 import reportWebVitals from './reportWebVitals';
-import {store} from './Redux/State';
+import {store} from './Redux/redux-store'
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 
 
-export const rerenderEntireTree = () => {  // создаем функцию которая перерисовывает весь наш сайт
+export const rerenderEntireTree = () => {
+    debugger// создаем функцию которая перерисовывает весь наш сайт
     ReactDOM.render(
         <React.StrictMode>
-            <App store={store}
-                 dispatch={store.dispatch.bind(store)}/>
+            <App state={store.getState()}
+            dispatch={store.dispatch.bind(store)}/>
         </React.StrictMode>,
         document.getElementById('root')
     );
@@ -18,8 +19,9 @@ export const rerenderEntireTree = () => {  // создаем функцию ко
 
 rerenderEntireTree(); //Вызываем эту функцию чтобы отрисовать наш сайт
 
-store.subscribe(rerenderEntireTree)
-
+store.subscribe(()=> {
+    rerenderEntireTree()
+})
 
 
 // If you want to start measuring performance in your app, pass a function
