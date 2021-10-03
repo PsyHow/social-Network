@@ -7,8 +7,6 @@ import Profile from "./components/Profile/Profile";
 import {News} from "./components/News/News";
 import {Settings} from './components/Settings/Settings';
 import {Music} from "./components/Music/Music";
-import {ActionsType} from "./Redux/state";
-import {StoreType} from "./Redux/redux-store";
 import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
 
 
@@ -29,11 +27,8 @@ export const SiteBar = () => {
     )
 }
 
-type PropsType = {
-    store: StoreType
-}
 
-const App = (props: PropsType) => {
+const App = () => {
     debugger
     return (
         <BrowserRouter>
@@ -43,10 +38,10 @@ const App = (props: PropsType) => {
                 <div className={'app-wrapper-content'}>
                     <Route path={'/dialogs'}
                            render={() =>
-                               <DialogsContainer store={props.store}/>}/>
+                               <DialogsContainer/>}/>
 
                     <Route path={'/profile'}
-                           render={() => <Profile store={props.store}/>}/>
+                           render={() => <Profile/>}/>
 
 
                     <Route path={'/news'} component={News}/>
