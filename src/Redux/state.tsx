@@ -104,6 +104,5 @@ export let state: StoreType = {
     }
 }
 
-
 //action это объект(действие) который описывает какое действие
 //совершить { type: 'ADD-POST' }

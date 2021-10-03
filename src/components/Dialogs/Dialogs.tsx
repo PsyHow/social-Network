@@ -2,29 +2,29 @@ import React, {ChangeEvent} from "react";
 import s from './Dialogs.module.css'
 import {DialogsItem} from "./DialogsItem/DialogsItem";
 import {Message} from "./Message/Message";
-import { changeMessageTextActionCreator, sendMessageTextActionCreator} from "../../Redux/dialogsReducer";
-import {ActionsType} from "../../Redux/state";
-import {AppStateType} from "../../Redux/redux-store";
+import {DialogsType, MessagesType} from "../../Redux/dialogsReducer";
+
 type propsType = {
-    store: AppStateType
-    dispatch:(action:ActionsType)=> void
+    sendMessage:()=>void
+    onChangeMessage:(event:ChangeEvent<HTMLTextAreaElement>) =>void
+    dialogs:Array<DialogsType>
+    messages:Array<MessagesType>
+    newMessageText:string
 }
 
 
 export const Dialogs = (props: propsType) => {
-    let dialogsElements = props.store.dialogsReducer.dialogs.map(d => <DialogsItem key={d.id} name={d.name} id={d.id}/>)
-    let messagesElements = props.store.dialogsReducer.messages.map(m => <Message key={m.id} message={m.message} id={m.id}/>)
+    let dialogsElements = props.dialogs.map(d => <DialogsItem key={d.id} name={d.name} id={d.id}/>)
+    let messagesElements = props.messages.map(m => <Message key={m.id} message={m.message} id={m.id}/>)
 
 
 
     const sendMessage = () => {
-        props.dispatch(sendMessageTextActionCreator())
-        props.dispatch(changeMessageTextActionCreator(''))
+        props.sendMessage()
     }
 
     const onChangeHandler = (event:ChangeEvent<HTMLTextAreaElement>) => {
-        props.dispatch(changeMessageTextActionCreator(props.store.dialogsReducer.newMessageText))
-        props.dispatch(changeMessageTextActionCreator(event.currentTarget.value))
+        props.onChangeMessage(event)
     }
 
     return (
@@ -35,7 +35,7 @@ export const Dialogs = (props: propsType) => {
             <div className={s.messages}>
                 <div>{messagesElements}</div>
                 <div>
-                    <textarea value={props.store.dialogsReducer.newMessageText} onChange={onChangeHandler}/>
+                    <textarea value={props.newMessageText} onChange={onChangeHandler}/>
                 </div>
                 <div>
                     <button onClick={sendMessage}>send</button>
