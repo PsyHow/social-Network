@@ -1,1 +1,9 @@
+.profileWrapper{
+    display: grid;
+    grid-template-areas:
+    'profileinfo' 'profileinfo'
+    'posts'
+    'posts';
 
+    grid-template-rows: 1fr 1fr;
+}

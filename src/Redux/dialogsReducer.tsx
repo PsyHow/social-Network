@@ -11,6 +11,7 @@ export type MessagesType = {
     id:number,
     message:string
 }
+
 const initialState = {
     dialogs: [
         {id: 1, name: 'Roman'},

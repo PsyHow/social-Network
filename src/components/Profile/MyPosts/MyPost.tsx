@@ -25,6 +25,9 @@ const MyPost = (props: propsType) => {
 
     return (
         <div>
+            <div className={s.posts}>
+                {myPosts}
+            </div>
             <div>
                   <textarea value={props.postText}
                             onChange={onPostChange}/>
@@ -32,13 +35,6 @@ const MyPost = (props: propsType) => {
             <div>
                 <button onClick={addPostHandler}>Send post</button>
             </div>
-            <div className={s.postsBlock}>
-                <h3>my posts</h3>
-            </div>
-            <div className={s.posts}>
-                {myPosts}
-            </div>
-
         </div>
 
     )

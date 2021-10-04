@@ -29,7 +29,6 @@ export const SiteBar = () => {
 
 
 const App = () => {
-    debugger
     return (
         <BrowserRouter>
             <div className={'app-wrapper'}>
@@ -42,7 +41,6 @@ const App = () => {
 
                     <Route path={'/profile'}
                            render={() => <Profile/>}/>
-
 
                     <Route path={'/news'} component={News}/>
                     <Route path={'/settings'} component={Settings}/>

@@ -1,8 +1,36 @@
-.item {
-    margin-left: 10px;
-    color: gray;
+
+.PostWrapper {
+    grid-area: posts;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
+    height: 200px;
+    grid-gap: 10px;
+    margin-bottom: 50px;
+    margin-left: 20px;
 }
 
-.item img {
-    height: 50px;
+.box1 {
+    background-color: #7aabc0;
+    grid-column: 1/2;
+    grid-row: 1/5;
+    box-shadow: 0px 1px 10px 3px;
+}
+.ava{
+    display: flex;
+    justify-content: center;
+    height: 100%;
+}
+
+.box2 {
+    background-color: #7aabc0;
+    grid-column: 2/4;
+    grid-row: 1/4;
+    box-shadow: 0px 1px 10px 3px;
+}
+
+.box3 {
+    background-color: #7aabc0;
+    grid-column: 3/4;
+    box-shadow: 0px 1px 10px 3px;
 }
