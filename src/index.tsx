@@ -4,10 +4,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import {Provider} from './StoreContext';
+import {Provider} from "react-redux";
 
-
-export const rerenderEntireTree = () => {
     ReactDOM.render(
         <React.StrictMode>
             <Provider store={store}>
@@ -16,13 +14,7 @@ export const rerenderEntireTree = () => {
         </React.StrictMode>,
         document.getElementById('root')
     );
-}
 
-rerenderEntireTree(); //Вызываем эту функцию чтобы отрисовать наш сайт
-
-store.subscribe(() => {
-    rerenderEntireTree()
-})
 
 
 // If you want to start measuring performance in your app, pass a function

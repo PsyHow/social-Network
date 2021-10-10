@@ -3,7 +3,7 @@ import s from '../Dialogs.module.css'
 
 
 type messagesType = {
-    id:number
+    id:string
     message:string
 }
 

@@ -6,7 +6,7 @@ import {DialogsType, MessagesType} from "../../Redux/dialogsReducer";
 
 type propsType = {
     sendMessage:()=>void
-    onChangeMessage:(event:ChangeEvent<HTMLTextAreaElement>) =>void
+    onChangeMessage:(newMessage:string) =>void
     dialogs:Array<DialogsType>
     messages:Array<MessagesType>
     newMessageText:string
@@ -24,7 +24,7 @@ export const Dialogs = (props: propsType) => {
     }
 
     const onChangeHandler = (event:ChangeEvent<HTMLTextAreaElement>) => {
-        props.onChangeMessage(event)
+        props.onChangeMessage(event.currentTarget.value)
     }
 
     return (

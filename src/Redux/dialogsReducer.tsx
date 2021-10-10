@@ -1,31 +1,40 @@
-import {ActionsType, ChangeMessageActionTextType, SendMessageActionType} from "./state";
+import {v1} from "uuid";
+
+type ChangeMessageActionTextType = {
+    type: 'CHANGE-MESSAGE-TEXT'
+    newMessageText: string
+}
+type SendMessageActionType = {
+    type: 'SEND-MESSAGE'
+}
+type DialogsPageActionType = ChangeMessageActionTextType | SendMessageActionType
 
 const CHANGE_MESSAGE_TEXT = 'CHANGE-MESSAGE-TEXT';
 const SEND_MESSAGE = 'SEND-MESSAGE';
 
 export type DialogsType = {
-    id:number,
+    id:string,
     name:string
 }
 export type MessagesType = {
-    id:number,
+    id:string,
     message:string
 }
 
 const initialState = {
     dialogs: [
-        {id: 1, name: 'Roman'},
-        {id: 2, name: 'Romazan'},
-        {id: 3, name: 'Diyar'},
-        {id: 4, name: 'Ilyas'},
-        {id: 5, name: 'Viktor'}
+        {id: v1(), name: 'Roman'},
+        {id: v1(), name: 'Romazan'},
+        {id: v1(), name: 'Diyar'},
+        {id: v1(), name: 'Ilyas'},
+        {id: v1(), name: 'Viktor'}
     ] as Array<DialogsType>,
     messages: [
-        {id: 1, message: 'Hi'},
-        {id: 2, message: 'Hello'},
-        {id: 3, message: 'Yopta'},
-        {id: 4, message: 'Ku'},
-        {id: 5, message: 'Cho kogo?'}
+        {id: v1(), message: 'Hi'},
+        {id: v1(), message: 'Hello'},
+        {id: v1(), message: 'Yopta'},
+        {id: v1(), message: 'Ku'},
+        {id: v1(), message: 'Cho kogo?'}
     ] as Array<MessagesType>,
     newMessageText: ''
 
@@ -33,18 +42,16 @@ const initialState = {
 
 export type InitialStateType = typeof initialState
 
-const dialogsReducer = (state:InitialStateType = initialState, action: ActionsType) => {
+const dialogsReducer = (state:InitialStateType = initialState, action: DialogsPageActionType) :InitialStateType => {
 
     switch (action.type) {
         case CHANGE_MESSAGE_TEXT :
-            state.newMessageText = action.newMessageText
-            return state
-    }
-    switch (action.type) {
+            return {...state, newMessageText: action.newMessageText}
         case SEND_MESSAGE :
-            const newMessage: MessagesType = {id: 6, message: state.newMessageText}
-            state.messages.push(newMessage)
-            return state
+            /*const newMessage: MessagesType = {id: 6, message: state.newMessageText}
+            state.messages.push(newMessage)*/
+            //const newMessage = state.newMessageText
+            return {...state, newMessageText: '', messages: [...state.messages,{id: v1(), message: state.newMessageText}]}
         default:
             return state
     }
