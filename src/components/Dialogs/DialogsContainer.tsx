@@ -1,4 +1,3 @@
-import React, {ChangeEvent} from "react";
 import {
     changeMessageTextActionCreator,
     DialogsType,
@@ -7,7 +6,7 @@ import {
 } from "../../Redux/dialogsReducer";
 import {Dialogs} from "./Dialogs";
 import {connect} from "react-redux";
-import {AppStateType, store} from "../../Redux/redux-store";
+import {AppStateType} from "../../Redux/redux-store";
 import {Dispatch} from 'redux'
 
 
@@ -33,7 +32,7 @@ let mapStateToProps = (state: AppStateType): MapStateToPropsType => {
 let mapDispatchToProps = (dispatch: Dispatch) : mapDispatchToProps => {
     return {
         sendMessage: () => {
-            store.dispatch(sendMessageTextActionCreator())
+            dispatch(sendMessageTextActionCreator())
         },
         onChangeMessage: (newMessage:string) => {
             dispatch(changeMessageTextActionCreator(newMessage))

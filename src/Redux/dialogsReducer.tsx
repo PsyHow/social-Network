@@ -39,8 +39,7 @@ const initialState = {
     newMessageText: ''
 
 }
-
-export type InitialStateType = typeof initialState
+type InitialStateType = typeof initialState
 
 const dialogsReducer = (state:InitialStateType = initialState, action: DialogsPageActionType) :InitialStateType => {
 
