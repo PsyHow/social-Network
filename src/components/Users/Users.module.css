@@ -1,4 +1,25 @@
-.wrapper img {
-    width: 100px;
-    height: 100px;
+.wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 10px;
+}
+
+.items {
+    display: grid;
+    justify-content: center;
+    background-color: #7aabc0;
+}
+.items img {
+    margin-top: 5px;
+}
+
+.button {
+    display: grid;
+    justify-content: center;
+}
+
+.userInfo {
+    display: grid;
+    justify-content: center;
+    width: 130px;
 }
