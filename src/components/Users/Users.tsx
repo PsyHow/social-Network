@@ -1,12 +1,20 @@
 import React from 'react'
 import s from './Users.module.css'
-import {v1} from "uuid";
 import {UsersPropsType} from "./UsersContainer";
+import axios from 'axios';
+import {UsersType} from "../../Redux/usersReducer";
+import userPhoto from '../../assets/images/user.png'
 
 export const Users = (props: UsersPropsType) => {
 
-    if(props.usersPage.users.length === 0) {
-        props.setUsers([
+    if (props.usersPage.users.length === 0) {
+        axios.get<UsersType[]>("https://social-network.samuraijs.com/api/1.0/users")
+            .then((response) => {
+                debugger
+                // @ts-ignore
+                props.setUsers(response.data.items)
+            })
+       /* props.setUsers([
             {
                 id: v1(),
                 avatar: 'https://mir-s3-cdn-cf.behance.net/project_modules/disp/ce54bf11889067.562541ef7cde4.png',
@@ -31,7 +39,7 @@ export const Users = (props: UsersPropsType) => {
                 status: 'I wont to be a HackerMan',
                 location: {city: 'Pavlodar', country: 'Kazakhstan'}
             }
-        ])
+        ])*/
     }
 
     return (
@@ -39,7 +47,7 @@ export const Users = (props: UsersPropsType) => {
             {props.usersPage.users.map(u => <div key={u.id}>
                 <span>
                     <div>
-                        <img src={u.avatar}/>
+                        <img src={u.photos.small !== null ? u.photos.small : userPhoto}/>
                     </div>
                     <div>
                         {u.followed
@@ -50,12 +58,12 @@ export const Users = (props: UsersPropsType) => {
                 </span>
                 <span>
                     <span>
-                        <div>{u.fullName}</div>
+                        <div>{u.name}</div>
                         <div>{u.status}</div>
                     </span>
                     <span>
-                        <div>{u.location.city}</div>
-                        <div>{u.location.country}</div>
+                        <div>{u.location?.country}</div>
+                        <div>{u.location?.city}</div>
                     </span>
                 </span>
             </div>)}

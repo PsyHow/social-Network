@@ -1,55 +1,60 @@
-type LocationType = {
-    city: string
-    country: string
-}
+
 export type UsersType = {
-    followed: boolean
-    id: string
-    avatar: string
-    fullName: string
-    status: string
-    location: LocationType
+        name: string,
+    id: number,
+    uniqueUrlName: string,
+    photos: {
+        small:string
+        large:string
+    },
+    status: any,
+    followed:boolean
+    location?: {city: string, country: string}
 }
 type FollowACType = {
     type: 'FOLLOW'
-    userId: string
+    userId: number
 }
 type UnFollowACType = {
     type: 'UNFOLLOW'
-    userId: string
+    userId: number
 }
 type SetUsersACType = {
     type: 'SET_USERS'
     users: UsersType[]
 }
+
+
 type UsersActionType = FollowACType | UnFollowACType | SetUsersACType
+
 let initialState : InitialStateType = {
-    users: []
+    users: [ ]
 }
 export type InitialStateType =  {
     users: UsersType[]
-}
+};
 
 export const UsersReducer = (state: InitialStateType = initialState, action: UsersActionType): InitialStateType => {
     switch (action.type) {
         case "FOLLOW":
-            /*let stateCopy = {...state, users: state.users.map(m=> m.id === action.userId ? {...m, followed:true}: m)}
-            return stateCopy*/
-            return {...state, users: [...state.users].map(m => m.id === action.userId ? {...m, followed: true} : m)}
+            return {
+                ...state,
+                users: state.users
+                    .map(m => m.id === action.userId ? {...m, followed: true} : m)}
         case 'UNFOLLOW':
             return {...state, users: [...state.users].map(m => m.id === action.userId ? {...m, followed: false} : m)}
         case 'SET_USERS':
-            return {...state, users: [ ...action.users]}
+            return {...state, users: [...state.users, ...action.users]}
         default:
             return state
     }
 }
 
-export const FollowAC = (userId: string): FollowACType => {
+export const FollowAC = (userId: number): FollowACType => {
     return {type: 'FOLLOW', userId}
 }
 
-export const UnFollowAC = (userId: string): UnFollowACType => {
+export const UnFollowAC = (userId: number): UnFollowACType => {
     return {type: 'UNFOLLOW', userId}
 }
 
