@@ -3,6 +3,9 @@
     grid-template-columns: 1fr 1fr;
     grid-gap: 10px;
 }
+.wrapper button {
+    display: grid;
+}
 
 .items {
     display: grid;
