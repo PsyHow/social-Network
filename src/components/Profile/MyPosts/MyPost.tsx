@@ -12,8 +12,7 @@ type propsType = {
 
 
 const MyPost = (props: propsType) => {
-
-    let myPosts = props.posts.map(p => <Post key={p.id} message={p.message} likescount={p.likesCount}/>)
+    const myPosts = props.posts.map(p => <Post key={p.id} message={p.message} likescount={p.likesCount}/>)
 
     const addPostHandler = () => {
         props.addPost()
@@ -40,3 +39,4 @@ const MyPost = (props: propsType) => {
     )
 }
 export default MyPost;
+

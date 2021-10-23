@@ -23,12 +23,11 @@ let mapStateToProps = (state: AppStateType): MatStateToPropsType => {
 }
 let mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => {
     return {
-        addPost: () => {
-            dispatch(addPostActionCreator())
-        },
+        addPost: () => dispatch(addPostActionCreator()),
         postChange: (postText: string) => {
             dispatch(changePostTextActionCreator(postText))
         }
     }
 }
+
 export const MyPostContainer = connect(mapStateToProps, mapDispatchToProps)(MyPost)

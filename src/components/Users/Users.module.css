@@ -26,3 +26,11 @@
     justify-content: center;
     width: 130px;
 }
+
+.selectedPage {
+    display: flex;
+    font-weight: bold;
+}
+.Page {
+    display: flex;
+}
