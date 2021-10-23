@@ -1,5 +1,5 @@
 import React, {ChangeEvent} from 'react';
-import s from './MyPosts.module.css';
+import styles from './MyPosts.module.css';
 import Post from "./Post/Post";
 import {PostType,} from "../../../Redux/profileReducer";
 
@@ -24,7 +24,7 @@ const MyPost = (props: propsType) => {
 
     return (
         <div>
-            <div className={s.posts}>
+            <div className={styles.posts}>
                 {myPosts}
             </div>
             <div>

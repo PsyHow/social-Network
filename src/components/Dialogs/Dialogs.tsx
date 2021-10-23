@@ -1,5 +1,5 @@
 import React, {ChangeEvent} from "react";
-import s from './Dialogs.module.css'
+import styles from './Dialogs.module.css'
 import {DialogsItem} from "./DialogsItem/DialogsItem";
 import {Message} from "./Message/Message";
 import {DialogsType, MessagesType} from "../../Redux/dialogsReducer";
@@ -14,8 +14,8 @@ type propsType = {
 
 
 export const Dialogs = (props: propsType) => {
-    let dialogsElements = props.dialogs.map(d => <DialogsItem key={d.id} name={d.name} id={d.id}/>)
-    let messagesElements = props.messages.map(m => <Message key={m.id} message={m.message} id={m.id}/>)
+    const dialogsElements = props.dialogs.map(d => <DialogsItem key={d.id} name={d.name} id={d.id}/>)
+    const messagesElements = props.messages.map(m => <Message key={m.id} message={m.message} id={m.id}/>)
 
 
 
@@ -28,11 +28,11 @@ export const Dialogs = (props: propsType) => {
     }
 
     return (
-        <div className={s.dialogs}>
-            <div className={s.dialogsItems}>
+        <div className={styles.dialogs}>
+            <div className={styles.dialogsItems}>
                 {dialogsElements}
             </div>
-            <div className={s.messages}>
+            <div className={styles.messages}>
                 <div>{messagesElements}</div>
                 <div>
                     <textarea value={props.newMessageText} onChange={onChangeHandler}/>

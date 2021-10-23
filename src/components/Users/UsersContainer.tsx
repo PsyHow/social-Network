@@ -1,15 +1,13 @@
 import {connect} from "react-redux";
 import {AppStateType} from "../../Redux/redux-store";
-import preloader from '../../assets/images/Rocket.gif'
 import {
-    followAC,
-    setCurrentPageAC,
-    setTotalUsersCountAC,
-    setUsersAC, toggleIsFetchingAC,
-    unFollowAC,
+    follow,
+    setCurrentPage,
+    setTotalUsersCount,
+    setUsers, toggleIsFetching,
+    unFollow,
     UsersType
 } from "../../Redux/usersReducer";
-import {Dispatch} from "redux";
 import React from "react";
 import axios from "axios";
 import {Users} from "./Users";
@@ -52,28 +50,6 @@ const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
 
 }
 
-const mapDispatchToProps = (dispatch: Dispatch) => {
-    return {
-        follow: (id: number) => {
-            dispatch(followAC(id))
-        },
-        unFollow: (id: number) => {
-            dispatch(unFollowAC(id))
-        },
-        setUsers: (users: UsersType[]) => {
-            dispatch(setUsersAC(users))
-        },
-        setCurrentPage: (currentPage: number) => {
-            dispatch(setCurrentPageAC(currentPage))
-        },
-        setTotalUsersCount: (totalCount: number) => {
-            dispatch(setTotalUsersCountAC(totalCount))
-        },
-        toggleIsFetching: (isFetching: boolean) => {
-            dispatch(toggleIsFetchingAC(isFetching))
-        }
-    }
-}
 
 export class UsersAPIComponent extends React.Component<UsersPropsType> {
 
@@ -115,4 +91,11 @@ export class UsersAPIComponent extends React.Component<UsersPropsType> {
     }
 }
 
-export const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(UsersAPIComponent)
+export const UsersContainer = connect(mapStateToProps, {
+    follow,
+    unFollow,
+    setUsers,
+    setCurrentPage,
+    setTotalUsersCount,
+    toggleIsFetching
+})(UsersAPIComponent)

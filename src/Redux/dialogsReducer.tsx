@@ -47,22 +47,19 @@ const dialogsReducer = (state:InitialStateType = initialState, action: DialogsPa
         case CHANGE_MESSAGE_TEXT :
             return {...state, newMessageText: action.newMessageText}
         case SEND_MESSAGE :
-            /*const newMessage: MessagesType = {id: 6, message: state.newMessageText}
-            state.messages.push(newMessage)*/
-            //const newMessage = state.newMessageText
             return {...state, newMessageText: '', messages: [...state.messages,{id: v1(), message: state.newMessageText}]}
         default:
             return state
     }
 }
 
-export const changeMessageTextActionCreator = (newMessage: string): ChangeMessageActionTextType => {
+export const onChangeMessage = (newMessage: string): ChangeMessageActionTextType => {
     return {
         type: CHANGE_MESSAGE_TEXT,
         newMessageText: newMessage
     }
 }
-export const sendMessageTextActionCreator = (): SendMessageActionType => {
+export const sendMessage = (): SendMessageActionType => {
     return {
         type: SEND_MESSAGE
     }
