@@ -22,6 +22,13 @@ export const Users = (props: propsType) => {
     }
 
     return <>
+
+        {page.map(m => <span
+            className={props.currentPage === m ? s.selectedPage : s.Page}
+            onClick={(e) => {
+                props.onPageChanged(m)
+            }}>{m}</span>)}
+
         <div className={s.wrapper}>
             {props.usersPage.map(u => <div className={s.itemsWrapper} key={u.id}>
                 <div className={s.items}>
@@ -29,10 +36,10 @@ export const Users = (props: propsType) => {
                         <img src={u.photos.small !== null ? u.photos.small : userPhoto}/>
                     </div>
 
-                    <div className={s.button}>
+                    <div >
                         {u.followed
-                            ? <button onClick={() => props.unFollow(u.id)}>UnFollow</button>
-                            : <button onClick={() => props.follow(u.id)}>Follow</button>
+                            ? <button className={s.button} onClick={() => props.unFollow(u.id)}>UnFollow</button>
+                            : <button className={s.button} onClick={() => props.follow(u.id)}>Follow</button>
                         }
                     </div>
 
@@ -50,12 +57,6 @@ export const Users = (props: propsType) => {
 
             </div>)}
         </div>
-
-        {page.map(m => <span
-            className={props.currentPage === m ? s.selectedPage : s.Page}
-            onClick={(e) => {
-                props.onPageChanged(m)
-            }}>{m}</span>)}
 
     </>
 }

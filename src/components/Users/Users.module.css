@@ -1,16 +1,16 @@
 .wrapper {
-    display: grid;
+/*    display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-gap: 10px;
+    grid-gap: 10px;*/
 }
 .wrapper button {
-    display: grid;
+/*    display: grid;*/
 }
 
 .items {
-    display: grid;
+   /* display: grid;
     justify-content: center;
-    background-color: #7aabc0;
+    background-color: #7aabc0;*/
 }
 .items img {
     margin-top: 5px;
@@ -28,9 +28,9 @@
 }
 
 .selectedPage {
-    display: flex;
+/*    display: flex;*/
     font-weight: bold;
 }
 .Page {
-    display: flex;
+/*    display: flex;*/
 }
