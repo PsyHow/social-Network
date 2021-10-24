@@ -1,5 +1,27 @@
 import { v1 } from "uuid";
 
+export type UserProfileType = {
+    userId: number
+    lookingForAJob: boolean
+    lookingForAJobDescription: string
+    fullName: string
+    contacts: {
+        github: string
+        vk: string
+        facebook: string
+        instagram: string
+        twitter: string
+        website: string
+        youtube: string
+        mainLink: string
+    }
+    photos: {
+        small: string
+        large: string
+    }
+
+}
+
 type AddPostActionType = {
     type: 'ADD-POST'
 }
@@ -7,7 +29,11 @@ type ChangePostActionTextType = {
     type: 'CHANGE-POST-TEXT'
     newPostText: string
 }
-type ProfileActionType = AddPostActionType | ChangePostActionTextType
+type SetUserProfileACType = {
+    type: 'SET_USER_PROFILE'
+    profile:any
+}
+type ProfileActionType = AddPostActionType | ChangePostActionTextType | SetUserProfileACType
 
 const ADD_POST = 'ADD-POST';
 const CHANGE_POST_TEXT = 'CHANGE-POST-TEXT';
@@ -16,16 +42,21 @@ export type PostType = {
     message: string,
     likesCount: number
 }
-const initialState = {
+const initialState: InitialStateType = {
     post: [
         {id: v1(), message: 'Hello', likesCount: 12},
         {id: v1(), message: 'Its my first post', likesCount: 30},
         {id: v1(), message: 'Yo', likesCount: 40},
         {id: v1(), message: 'Mu-a-ha-ha', likesCount: 606}
     ] as Array<PostType>,
-    postText: ' '
+    postText: ' ',
+    profile: null,
 }
-export type InitialStateType = typeof initialState
+export type InitialStateType = {
+    post: PostType[]
+    postText: string
+    profile:null | UserProfileType
+}
 const profileReducer = (state : InitialStateType = initialState, action: ProfileActionType) :InitialStateType => {
     switch (action.type) {
         case ADD_POST :
@@ -36,6 +67,8 @@ const profileReducer = (state : InitialStateType = initialState, action: Profile
                 }]}
         case CHANGE_POST_TEXT :
             return {...state, postText: action.newPostText}
+        case "SET_USER_PROFILE":
+            return {...state, profile: action.profile}
         default:
             return state
     }
@@ -44,5 +77,8 @@ const profileReducer = (state : InitialStateType = initialState, action: Profile
 export const addPost = (): AddPostActionType => ({type: ADD_POST})
 export const postChange = (newPostText: string): ChangePostActionTextType =>
     ({type: CHANGE_POST_TEXT, newPostText: newPostText})
+export const setUserProfile = (profile:UserProfileType): SetUserProfileACType => {
+    return {type:"SET_USER_PROFILE", profile}
+}
 
 export default profileReducer;

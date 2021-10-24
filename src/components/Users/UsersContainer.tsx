@@ -32,7 +32,7 @@ export type mapDispatchToPropsType = {
     toggleIsFetching: (isFetching: boolean) => void
 }
 
-type UserResponseType = {
+export type UserResponseType = {
     items: UsersType[]
     totalCount: number
     error: string

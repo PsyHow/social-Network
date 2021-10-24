@@ -10,6 +10,8 @@ export type UsersType = {
     followed: any
     location?: { city: string, country: string }
 }
+
+
 type FollowACType = {
     type: 'FOLLOW'
     id: number
@@ -18,7 +20,6 @@ type UnFollowACType = {
     type: 'UNFOLLOW'
     id: number
 }
-
 type SetCurrentPageACType = {
     type: 'SET_CURRENT_PAGE',
     currentPage: number
@@ -31,7 +32,6 @@ type SetTotalUsersCountACType = {
     type: 'SET_TOTAL_USERS_COUNT',
     totalCount: number
 }
-
 type ToggleIsFetchingACType = {
     type: 'TOGGLE_IS_FETCHING',
     isFetching:boolean
