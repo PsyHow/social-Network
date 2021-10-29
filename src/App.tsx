@@ -9,6 +9,7 @@ import {Music} from "./components/Music/Music";
 import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
 import {UsersContainer} from './components/Users/UsersContainer';
 import ProfileContainer from "./components/Profile/ProfileContainer";
+import HeaderContainer from "./components/Header/HeaderContainer";
 
 
 export const SiteBar = () => {
@@ -33,7 +34,7 @@ const App = () => {
     return (
         <BrowserRouter>
             <div className={'app-wrapper'}>
-                <Header/>
+                <HeaderContainer/>
                 <Nav/>
                 <div className={'app-wrapper-content'}>
                     <Route path={'/dialogs'}
