@@ -44,3 +44,7 @@
     font-family: serif;
 
 }
+.toggle{
+    display: flex;
+    flex-direction: column;
+}
