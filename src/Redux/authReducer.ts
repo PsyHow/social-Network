@@ -1,3 +1,6 @@
+import {Dispatch} from "react";
+import {usersAPI} from "../API/Api";
+
 type InitialStateType = {
     id: null | number
     email: null | string
@@ -17,7 +20,7 @@ export const authReducer = (state: InitialStateType = initialState, action: setU
             return {
                 ...state,
                 ...action.data,
-                isAuth:true
+                isAuth: true
             }
         default:
             return state
@@ -29,3 +32,17 @@ export const setAuthUserData = (id: number | null, email: string | null, login: 
 }
 
 type setUserDataACType = ReturnType<typeof setAuthUserData>
+
+
+//thunk
+export const authUser = () => {
+    return (dispatch: Dispatch<setUserDataACType>) => {
+        usersAPI.authUser()
+            .then(data => {
+                if (data.resultCode === 0) {
+                    const {email, login, id} = data.data
+                    dispatch(setAuthUserData(id, email, login))
+                }
+            })
+    }
+}

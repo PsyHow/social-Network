@@ -1,3 +1,6 @@
+import {usersAPI} from "../API/Api";
+import {Dispatch} from "react";
+
 export type UsersType = {
     name: string,
     id: number,
@@ -98,11 +101,11 @@ export const UsersReducer = (state: InitialStateType = initialState, action: Use
     }
 }
 
-export const follow = (id: number): FollowACType => {
+export const followSuccess = (id: number): FollowACType => {
     return {type: 'FOLLOW', id}
 }
 
-export const unFollow = (id: number): UnFollowACType => {
+export const unFollowSuccess = (id: number): UnFollowACType => {
     return {type: 'UNFOLLOW', id}
 }
 
@@ -120,4 +123,45 @@ export const toggleIsFetching = (isFetching: boolean): ToggleIsFetchingACType =>
 }
 export const followingInProgress = (isFetching: boolean, userId: number): FollowingInProgressType => {
     return {type: 'FOLLOWING_IN_PROGRESS', isFetching, userId}
+}
+
+
+//thunk
+
+export const getUsers = (currentPage: number, pageSize: number) => {
+    return (dispatch: Dispatch<UsersActionType>) => {
+        dispatch(toggleIsFetching(true))
+        usersAPI.getUsers(currentPage, pageSize)
+            .then(data => {
+                dispatch(toggleIsFetching(false))
+                dispatch(setUsers(data.items))
+                dispatch(setTotalUsersCount(data.totalCount))
+            })
+    }
+}
+
+export const follow = (userId: number) => {
+    return (dispatch: Dispatch<UsersActionType>) => {
+        dispatch(followingInProgress(true, userId))
+        usersAPI.unfollowUser(userId)
+            .then(data => {
+                if (data.resultCode === 0) {
+                    dispatch(unFollowSuccess(userId))
+                }
+                dispatch(followingInProgress(false, userId))
+            })
+    }
+}
+
+export const unFollow = (userId: number) => {
+    return (dispatch: Dispatch<UsersActionType>) => {
+        dispatch(followingInProgress(true, userId))
+        usersAPI.followUser(userId)
+            .then(data => {
+                if (data.resultCode === 0) {
+                    dispatch(followSuccess(userId))
+                }
+                dispatch(followingInProgress(false, userId))
+            })
+    }
 }

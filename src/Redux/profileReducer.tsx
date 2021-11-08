@@ -1,4 +1,6 @@
-import { v1 } from "uuid";
+import {v1} from "uuid";
+import {Dispatch} from "react";
+import {usersAPI} from "../API/Api";
 
 export type UserProfileType = {
     userId: number
@@ -31,7 +33,7 @@ type ChangePostActionTextType = {
 }
 type SetUserProfileACType = {
     type: 'SET_USER_PROFILE'
-    profile:any
+    profile: any
 }
 type ProfileActionType = AddPostActionType | ChangePostActionTextType | SetUserProfileACType
 
@@ -55,16 +57,18 @@ const initialState: InitialStateType = {
 export type InitialStateType = {
     post: PostType[]
     postText: string
-    profile:null | UserProfileType
+    profile: null | UserProfileType
 }
-const profileReducer = (state : InitialStateType = initialState, action: ProfileActionType) :InitialStateType => {
+export const profileReducer = (state: InitialStateType = initialState, action: ProfileActionType): InitialStateType => {
     switch (action.type) {
         case ADD_POST :
-            return {...state, postText: '', post: [...state.post,{
+            return {
+                ...state, postText: '', post: [...state.post, {
                     id: v1(),
                     message: state.postText,
                     likesCount: 0
-                }]}
+                }]
+            }
         case CHANGE_POST_TEXT :
             return {...state, postText: action.newPostText}
         case "SET_USER_PROFILE":
@@ -77,8 +81,17 @@ const profileReducer = (state : InitialStateType = initialState, action: Profile
 export const addPost = (): AddPostActionType => ({type: ADD_POST})
 export const postChange = (newPostText: string): ChangePostActionTextType =>
     ({type: CHANGE_POST_TEXT, newPostText: newPostText})
-export const setUserProfile = (profile:UserProfileType): SetUserProfileACType => {
-    return {type:"SET_USER_PROFILE", profile}
+export const setUserProfile = (profile: UserProfileType): SetUserProfileACType => {
+    return {type: "SET_USER_PROFILE", profile}
 }
 
-export default profileReducer;
+
+//thunk
+export const SetUserProfile = (userId: string) => {
+    return (dispatch: Dispatch<ProfileActionType>) => {
+        usersAPI.setUserProfile(userId)
+            .then(data => {
+                dispatch(setUserProfile(data))
+            })
+    }
+}
