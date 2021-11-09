@@ -1,6 +1,5 @@
 import React from 'react';
 import './App.css';
-import Header from './components/Header/Header'
 import Nav from "./components/Navigation/Navigation";
 import {BrowserRouter, Route} from "react-router-dom";
 import {News} from "./components/News/News";
@@ -10,6 +9,7 @@ import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
 import {UsersContainer} from './components/Users/UsersContainer';
 import ProfileContainer from "./components/Profile/ProfileContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
+import {Login} from "./components/login/Login";
 
 
 export const SiteBar = () => {
@@ -51,6 +51,8 @@ const App = () => {
                     <Route path={'/news'} component={News}/>
                     <Route path={'/settings'} component={Settings}/>
                     <Route path={'/music'} component={Music}/>
+                    <Route path={'/login'}
+                           render={() => <Login/>}/>
                 </div>
             </div>
         </BrowserRouter>

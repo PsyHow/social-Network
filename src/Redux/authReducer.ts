@@ -1,5 +1,5 @@
 import {Dispatch} from "react";
-import {usersAPI} from "../API/Api";
+import {authAPI, usersAPI} from "../API/Api";
 
 type InitialStateType = {
     id: null | number
@@ -35,9 +35,9 @@ type setUserDataACType = ReturnType<typeof setAuthUserData>
 
 
 //thunk
-export const authUser = () => {
+export const authMe = () => {
     return (dispatch: Dispatch<setUserDataACType>) => {
-        usersAPI.authUser()
+        authAPI.authMe()
             .then(data => {
                 if (data.resultCode === 0) {
                     const {email, login, id} = data.data
