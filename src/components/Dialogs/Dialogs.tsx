@@ -3,19 +3,17 @@ import styles from './Dialogs.module.css'
 import {DialogsItem} from "./DialogsItem/DialogsItem";
 import {Message} from "./Message/Message";
 import {DialogsType, MessagesType} from "../../Redux/dialogsReducer";
-import {Redirect} from "react-router-dom";
 
-type propsType = {
+type PropsType = {
     sendMessage:()=>void
     onChangeMessage:(newMessage:string) =>void
     dialogs:Array<DialogsType>
     messages:Array<MessagesType>
     newMessageText:string
-    isAuth:boolean
 }
 
 
-export const Dialogs = (props: propsType) => {
+export const Dialogs = (props: PropsType) => {
     const dialogsElements = props.dialogs.map(d => <DialogsItem key={d.id} name={d.name} id={d.id}/>)
     const messagesElements = props.messages.map(m => <Message key={m.id} message={m.message} id={m.id}/>)
 
@@ -28,8 +26,6 @@ export const Dialogs = (props: propsType) => {
     const onChangeHandler = (event:ChangeEvent<HTMLTextAreaElement>) => {
         props.onChangeMessage(event.currentTarget.value)
     }
-
-    if(!props.isAuth) return <Redirect to={'/login'}/>
 
     return (
         <div className={styles.dialogs}>
@@ -50,3 +46,4 @@ export const Dialogs = (props: propsType) => {
 
     )
 }
+
