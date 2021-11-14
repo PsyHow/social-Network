@@ -23,6 +23,11 @@ export type UserResponseType = {
     error: string
 }
 
+type StatusResponseType = {
+    resultCode: number
+    messages: Array<string>
+    data: {}
+}
 export const instance = axios.create({
     baseURL: 'https://social-network.samuraijs.com/api/1.0/',
     withCredentials: true,
@@ -44,9 +49,22 @@ export const usersAPI = {
         return instance.post<FollowUnfollowType>(`follow/${id}`)
             .then(response => response.data)
     },
-    setUserProfile(userId:string) {
-        return instance.get<UserProfileType>(`profile/` + userId)
+    setUserProfile(userId: string) {
+        console.warn('Obsolete method. Please use profileAPI object')
+        return profileAPI.setUserProfile(userId)
+    }
+}
+
+export const profileAPI = {
+    setUserProfile(userId: string) {
+        return instance.get<UserProfileType>(`profile/${userId}`)
             .then(response => response.data)
+    },
+    getStatus(userId: string) {
+        return instance.get<string>(`profile/status/${userId}`)
+    },
+    updateStatus(status: string) {
+        return instance.put<StatusResponseType>('profile/status', {status})
     }
 }
 

@@ -1,5 +1,5 @@
 import {Dispatch} from "react";
-import {authAPI, usersAPI} from "../API/Api";
+import {authAPI, usersAPI} from "../api/Api";
 
 type InitialStateType = {
     id: null | number

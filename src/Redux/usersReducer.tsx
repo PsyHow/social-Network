@@ -1,4 +1,4 @@
-import {usersAPI} from "../API/Api";
+import {usersAPI} from "../api/Api";
 import {Dispatch} from "react";
 
 export type UsersType = {

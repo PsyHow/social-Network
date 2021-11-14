@@ -75,6 +75,7 @@ export class UsersAPIComponent extends React.Component<UsersPropsType> {
 
     }
 }
+
 // important type compose with generic <React.ComponentType>
 export default compose<React.ComponentType>(
     connect(mapStateToProps, {
