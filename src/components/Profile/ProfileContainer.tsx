@@ -62,6 +62,5 @@ class ProfileContainer extends React.Component<PropsType> {
 // important type compose with generic <React.ComponentType>
 export default compose<React.ComponentType>(
     connect(mapStateToProps, {SetUserProfile, getStatus, updateStatus}),
-    withRouter,
-    withAuthRedirect
+    withRouter
 )(ProfileContainer)
