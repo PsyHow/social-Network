@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import styles from './ProfileInfo.module.css'
 import {UserProfileType} from "../../../Redux/profileReducer";
 import {Preloader} from "../../common/preloader/Preloader";
+import  ProfileStatus  from './ProfileStatus';
 
 type PropsType = {
     profile: null | UserProfileType
@@ -19,6 +20,7 @@ const ProfileInfo = (props:PropsType) => {
         <div className={styles.wrapper}>
             <div className={styles.description}>
                 <div className={styles.info}>
+                    <ProfileStatus status={'Hello MutherFucker'}/>
                     <h3>FirstName : <span>{null ? 'Viktor' : props.profile.fullName}</span></h3>
                     <h3>Looking for a job : <span>{props.profile.lookingForAJob ? 'Yes' : 'No'}</span></h3>
                     <h3>looking For A Job Description : <span>{props.profile.lookingForAJobDescription}</span></h3>
