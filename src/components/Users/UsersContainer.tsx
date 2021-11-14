@@ -11,6 +11,8 @@ import {
 import React from "react";
 import {Users} from "./Users";
 import {Preloader} from "../common/preloader/Preloader";
+import {compose} from "redux";
+import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 
 export type UsersPropsType = MapStateToPropsType & mapDispatchToPropsType
 
@@ -73,11 +75,14 @@ export class UsersAPIComponent extends React.Component<UsersPropsType> {
 
     }
 }
-
-export const UsersContainer = connect(mapStateToProps, {
-    follow,
-    unFollow,
-    setCurrentPage,
-    getUsers,
-    followingInProgress
-})(UsersAPIComponent)
+// important type compose with generic <React.ComponentType>
+export default compose<React.ComponentType>(
+    connect(mapStateToProps, {
+        follow,
+        unFollow,
+        setCurrentPage,
+        getUsers,
+        followingInProgress
+    }),
+    withAuthRedirect
+)(UsersAPIComponent)
