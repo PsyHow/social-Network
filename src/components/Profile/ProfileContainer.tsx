@@ -16,6 +16,8 @@ type MapDispatchToPropsType = {
 type MapStateToPropsType = {
     profile: null | UserProfileType
     status: string
+    authorizedUserId: null | number
+    isAuth: boolean
 }
 type PathParamsType = {
     userId: string
@@ -26,6 +28,8 @@ const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
     return {
         profile: state.profilePage.profile,
         status: state.profilePage.status,
+        authorizedUserId: state.auth.id,
+        isAuth: state.auth.isAuth,
     }
 }
 
@@ -58,5 +62,5 @@ class ProfileContainer extends React.Component<PropsType> {
 export default compose<React.ComponentType>(
     connect(mapStateToProps, { SetUserProfile, getStatus, updateStatus }),
     withRouter,
-    withAuthRedirect
+    withAuthRedirect,
 )(ProfileContainer)
