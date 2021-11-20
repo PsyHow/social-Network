@@ -1,8 +1,8 @@
-import React from 'react';
-import ProfileInfo from "./ProfileInfo/ProfileInfo";
-import {MyPostContainer} from "./MyPosts/MyPostContainer";
-import styles from './Profile.module.css'
-import {UserProfileType} from "../../Redux/profileReducer";
+import React               from 'react';
+import ProfileInfo         from "./ProfileInfo/ProfileInfo";
+import { MyPostContainer } from "./MyPosts/MyPostContainer";
+import styles              from './Profile.module.css'
+import { UserProfileType } from "../../Redux/profileReducer";
 
 type PropsType = {
     profile: null | UserProfileType

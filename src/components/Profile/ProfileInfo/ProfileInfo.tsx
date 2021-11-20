@@ -1,8 +1,8 @@
-import React, {useState} from 'react';
-import styles from './ProfileInfo.module.css'
-import {UserProfileType} from "../../../Redux/profileReducer";
-import {Preloader} from "../../common/preloader/Preloader";
-import ProfileStatus from './ProfileStatus';
+import React, { useState } from 'react';
+import styles              from './ProfileInfo.module.css'
+import { UserProfileType } from "../../../Redux/profileReducer";
+import { Preloader }       from "../../common/preloader/Preloader";
+import ProfileStatus       from './ProfileStatus';
 
 type PropsType = {
     profile: null | UserProfileType
@@ -12,9 +12,9 @@ type PropsType = {
 
 const ProfileInfo = (props: PropsType) => {
 
-    const [toggle, setToggle] = useState<boolean>(true)
+    const [toggle, setToggle] = useState<boolean>( true )
 
-    if (!props.profile) {
+    if(!props.profile) {
         return <Preloader/>
     }
 
@@ -27,7 +27,7 @@ const ProfileInfo = (props: PropsType) => {
                     <h3>Looking for a job : <span>{props.profile.lookingForAJob ? 'Yes' : 'No'}</span></h3>
                     <h3>looking For A Job Description : <span>{props.profile.lookingForAJobDescription}</span></h3>
                 </div>
-                <div onClick={() => setToggle(!toggle)}>Toggle{toggle ? '' :
+                <div onClick={() => setToggle( !toggle )}>Toggle{toggle ? '' :
                     <div className={styles.toggle}>
                         <span>Git: {props.profile.contacts.github}</span>
                         <span>VK: {props.profile.contacts.vk}</span>

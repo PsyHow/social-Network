@@ -1,7 +1,6 @@
-import React from "react";
-import {Field, reduxForm} from "redux-form";
-import {InjectedFormProps} from 'redux-form';
-import {ReactForm} from "./ReactForm";
+import React                 from "react";
+import { Field, reduxForm }  from "redux-form";
+import { InjectedFormProps } from 'redux-form';
 
 type FormDataType = {
     login: string
@@ -12,14 +11,13 @@ type FormDataType = {
 export const Login = () => {
 
     const onSubmit = (formData: FormDataType) => {
-        console.log(formData)
-
+        console.log( formData )
     }
 
     return <div>
         <h1>Login</h1>
-        <ReactForm/>
-        {/*<LoginReduxForm onSubmit={onSubmit}/>*/}
+        {/*<ReactForm/>*/}
+        <LoginReduxForm onSubmit={onSubmit}/>
     </div>
 };
 
@@ -40,4 +38,4 @@ const LoginForm = (props: InjectedFormProps<FormDataType>) => {
     </form>
 }
 
-const LoginReduxForm = reduxForm<FormDataType>({form: 'login'})(LoginForm)
+const LoginReduxForm = reduxForm<FormDataType>( { form: 'login' } )( LoginForm )
