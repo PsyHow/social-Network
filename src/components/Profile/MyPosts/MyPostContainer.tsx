@@ -1,7 +1,7 @@
 import { addPost, PostType } from "../../../Redux/profileReducer";
-import MyPost                 from "./MyPost";
-import { connect }            from "react-redux";
-import { AppStateType }       from "../../../Redux/redux-store";
+import { MyPost }            from "./MyPost";
+import { connect }           from "react-redux";
+import { AppStateType }      from "../../../Redux/redux-store";
 
 
 type MatStateToPropsType = {
@@ -15,5 +15,5 @@ const mapStateToProps = (state: AppStateType): MatStateToPropsType => {
 }
 
 export const MyPostContainer = connect(mapStateToProps, {
-    addPost
+    addPost,
 })(MyPost)

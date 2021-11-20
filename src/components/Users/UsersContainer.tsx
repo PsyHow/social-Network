@@ -9,9 +9,9 @@ import {
     unFollow
 } from "../../Redux/usersReducer";
 import React from "react";
-import {Users} from "./Users";
-import {Preloader} from "../common/preloader/Preloader";
-import {compose} from "redux";
+import {Users}     from "./Users";
+import {Preloader} from "../common/Preloader/Preloader";
+import {compose}   from "redux";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 
 export type UsersPropsType = MapStateToPropsType & mapDispatchToPropsType

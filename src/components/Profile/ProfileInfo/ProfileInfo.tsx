@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styles              from './ProfileInfo.module.css'
 import { UserProfileType } from "../../../Redux/profileReducer";
-import { Preloader }       from "../../common/preloader/Preloader";
+import { Preloader }       from "../../common/Preloader/Preloader";
 import ProfileStatus       from './ProfileStatus';
 
 type PropsType = {
