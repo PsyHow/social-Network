@@ -4,7 +4,7 @@ import { required }                            from "../../../utils/validators/v
 import React                                   from "react";
 
 export type LoginFormDataType = {
-    login: string
+    email: string
     password: string
     rememberMe: boolean
 }
@@ -14,17 +14,18 @@ const LoginForm = (props: InjectedFormProps<LoginFormDataType>) => {
         <div>
             <Field component={ Input }
                    validate={ [required] }
-                   name={ 'login' }
-                   placeholder={ 'login' }/>
+                   name={ 'email' }
+                   placeholder={ 'Email' }/>
         </div>
         <div>
             <Field component={ Input }
                    validate={ [required] }
                    name={ 'password' }
+                   type={ 'password' }
                    placeholder={ 'password' }/>
         </div>
         <div>
-            <Field component={ Input } type={ 'checkbox' } name={ 'rememberMe' } placeholder={ 'remember me' }/>
+            <Field component={ Input } type={ 'checkbox' } name={ 'rememberMe' }/>Remember me
         </div>
         <div>
             <button>Login</button>
