@@ -1,18 +1,10 @@
-import { connect }          from "react-redux";
-import { AppStateType }     from "../../Redux/redux-store";
-import {
-    followingInProgress,
-    getUsers,
-    setCurrentPage,
-    UsersType,
-    follow,
-    unFollow,
-}                           from "../../Redux/usersReducer";
-import React                from "react";
-import { Users }            from "./Users";
-import { Preloader }        from "../common/Preloader/Preloader";
-import { compose }          from "redux";
-import { withAuthRedirect } from "../../hoc/withAuthRedirect";
+import { connect }                                                                    from "react-redux";
+import { AppStateType }                                                               from "../../Redux/redux-store";
+import { follow, followingInProgress, getUsers, setCurrentPage, unFollow, UsersType } from "../../Redux/usersReducer";
+import React                                                                          from "react";
+import { Users }                                                                      from "./Users";
+import { Preloader }                                                                  from "../common/Preloader/Preloader";
+import { compose }                                                                    from "redux";
 
 type UsersPropsType = MapStateToPropsType & mapDispatchToPropsType
 type MapStateToPropsType = {
@@ -45,7 +37,7 @@ const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
 
 export class UsersAPIComponent extends React.Component<UsersPropsType> {
 
-    componentDidMount(){
+    componentDidMount() {
         this.props.getUsers(this.props.currentPage, this.props.pageSize)
     }
 
@@ -53,7 +45,7 @@ export class UsersAPIComponent extends React.Component<UsersPropsType> {
         this.props.getUsers(pageNumber, this.props.pageSize)
     }
 
-    render(){
+    render() {
 
         return <>
             { this.props.isFetching ? <Preloader/> : null }
@@ -81,5 +73,4 @@ export default compose<React.ComponentType>(
         getUsers,
         followingInProgress,
     }),
-    withAuthRedirect,
 )(UsersAPIComponent)

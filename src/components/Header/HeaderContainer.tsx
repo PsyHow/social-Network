@@ -1,11 +1,28 @@
-import React              from 'react';
-import Header             from "./Header";
-import { connect }        from 'react-redux';
-import { AppStateType }   from "../../Redux/redux-store";
-import { authMe, logout } from "../../Redux/authReducer";
+import React            from 'react';
+import Header           from "./Header";
+import { connect }      from 'react-redux';
+import { AppStateType } from "../../Redux/redux-store";
+import { logout }       from "../../Redux/authReducer";
+
+
+class HeaderContainer extends React.Component<AuthPropsType> {
+
+    render() {
+        return (
+            <Header { ...this.props }/>
+        )
+    }
+
+}
+
+const mapStateToProps = (state: AppStateType) => ( {
+    isAuth: state.auth.isAuth,
+    login: state.auth.login,
+} )
+
+export default connect(mapStateToProps, { logout })(HeaderContainer);
 
 type MapDispatchToPropsType = {
-    authMe: () => void
     logout: () => void
 }
 type MapStateToPropsType = {
@@ -13,26 +30,3 @@ type MapStateToPropsType = {
     login: string | null
 }
 type AuthPropsType = MapDispatchToPropsType & MapStateToPropsType
-
-const mapStateToProps = (state: AppStateType) => ( {
-    isAuth: state.auth.isAuth,
-    login: state.auth.login,
-} )
-
-class HeaderContainer extends React.Component<AuthPropsType> {
-
-    componentDidMount(){
-        this.props.authMe()
-    }
-
-    render(){
-        return (
-            <Header isAuth={ this.props.isAuth }
-                    login={ this.props.login }
-                    logout={ this.props.logout }/>
-        )
-    }
-
-}
-
-export default connect(mapStateToProps, { authMe, logout })(HeaderContainer);

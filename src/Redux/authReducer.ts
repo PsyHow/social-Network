@@ -32,40 +32,38 @@ export const setAuthUserData = (id: number | null, email: string | null, login: 
 }
 
 //thunk
-export const authMe = () => {
-    return (dispatch: any) => {
-        authAPI.authMe()
-               .then(data => {
-                   if(data.resultCode === 0) {
-                       const { email, login, id } = data.data
-                       dispatch(setAuthUserData(id, email, login, true))
-                   }
-               })
-    }
+export const getAuthUserData = () => (dispatch: any) => {
+    return authAPI.authMe()
+        .then(data => {
+            if(data.resultCode === 0) {
+                const { email, login, id } = data.data
+                dispatch(setAuthUserData(id, email, login, true))
+            }
+        })
 }
 
 export const login = (email: string, password: string, rememberMe: boolean) => {
     return (dispatch: any) => {
         authAPI.login(email, password, rememberMe)
-               .then((res) => {
-                   if(res.data.resultCode === 0) {
-                       dispatch(authMe())
-                   }
-                   else {
-                       const message = res.data.messages.length > 0 ? res.data.messages[0] : 'Some Error'
-                       dispatch(stopSubmit('login', { _error: message }))
-                   }
-               })
+            .then((res) => {
+                if(res.data.resultCode === 0) {
+                    dispatch(getAuthUserData())
+                }
+                else {
+                    const message = res.data.messages.length > 0 ? res.data.messages[0] : 'Some Error'
+                    dispatch(stopSubmit('login', { _error: message }))
+                }
+            })
     }
 }
 
 export const logout = () => {
     return (dispatch: any) => {
         authAPI.logout()
-               .then((res) => {
-                   if(res.data.resultCode === 0) {
-                       dispatch(setAuthUserData(null, null, null, false))
-                   }
-               })
+            .then((res) => {
+                if(res.data.resultCode === 0) {
+                    dispatch(setAuthUserData(null, null, null, false))
+                }
+            })
     }
 }

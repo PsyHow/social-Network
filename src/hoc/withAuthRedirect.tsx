@@ -6,6 +6,7 @@ import {AppStateType} from "../Redux/redux-store";
 type MapStateToPropsType = {
     isAuth: boolean
 }
+
 const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
     return {
         isAuth: state.auth.isAuth
@@ -15,7 +16,7 @@ const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
 export function withAuthRedirect<T>(Component: ComponentType<T>) {
     const RedirectComponent = (props: MapStateToPropsType) => {
         const {isAuth, ...restProps} = props
-        if (!props.isAuth) return <Redirect to={'/login'}/>
+        if (!isAuth) return <Redirect to={'/login'}/>
 
         return <Component {...restProps as T}/>
     }

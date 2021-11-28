@@ -82,34 +82,37 @@ export const profileReducer = (state: InitialStateType = initialState, action: P
     }
 }
 
-export const addPost = (newPostMessage: string): AddPostActionType => ({ type: ADD_POST, newPostMessage })
-export const setUserProfile = (profile: UserProfileType): SetUserProfileACType => ({ type: SET_USER_PROFILE, profile })
-export const setStatus = (status: string): SetStatusACType => ({ type: "SET_STATUS", status })
+export const addPost = (newPostMessage: string): AddPostActionType => ( { type: ADD_POST, newPostMessage } )
+export const setUserProfile = (profile: UserProfileType): SetUserProfileACType => ( {
+    type: SET_USER_PROFILE,
+    profile,
+} )
+export const setStatus = (status: string): SetStatusACType => ( { type: "SET_STATUS", status } )
 
 //thunk
 export const SetUserProfile = (userId: string) => {
     return (dispatch: Dispatch<ProfileActionType>) => {
-        usersAPI.setUserProfile( userId )
-                .then( data => {
-                    dispatch( setUserProfile( data ) )
-                } )
+        usersAPI.setUserProfile(userId)
+            .then(data => {
+                dispatch(setUserProfile(data))
+            })
     }
 }
 export const getStatus = (userId: string) => {
     return (dispatch: Dispatch<ProfileActionType>) => {
-        profileAPI.getStatus( userId )
-                  .then( response => {
-                      dispatch( setStatus( response.data ) )
-                  } )
+        profileAPI.getStatus(userId)
+            .then(response => {
+                dispatch(setStatus(response.data))
+            })
     }
 }
 export const updateStatus = (status: string) => {
     return (dispatch: Dispatch<ProfileActionType>) => {
-        profileAPI.updateStatus( status )
-                  .then( response => {
-                      if(response.data.resultCode === 0) {
-                          dispatch( setStatus( status ) )
-                      }
-                  } )
+        profileAPI.updateStatus(status)
+            .then(response => {
+                if(response.data.resultCode === 0) {
+                    dispatch(setStatus(status))
+                }
+            })
     }
 }

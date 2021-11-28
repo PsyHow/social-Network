@@ -2,7 +2,7 @@ import { DialogsType, MessagesType, sendMessage } from "../../Redux/dialogsReduc
 import { Dialogs }                                from "./Dialogs";
 import { connect }                                from "react-redux";
 import { AppStateType }                           from "../../Redux/redux-store";
-import React                                      from "react";
+import { ComponentType }                          from "react";
 import { withAuthRedirect }                       from "../../hoc/withAuthRedirect";
 import { compose }                                from "redux";
 
@@ -19,7 +19,7 @@ const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
     }
 }
 // important type compose with generic <React.ComponentType>
-export default compose<React.ComponentType>(
-    connect(mapStateToProps, {sendMessage}),
-    withAuthRedirect
+export default compose<ComponentType>(
+    connect(mapStateToProps, { sendMessage }),
+    withAuthRedirect,
 )(Dialogs)

@@ -34,7 +34,7 @@ const initialState = {
     ] as Array<MessagesType>,
 
 }
-type InitialStateType = typeof initialState
+export type InitialStateType = typeof initialState
 
 const dialogsReducer = (state: InitialStateType = initialState, action: DialogsPageActionType): InitialStateType => {
 
