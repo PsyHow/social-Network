@@ -4,7 +4,7 @@ type SendMessageActionType = {
     type: 'SEND-MESSAGE',
     newMessageBody: string
 }
-type DialogsPageActionType = SendMessageActionType
+export type DialogsPageActionType = SendMessageActionType
 
 const SEND_MESSAGE = 'SEND-MESSAGE';
 

@@ -1,11 +1,11 @@
-import {applyMiddleware, combineReducers, createStore} from "redux";
-import {authReducer}                                   from "./authReducer";
-import dialogsReducer                                  from "./dialogsReducer";
-import {profileReducer}                                from "./profileReducer";
-import {UsersReducer}                                  from "./usersReducer";
-import thunk                                           from "redux-thunk"
-import {reducer as formReducer}                        from "redux-form"
-import { appReducer }                                  from "./app-reducer";
+import { applyMiddleware, combineReducers, createStore } from "redux";
+import { authReducer, SetUserDataACType }                from "./authReducer";
+import dialogsReducer, { DialogsPageActionType }         from "./dialogsReducer";
+import { ProfileActionType, profileReducer }             from "./profileReducer";
+import { UsersActionType, UsersReducer }                 from "./usersReducer";
+import thunk, { ThunkAction }                            from "redux-thunk"
+import { reducer as formReducer }                        from "redux-form"
+import { appReducer }                                    from "./app-reducer";
 
 
 const rootReducer = combineReducers({
@@ -14,7 +14,7 @@ const rootReducer = combineReducers({
     usersPage: UsersReducer,
     auth: authReducer,
     app: appReducer,
-    form: formReducer
+    form: formReducer,
     //sidebarReducer
 });
 
@@ -22,6 +22,11 @@ const rootReducer = combineReducers({
 export const store = createStore(rootReducer, applyMiddleware(thunk));
 
 export type AppStateType = ReturnType<typeof rootReducer>
+export type AppActionType = SetUserDataACType | DialogsPageActionType | ProfileActionType | UsersActionType
+export type AppThunkType<ReturnType = void> = ThunkAction<ReturnType,
+    AppStateType,
+    unknown,
+    AppActionType>
 
 
 // @ts-ignore

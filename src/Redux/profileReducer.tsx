@@ -1,6 +1,6 @@
 import { v1 }                   from "uuid";
-import { Dispatch }             from "react";
 import { profileAPI, usersAPI } from "../api/Api";
+import { AppThunkType }         from "./redux-store";
 
 const ADD_POST = 'ADD-POST';
 const SET_USER_PROFILE = "SET_USER_PROFILE"
@@ -38,7 +38,7 @@ type SetStatusACType = {
     type: "SET_STATUS",
     status: string
 }
-type ProfileActionType = AddPostActionType | SetUserProfileACType | SetStatusACType
+export type ProfileActionType = AddPostActionType | SetUserProfileACType | SetStatusACType
 export type PostType = {
     id: string,
     message: string,
@@ -90,29 +90,23 @@ export const setUserProfile = (profile: UserProfileType): SetUserProfileACType =
 export const setStatus = (status: string): SetStatusACType => ( { type: "SET_STATUS", status } )
 
 //thunk
-export const SetUserProfile = (userId: string) => {
-    return (dispatch: Dispatch<ProfileActionType>) => {
-        usersAPI.setUserProfile(userId)
-            .then(data => {
-                dispatch(setUserProfile(data))
-            })
-    }
+export const SetUserProfile = (userId: string): AppThunkType => (dispatch) => {
+    usersAPI.setUserProfile(userId)
+        .then(data => {
+            dispatch(setUserProfile(data))
+        })
 }
-export const getStatus = (userId: string) => {
-    return (dispatch: Dispatch<ProfileActionType>) => {
-        profileAPI.getStatus(userId)
-            .then(response => {
-                dispatch(setStatus(response.data))
-            })
-    }
+export const getStatus = (userId: string): AppThunkType => (dispatch) => {
+    profileAPI.getStatus(userId)
+        .then(response => {
+            dispatch(setStatus(response.data))
+        })
 }
-export const updateStatus = (status: string) => {
-    return (dispatch: Dispatch<ProfileActionType>) => {
-        profileAPI.updateStatus(status)
-            .then(response => {
-                if(response.data.resultCode === 0) {
-                    dispatch(setStatus(status))
-                }
-            })
-    }
+export const updateStatus = (status: string): AppThunkType => (dispatch) => {
+    profileAPI.updateStatus(status)
+        .then(response => {
+            if(response.data.resultCode === 0) {
+                dispatch(setStatus(status))
+            }
+        })
 }
