@@ -1,16 +1,12 @@
-import { DialogsType, MessagesType, sendMessage } from "../../Redux/dialogsReducer";
-import { Dialogs }                                from "./Dialogs";
-import { connect }                                from "react-redux";
-import { AppStateType }                           from "../../Redux/redux-store";
-import { ComponentType }                          from "react";
-import { withAuthRedirect }                       from "../../hoc/withAuthRedirect";
-import { compose }                                from "redux";
+import { sendMessage }               from "../../Redux/dialogsReducer";
+import { Dialogs }                   from "./Dialogs";
+import { connect }                   from "react-redux";
+import { AppStateType }              from "../../Redux/redux-store";
+import { ComponentType }             from "react";
+import { withAuthRedirect }          from "../../hoc/withAuthRedirect";
+import { compose }                   from "redux";
+import { DialogsType, MessagesType } from "../../types/types";
 
-
-type MapStateToPropsType = {
-    dialogs: DialogsType[]
-    messages: MessagesType[]
-}
 
 const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
     return {
@@ -23,3 +19,9 @@ export default compose<ComponentType>(
     connect(mapStateToProps, { sendMessage }),
     withAuthRedirect,
 )(Dialogs)
+
+//types
+type MapStateToPropsType = {
+    dialogs: Array<DialogsType>
+    messages: Array<MessagesType>
+}

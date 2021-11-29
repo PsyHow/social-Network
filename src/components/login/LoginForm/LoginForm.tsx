@@ -4,29 +4,24 @@ import { required }                            from "../../../utils/validators/v
 import React                                   from "react";
 import styles                                  from "./../../common/FormsControl/FormsControl.module.css"
 
-export type LoginFormDataType = {
-    email: string
-    password: string
-    rememberMe: boolean
-}
 
 const LoginForm = (props: InjectedFormProps<LoginFormDataType>) => {
     return <form onSubmit={ props.handleSubmit }>
         <div>
             <Field component={ Input }
                    validate={ [required] }
-                   name={ 'email' }
-                   placeholder={ 'Email' }/>
+                   name={ "email" }
+                   placeholder={ "Email" }/>
         </div>
         <div>
             <Field component={ Input }
                    validate={ [required] }
-                   name={ 'password' }
-                   type={ 'password' }
-                   placeholder={ 'password' }/>
+                   name={ "password" }
+                   type={ "password" }
+                   placeholder={ "password" }/>
         </div>
         <div>
-            <Field component={ Input } type={ 'checkbox' } name={ 'rememberMe' }/>Remember me
+            <Field component={ Input } type={ "checkbox" } name={ "rememberMe" }/>Remember me
         </div>
         { props.error && <div className={ styles.formSummaryError }>
             { props.error }
@@ -37,4 +32,11 @@ const LoginForm = (props: InjectedFormProps<LoginFormDataType>) => {
     </form>
 }
 
-export const LoginReduxForm = reduxForm<LoginFormDataType>({ form: 'login' })(LoginForm)
+export const LoginReduxForm = reduxForm<LoginFormDataType>({ form: "login" })(LoginForm)
+
+//types
+export type LoginFormDataType = {
+    email: string
+    password: string
+    rememberMe: boolean
+}

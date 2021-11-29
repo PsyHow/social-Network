@@ -5,18 +5,6 @@ import { login, logout }                     from "../../Redux/authReducer";
 import { AppStateType }                      from "../../Redux/redux-store";
 import { Redirect }                          from "react-router-dom";
 
-type MapDispatchToPropsType = {
-    login: (email: string, password: string, rememberMe: boolean) => void
-    logout: () => void
-}
-type MapStateToPropsType = {
-    isAuth: boolean
-}
-type LoginPropsType = MapDispatchToPropsType & MapStateToPropsType
-
-const MapStateToProps = (state: AppStateType): MapStateToPropsType => {
-    return { isAuth: state.auth.isAuth }
-}
 
 const Login = (props: LoginPropsType) => {
 
@@ -24,8 +12,8 @@ const Login = (props: LoginPropsType) => {
         props.login(formData.email, formData.password, formData.rememberMe)
     }
 
-    if(props.isAuth) {
-        return <Redirect to={ '/profile' }/>
+    if (props.isAuth) {
+        return <Redirect to={ "/profile" }/>
     }
     return <div>
         <h1>Login</h1>
@@ -34,6 +22,20 @@ const Login = (props: LoginPropsType) => {
     </div>
 };
 
+const MapStateToProps = (state: AppStateType): MapStateToPropsType => {
+    return { isAuth: state.auth.isAuth }
+}
+
 export default connect(MapStateToProps, { login, logout })(Login)
+
+//types
+type MapDispatchToPropsType = {
+    login: (email: string, password: string, rememberMe: boolean) => void
+    logout: () => void
+}
+type MapStateToPropsType = {
+    isAuth: boolean
+}
+type LoginPropsType = MapDispatchToPropsType & MapStateToPropsType
 
 

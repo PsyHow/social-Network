@@ -1,39 +1,40 @@
 import React         from "react";
-import s             from "./Users.module.css";
+import style         from "./Users.module.css";
 import userPhoto     from "../../assets/images/user.png";
-import { UsersType } from "../../Redux/usersReducer";
 import { NavLink }   from "react-router-dom";
+import { UsersType } from "../../types/types";
 
-type propsType = {
-    totalUsersCount: number
-    pageSize: number
-    follow: (id: number) => void
-    unFollow: (id: number) => void
-    usersPage: UsersType[]
-    currentPage: number
-    onPageChanged: (pageNumber: number) => void
-    followProgress: Array<number>
-}
 
-export const Users = (props: propsType) => {
+export const Users = (props: PropsType) => {
+    const {
+        totalUsersCount,
+        pageSize,
+        follow,
+        unFollow,
+        usersPage,
+        currentPage,
+        onPageChanged,
+        followProgress,
+    } = props
 
-    const pagesCount = Math.ceil(props.totalUsersCount / props.pageSize)
+    const pagesCount = Math.ceil(totalUsersCount / pageSize)
     const page = []
     for (let i = 1; i <= pagesCount; i++) {
         page.push(i)
     }
 
+
     return <>
 
         { page.map(m => <span
-            className={ props.currentPage === m ? s.selectedPage : s.Page }
+            className={ currentPage === m ? style.selectedPage : style.Page }
             onClick={ (e) => {
-                props.onPageChanged(m)
+                onPageChanged(m)
             } }>{ m }</span>) }
 
-        <div className={ s.wrapper }>
-            { props.usersPage.map(u => <div className={ s.itemsWrapper } key={ u.id }>
-                <div className={ s.items }>
+        <div className={ style.wrapper }>
+            { usersPage.map(u => <div className={ style.itemsWrapper } key={ u.id }>
+                <div className={ style.items }>
                     <NavLink to={ '/profile/' + u.id }>
                         <div>
                             <img src={ u.photos.small !== null ? u.photos.small : userPhoto }/>
@@ -41,24 +42,24 @@ export const Users = (props: propsType) => {
                     </NavLink>
                     <div>
                         { u.followed
-                            ? <button disabled={ props.followProgress.some(id => id === u.id) }
-                                      className={ s.button }
+                            ? <button disabled={ followProgress.some(id => id === u.id) }
+                                      className={ style.button }
                                       onClick={ () => {
-                                          props.follow(u.id)
+                                          follow(u.id)
                                       } }>
                                 UnFollow
                             </button>
-                            : <button disabled={ props.followProgress.some(id => id === u.id) }
-                                      className={ s.button }
+                            : <button disabled={ followProgress.some(id => id === u.id) }
+                                      className={ style.button }
                                       onClick={ () => {
-                                          props.unFollow(u.id)
+                                          unFollow(u.id)
                                       } }>
                                 Follow
                             </button>
                         }
                     </div>
 
-                    <div className={ s.userInfo }>
+                    <div className={ style.userInfo }>
                         <div>{ u.name }</div>
                         <div>{ u.status }</div>
                     </div>
@@ -74,4 +75,16 @@ export const Users = (props: propsType) => {
         </div>
 
     </>
+}
+
+//types
+type PropsType = {
+    totalUsersCount: number
+    pageSize: number
+    follow: (id: number) => void
+    unFollow: (id: number) => void
+    usersPage: Array<UsersType>
+    currentPage: number
+    onPageChanged: (pageNumber: number) => void
+    followProgress: Array<number>
 }

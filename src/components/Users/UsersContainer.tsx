@@ -6,7 +6,6 @@ import {
     requestUsers,
     setCurrentPage,
     unFollow,
-    UsersType,
 }                       from "../../Redux/usersReducer";
 import React            from "react";
 import { Users }        from "./Users";
@@ -20,6 +19,7 @@ import {
     isFetching,
     totalUsersCount,
 }                       from "../../Redux/users-selectors";
+import { UsersType }    from "../../types/types";
 
 // const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
 //     return {
@@ -82,7 +82,7 @@ export default compose<React.ComponentType>(
     }),
 )(UsersAPIComponent)
 
-
+//types
 type UsersPropsType = MapStateToPropsType & mapDispatchToPropsType
 type MapStateToPropsType = {
     usersPage: UsersType[]

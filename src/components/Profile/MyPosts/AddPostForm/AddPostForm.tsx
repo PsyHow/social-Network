@@ -3,10 +3,6 @@ import { Field, InjectedFormProps, reduxForm } from "redux-form";
 import { TextArea }                            from "../../../common/FormsControl/FormsControl";
 import React                                   from "react";
 
-export type FormPostDataType = {
-    newPostMessage: string
-}
-
 const maxLength = maxLengthCreator(10)
 const AddPostFormC = (props: InjectedFormProps<FormPostDataType>) => {
     return <>
@@ -23,3 +19,8 @@ const AddPostFormC = (props: InjectedFormProps<FormPostDataType>) => {
 }
 
 export const AddPostForm = reduxForm<FormPostDataType>({ form: 'PostMessageForm' })(AddPostFormC)
+
+//types
+export type FormPostDataType = {
+    newPostMessage: string
+}

@@ -3,19 +3,18 @@ import { TextArea }                            from "../../common/FormsControl/F
 import { maxLengthCreator, required }          from "../../../utils/validators/validators";
 import React                                   from "react";
 
-export type FormDialogsDataType = {
-    newMessageBody: string
-}
-const maxLength = maxLengthCreator( 50 )
-const AddMessageFormC = ( props: InjectedFormProps<FormDialogsDataType> ) => {
+
+const maxLength = maxLengthCreator(50)
+
+const AddMessageFormC = (props: InjectedFormProps<FormDialogsDataType>) => {
 
     return <>
         <form onSubmit={ props.handleSubmit }>
             <div>
                 <Field component={ TextArea }
-                       name={ 'newMessageBody' }
-                       placeholder={ 'Enter your message' }
-                       validate={ [ required, maxLength ] }/>
+                       name={ "newMessageBody" }
+                       placeholder={ "Enter your message" }
+                       validate={ [required, maxLength] }/>
             </div>
             <div>
                 <button>send</button>
@@ -24,4 +23,11 @@ const AddMessageFormC = ( props: InjectedFormProps<FormDialogsDataType> ) => {
     </>
 }
 
-export const AddMessageForm = reduxForm<FormDialogsDataType>( { form: "dialogAddMessageForm" } )( AddMessageFormC )
+export const AddMessageForm = reduxForm<FormDialogsDataType>
+({ form: "dialogAddMessageForm" })
+(AddMessageFormC)
+
+//types
+type FormDialogsDataType = {
+    newMessageBody: string
+}

@@ -1,6 +1,6 @@
-import React            from 'react';
-import Header           from "./Header";
-import { connect }      from 'react-redux';
+import React            from "react";
+import { Header }       from "./Header";
+import { connect }      from "react-redux";
 import { AppStateType } from "../../Redux/redux-store";
 import { logout }       from "../../Redux/authReducer";
 
@@ -22,6 +22,7 @@ const mapStateToProps = (state: AppStateType) => ( {
 
 export default connect(mapStateToProps, { logout })(HeaderContainer);
 
+//types
 type MapDispatchToPropsType = {
     logout: () => void
 }

@@ -1,15 +1,12 @@
-import React                             from 'react';
-import styles                            from './MyPosts.module.css';
+import React                             from "react";
+import styles                            from "./MyPosts.module.css";
 import Post                              from "./Post/Post";
-import { PostType }                      from "../../../Redux/profileReducer";
 import { AddPostForm, FormPostDataType } from "./AddPostForm/AddPostForm";
+import { PostType }                      from "../../../types/types";
 
-type propsType = {
-    addPost: (newPostMessage: string) => void
-    posts: PostType[]
-}
 
-export const MyPost = (props: propsType) => {
+
+export const MyPost = (props: PropsType) => {
     const myPosts = props.posts.map(p => <Post key={ p.id } message={ p.message } likescount={ p.likesCount }/>)
 
     const addNewPost = (formData: FormPostDataType) => {
@@ -25,6 +22,12 @@ export const MyPost = (props: propsType) => {
         </div>
 
     )
+}
+
+//types
+type PropsType = {
+    addPost: (newPostMessage: string) => void
+    posts: Array<PostType>
 }
 
 
