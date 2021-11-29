@@ -28,6 +28,6 @@ export const AddMessageForm = reduxForm<FormDialogsDataType>
 (AddMessageFormC)
 
 //types
-type FormDialogsDataType = {
+export type FormDialogsDataType = {
     newMessageBody: string
 }

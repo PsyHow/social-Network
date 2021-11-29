@@ -1,5 +1,6 @@
-import { stopSubmit } from "redux-form";
-import { authAPI }    from "../api/Api";
+import { stopSubmit }   from "redux-form";
+import { authAPI }      from "../api/Api";
+import { AppThunkType } from "./redux-store";
 
 
 const initialState = {
@@ -28,35 +29,36 @@ export const setAuthUserData = (id: number | null, email: string | null, login: 
 
 
 //thunk
-export const getAuthUserData = () =>
-    (dispatch: any) => {
+export const getAuthUserData = (): AppThunkType =>
+    (dispatch) => {
         return authAPI.authMe()
             .then(data => {
-                if (data.resultCode === 0) {
+                if(data.resultCode === 0) {
                     const { email, login, id } = data.data
                     dispatch(setAuthUserData(id, email, login, true))
                 }
             })
     }
 
-export const login = (email: string, password: string, rememberMe: boolean) =>
-    (dispatch: any) => {
+export const login = (email: string, password: string, rememberMe: boolean): AppThunkType =>
+    (dispatch) => {
         authAPI.login(email, password, rememberMe)
             .then((res) => {
-                if (res.data.resultCode === 0) {
+                if(res.data.resultCode === 0) {
                     dispatch(getAuthUserData())
-                } else {
+                }
+                else {
                     const message = res.data.messages.length > 0 ? res.data.messages[0] : 'Some Error'
                     dispatch(stopSubmit('login', { _error: message }))
                 }
             })
     }
 
-export const logout = () =>
-    (dispatch: any) => {
+export const logout = (): AppThunkType =>
+    (dispatch) => {
         authAPI.logout()
             .then((res) => {
-                if (res.data.resultCode === 0) {
+                if(res.data.resultCode === 0) {
                     dispatch(setAuthUserData(null, null, null, false))
                 }
             })

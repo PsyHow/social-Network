@@ -1,8 +1,8 @@
-import { sendMessage }               from "../../Redux/dialogsReducer";
-import { Dialogs }                   from "./Dialogs";
-import { connect }                   from "react-redux";
-import { AppStateType }              from "../../Redux/redux-store";
-import { ComponentType }             from "react";
+import { sendMessage } from "../../Redux/dialogsReducer";
+import { Dialogs }     from "./Dialogs";
+import { connect }       from "react-redux";
+import { AppStateType }  from "../../Redux/redux-store";
+import { ComponentType } from "react";
 import { withAuthRedirect }          from "../../hoc/withAuthRedirect";
 import { compose }                   from "redux";
 import { DialogsType, MessagesType } from "../../types/types";

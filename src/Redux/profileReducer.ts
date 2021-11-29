@@ -1,7 +1,7 @@
-import { v1 }                   from "uuid";
-import { profileAPI, usersAPI } from "../api/Api";
-import { AppThunkType }         from "./redux-store";
-import { PostType, UserProfileType }      from "../types/types";
+import { v1 }                        from "uuid";
+import { profileAPI, usersAPI }      from "../api/Api";
+import { AppThunkType }              from "./redux-store";
+import { PostType, UserProfileType } from "../types/types";
 
 
 const initialState = {
@@ -66,7 +66,7 @@ export const updateStatus = (status: string): AppThunkType =>
     (dispatch) => {
         profileAPI.updateStatus(status)
             .then(response => {
-                if (response.data.resultCode === 0) {
+                if(response.data.resultCode === 0) {
                     dispatch(setStatus(status))
                 }
             })

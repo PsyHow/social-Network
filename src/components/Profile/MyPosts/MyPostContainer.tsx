@@ -1,5 +1,5 @@
-import { addPost }      from "../../../Redux/profileReducer";
-import { MyPost }       from "./MyPost";
+import { addPost } from "../../../Redux/profileReducer";
+import { MyPost }  from "./MyPost";
 import { connect }      from "react-redux";
 import { AppStateType } from "../../../Redux/redux-store";
 import { PostType }     from "../../../types/types";

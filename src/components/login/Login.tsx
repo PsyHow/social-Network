@@ -1,9 +1,9 @@
 import React                                 from "react";
 import { connect }                           from "react-redux";
 import { LoginFormDataType, LoginReduxForm } from "./LoginForm/LoginForm";
-import { login, logout }                     from "../../Redux/authReducer";
-import { AppStateType }                      from "../../Redux/redux-store";
-import { Redirect }                          from "react-router-dom";
+import { login, logout } from "../../Redux/authReducer";
+import { AppStateType }  from "../../Redux/redux-store";
+import { Redirect }      from "react-router-dom";
 
 
 const Login = (props: LoginPropsType) => {

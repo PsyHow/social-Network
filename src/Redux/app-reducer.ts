@@ -18,14 +18,15 @@ export const appReducer = (state = initialState, action: AppActionType): Initial
 export const initializedSuccess = () => ( { type: "SET_INITIALIZED" } as const )
 
 //thunk
-export const initializeApp = () => (dispatch: any) => {
-    let promise = dispatch(getAuthUserData())
-    Promise.all([promise])
-        .then(() => {
-            dispatch(initializedSuccess())
-        })
-}
+export const initializeApp = (): AppThunkType =>
+    (dispatch) => {
+        let promise = dispatch(getAuthUserData())
+        Promise.all([promise])
+            .then(() => {
+                dispatch(initializedSuccess())
+            })
+    }
 
 //types
 type InitialStateType = typeof initialState
-type AppActionType = ReturnType<typeof initializedSuccess>
+export type AppActionType = ReturnType<typeof initializedSuccess>

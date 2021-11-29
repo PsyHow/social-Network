@@ -86,7 +86,7 @@ export const follow = (userId: number): AppThunkType =>
         dispatch(followingInProgress(true, userId))
         usersAPI.unfollowUser(userId)
             .then(data => {
-                if (data.resultCode === 0) {
+                if(data.resultCode === 0) {
                     dispatch(unFollowSuccess(userId))
                 }
                 dispatch(followingInProgress(false, userId))
@@ -98,7 +98,7 @@ export const unFollow = (userId: number): AppThunkType =>
         dispatch(followingInProgress(true, userId))
         usersAPI.followUser(userId)
             .then(data => {
-                if (data.resultCode === 0) {
+                if(data.resultCode === 0) {
                     dispatch(followSuccess(userId))
                 }
                 dispatch(followingInProgress(false, userId))
