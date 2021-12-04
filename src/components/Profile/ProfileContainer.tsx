@@ -1,20 +1,20 @@
-import React, { ComponentType }                    from "react";
-import { Profile }                                 from "./Profile";
-import { connect }                                 from "react-redux";
-import { AppStateType }                            from "../../Redux/redux-store";
+import React, { ComponentType } from "react";
+import { Profile } from "./Profile";
+import { connect } from "react-redux";
+import { AppStateType } from "../../Redux/redux-store";
 import { getStatus, SetUserProfile, updateStatus } from "../../Redux/profileReducer";
-import { RouteComponentProps, withRouter }         from "react-router";
-import { compose }                                 from 'redux';
-import { withAuthRedirect }                        from "../../hoc/withAuthRedirect";
-import { UserProfileType }                         from "../../types/types";
+import { RouteComponentProps, withRouter } from "react-router";
+import { compose } from 'redux';
+import { withAuthRedirect } from "../../hoc/withAuthRedirect";
+import { UserProfileType } from "../../types/types";
 
 class ProfileContainer extends React.Component<PropsType> {
 
     componentDidMount() {
         let userId = this.props.match.params.userId
-        if (!userId) {
+        if(!userId) {
             userId = JSON.stringify(this.props.authorizedUserId)
-            if (!userId) {
+            if(!userId) {
                 this.props.history.push("/login")
             }
         }

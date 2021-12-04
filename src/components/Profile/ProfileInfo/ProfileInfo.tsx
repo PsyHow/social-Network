@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import styles              from "./ProfileInfo.module.css"
-import { Preloader }       from "../../common/Preloader/Preloader";
-import ProfileStatus       from './ProfileStatus';
+import styles from "./ProfileInfo.module.css"
+import { Preloader } from "../../common/Preloader/Preloader";
 import { UserProfileType } from "../../../types/types";
+import { ProfileStatusWithHooks } from "./ProfileStatusWithHook";
 
 
 export const ProfileInfo = (props: PropsType) => {
@@ -17,7 +17,7 @@ export const ProfileInfo = (props: PropsType) => {
         <div className={ styles.wrapper }>
             <div className={ styles.description }>
                 <div className={ styles.info }>
-                    <ProfileStatus status={ props.status } updateStatus={ props.updateStatus }/>
+                    <ProfileStatusWithHooks status={ props.status } updateStatus={ props.updateStatus }/>
                     <h3>FirstName : <span>{ null ? 'Viktor' : props.profile.fullName }</span></h3>
                     <h3>Looking for a job : <span>{ props.profile.lookingForAJob ? 'Yes' : 'No' }</span></h3>
                     <h3>looking For A Job Description : <span>{ props.profile.lookingForAJobDescription }</span></h3>
