@@ -25,11 +25,6 @@ export const usersAPI = {
         return instance.post<FollowUnfollowType>(`follow/${ id }`)
             .then(response => response.data)
     },
-
-    setUserProfile(userId: string) {
-        console.warn('Obsolete method. Please use profileAPI object')
-        return profileAPI.setUserProfile(userId)
-    },
 }
 
 export const profileAPI = {

@@ -1,7 +1,6 @@
-import React       from "react";
+import React from "react";
 import { NavLink } from "react-router-dom";
-import { SiteBar } from "../../App";
-import style       from "./Navigation.module.css";
+import style from "./Navigation.module.css";
 
 export const Nav = () => {
     return (
@@ -25,7 +24,7 @@ export const Nav = () => {
                 <NavLink to={ "/settings" } activeClassName={ style.active }>Settings</NavLink>
             </div>
             <div className={ style.item }>
-                <SiteBar/>
+
             </div>
         </nav>
     )

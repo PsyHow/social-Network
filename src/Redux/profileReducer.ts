@@ -1,6 +1,6 @@
-import { v1 }                        from "uuid";
-import { profileAPI, usersAPI }      from "../api/Api";
-import { AppThunkType }              from "./redux-store";
+import { v1 } from "uuid";
+import { profileAPI } from "../api/Api";
+import { AppThunkType } from "./redux-store";
 import { PostType, UserProfileType } from "../types/types";
 
 
@@ -48,7 +48,7 @@ export const setStatus = (status: string) => ( { type: "PROFILE/SET_STATUS", sta
 //thunk
 export const SetUserProfile = (userId: string): AppThunkType =>
     (dispatch) => {
-        usersAPI.setUserProfile(userId)
+        profileAPI.setUserProfile(userId)
             .then(data => {
                 dispatch(setUserProfile(data))
             })

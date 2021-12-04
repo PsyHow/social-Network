@@ -28,7 +28,7 @@ export const Users = (props: PropsType) => {
 
         { page.map(m => <span
             className={ currentPage === m ? style.selectedPage : style.Page }
-            onClick={ (e) => {
+            onClick={ () => {
                 onPageChanged(m)
             } }>{ m }</span>) }
 
@@ -37,7 +37,7 @@ export const Users = (props: PropsType) => {
                 <div className={ style.items }>
                     <NavLink to={ '/profile/' + u.id }>
                         <div>
-                            <img src={ u.photos.small !== null ? u.photos.small : userPhoto }/>
+                            <img alt={'photoProfile'} src={ u.photos.small !== null ? u.photos.small : userPhoto }/>
                         </div>
                     </NavLink>
                     <div>

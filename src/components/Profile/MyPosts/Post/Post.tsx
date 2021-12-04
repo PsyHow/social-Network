@@ -12,7 +12,7 @@ const Post = (props: messageTypes) => {
 
             <div className={s.box1}>
                 <div className={s.ava}>
-                    <img
+                    <img alt={'avatar'}
                         src='https://mir-s3-cdn-cf.behance.net/project_modules/disp/ce54bf11889067.562541ef7cde4.png'/>
                 </div>
             </div>

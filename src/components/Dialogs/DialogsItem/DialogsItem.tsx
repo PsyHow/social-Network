@@ -8,7 +8,7 @@ export const DialogsItem = (props: propsType) => {
 
     return (
         <div className={ style.dialog }>
-            <img
+            <img alt={'avatar'}
                 src={ "https://cdn1.iconfinder.com/data/icons/user-interface-design-flat/60/017_-_Male_User-ui-user-interface-avatar-512.png" }/>
             <NavLink activeClassName={ style.active } to={ path }>{ props.name }</NavLink>
         </div>

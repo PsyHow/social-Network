@@ -37,7 +37,7 @@ export const ProfileInfo = (props: PropsType) => {
             </div>
             <div className={ styles.ava }>
                 <div className={ styles.img }>
-                    <img
+                    <img alt={'avatar'}
                         src={ props.profile.photos.large || "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRpQppfBCwxxoQg3WctXTif09_hUrdIItPqnA&usqp=CAU" }/>
                     {/*<img  src={'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRpQppfBCwxxoQg3WctXTif09_hUrdIItPqnA&usqp=CAU'}/>*/ }
                 </div>

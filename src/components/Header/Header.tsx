@@ -6,7 +6,7 @@ import style       from "./Header.module.css"
 export const Header = (props: PropsType) => {
     return (
         <header className={ style.header }>
-            <img src="https://img.icons8.com/plasticine/2x/duolingo-logo.png"/>
+            <img alt={'logo'} src="https://img.icons8.com/plasticine/2x/duolingo-logo.png"/>
             <div className={ style.loginBlock }>
                 { props.isAuth
                     ? <div>{ props.login } - <button onClick={ props.logout }>Log out</button></div>

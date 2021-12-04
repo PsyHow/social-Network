@@ -17,22 +17,22 @@ import { compose }              from "redux";
 import { initializeApp }        from "./Redux/app-reducer";
 
 
-export const SiteBar = () => {
-    return (
-        <div className={ 'sitebar' }>
-            <h2>Friends</h2>
-            <img
-                src={ 'https://cdn1.iconfinder.com/data/icons/user-interface-design-flat/60/017_-_Male_User-ui-user-interface-avatar-512.png' }/>
-            <div>Andrei</div>
-            <img
-                src={ 'https://cdn1.iconfinder.com/data/icons/user-interface-design-flat/60/017_-_Male_User-ui-user-interface-avatar-512.png' }/>
-            <div>Andrei</div>
-            <img
-                src={ 'https://cdn1.iconfinder.com/data/icons/user-interface-design-flat/60/017_-_Male_User-ui-user-interface-avatar-512.png' }/>
-            <div>Andrei</div>
-        </div>
-    )
-}
+// export const SiteBar = () => {
+//     return (
+//         <div className={ 'sitebar' }>
+//             <h2>Friends</h2>
+//             <img
+//                 src={ 'https://cdn1.iconfinder.com/data/icons/user-interface-design-flat/60/017_-_Male_User-ui-user-interface-avatar-512.png' }/>
+//             <div>Andrei</div>
+//             <img
+//                 src={ 'https://cdn1.iconfinder.com/data/icons/user-interface-design-flat/60/017_-_Male_User-ui-user-interface-avatar-512.png' }/>
+//             <div>Andrei</div>
+//             <img
+//                 src={ 'https://cdn1.iconfinder.com/data/icons/user-interface-design-flat/60/017_-_Male_User-ui-user-interface-avatar-512.png' }/>
+//             <div>Andrei</div>
+//         </div>
+//     )
+// }
 
 
 class App extends React.Component<AppPropsType> {
