@@ -1,11 +1,12 @@
-import React         from "react";
-import style         from "./Users.module.css";
-import userPhoto     from "../../assets/images/user.png";
-import { NavLink }   from "react-router-dom";
+import React from "react";
+import style from "./Users.module.css";
 import { UsersType } from "../../types/types";
+import { Paginator } from "../common/Paginator/Paginator";
+import { User } from "./User";
 
 
 export const Users = (props: PropsType) => {
+
     const {
         totalUsersCount,
         pageSize,
@@ -17,64 +18,26 @@ export const Users = (props: PropsType) => {
         followProgress,
     } = props
 
-    const pagesCount = Math.ceil(totalUsersCount / pageSize)
-    const page = []
-    for (let i = 1; i <= pagesCount; i++) {
-        page.push(i)
-    }
 
+    return <div>
 
-    return <>
-
-        { page.map(m => <span
-            className={ currentPage === m ? style.selectedPage : style.Page }
-            onClick={ () => {
-                onPageChanged(m)
-            } }>{ m }</span>) }
+        <Paginator totalUsersCount={ totalUsersCount }
+                   pageSize={ pageSize }
+                   currentPage={ currentPage }
+                   onPageChanged={ onPageChanged }
+        />
 
         <div className={ style.wrapper }>
-            { usersPage.map(u => <div className={ style.itemsWrapper } key={ u.id }>
-                <div className={ style.items }>
-                    <NavLink to={ '/profile/' + u.id }>
-                        <div>
-                            <img alt={'photoProfile'} src={ u.photos.small !== null ? u.photos.small : userPhoto }/>
-                        </div>
-                    </NavLink>
-                    <div>
-                        { u.followed
-                            ? <button disabled={ followProgress.some(id => id === u.id) }
-                                      className={ style.button }
-                                      onClick={ () => {
-                                          follow(u.id)
-                                      } }>
-                                UnFollow
-                            </button>
-                            : <button disabled={ followProgress.some(id => id === u.id) }
-                                      className={ style.button }
-                                      onClick={ () => {
-                                          unFollow(u.id)
-                                      } }>
-                                Follow
-                            </button>
-                        }
-                    </div>
-
-                    <div className={ style.userInfo }>
-                        <div>{ u.name }</div>
-                        <div>{ u.status }</div>
-                    </div>
-
-                    <div>
-                        <div>{ "u.location?.country" }</div>
-                        <div>{ "u.location?.city" }</div>
-                    </div>
-
-                </div>
-
-            </div>) }
+            { usersPage.map(user =>
+                <User key={ user.id }
+                      user={ user }
+                      followProgress={ followProgress }
+                      follow={ follow }
+                      unFollow={ unFollow }
+                />)
+            }
         </div>
-
-    </>
+    </div>
 }
 
 //types

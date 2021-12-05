@@ -1,17 +1,4 @@
-.wrapper {
-/*    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-gap: 10px;*/
-}
-.wrapper button {
-/*    display: grid;*/
-}
 
-.items {
-   /* display: grid;
-    justify-content: center;
-    background-color: #7aabc0;*/
-}
 .items img {
     margin-top: 5px;
 }
@@ -27,10 +14,7 @@
     width: 130px;
 }
 
-.selectedPage {
-/*    display: flex;*/
-    font-weight: bold;
-}
+
 .Page {
 /*    display: flex;*/
 }

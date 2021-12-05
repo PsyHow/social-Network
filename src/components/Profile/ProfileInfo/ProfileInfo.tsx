@@ -7,9 +7,11 @@ import { ProfileStatusWithHooks } from "./ProfileStatusWithHook";
 
 export const ProfileInfo = (props: PropsType) => {
 
+    const { status, profile, updateStatus } = props
+
     const [toggle, setToggle] = useState<boolean>(true)
 
-    if (!props.profile) {
+    if(!profile) {
         return <Preloader/>
     }
 
@@ -17,29 +19,28 @@ export const ProfileInfo = (props: PropsType) => {
         <div className={ styles.wrapper }>
             <div className={ styles.description }>
                 <div className={ styles.info }>
-                    <ProfileStatusWithHooks status={ props.status } updateStatus={ props.updateStatus }/>
-                    <h3>FirstName : <span>{ null ? 'Viktor' : props.profile.fullName }</span></h3>
-                    <h3>Looking for a job : <span>{ props.profile.lookingForAJob ? 'Yes' : 'No' }</span></h3>
-                    <h3>looking For A Job Description : <span>{ props.profile.lookingForAJobDescription }</span></h3>
+                    <ProfileStatusWithHooks status={ status } updateStatus={ updateStatus }/>
+                    <h3>FirstName : <span>{ null ? 'Viktor' : profile.fullName }</span></h3>
+                    <h3>Looking for a job : <span>{ profile.lookingForAJob ? 'Yes' : 'No' }</span></h3>
+                    <h3>looking For A Job Description : <span>{ profile.lookingForAJobDescription }</span></h3>
                 </div>
                 <div onClick={ () => setToggle(!toggle) }>Toggle{ toggle ? '' :
                     <div className={ styles.toggle }>
-                        <span>Git: { props.profile.contacts.github }</span>
-                        <span>VK: { props.profile.contacts.vk }</span>
-                        <span>FaceBook: { props.profile.contacts.facebook }</span>
-                        <span>Twitter: { props.profile.contacts.twitter }</span>
-                        <span>Instagram: { props.profile.contacts.instagram }</span>
-                        <span>MainLink: { props.profile.contacts.mainLink }</span>
-                        <span>Website: { props.profile.contacts.website }</span>
-                        <span>YouTube: { props.profile.contacts.youtube }</span>
+                        <span>Git: { profile.contacts.github }</span>
+                        <span>VK: { profile.contacts.vk }</span>
+                        <span>FaceBook: { profile.contacts.facebook }</span>
+                        <span>Twitter: { profile.contacts.twitter }</span>
+                        <span>Instagram: { profile.contacts.instagram }</span>
+                        <span>MainLink: { profile.contacts.mainLink }</span>
+                        <span>Website: { profile.contacts.website }</span>
+                        <span>YouTube: { profile.contacts.youtube }</span>
                     </div>
                 }</div>
             </div>
             <div className={ styles.ava }>
                 <div className={ styles.img }>
-                    <img alt={'avatar'}
-                        src={ props.profile.photos.large || "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRpQppfBCwxxoQg3WctXTif09_hUrdIItPqnA&usqp=CAU" }/>
-                    {/*<img  src={'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRpQppfBCwxxoQg3WctXTif09_hUrdIItPqnA&usqp=CAU'}/>*/ }
+                    <img alt={ 'avatar' }
+                         src={ profile.photos.large || "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRpQppfBCwxxoQg3WctXTif09_hUrdIItPqnA&usqp=CAU" }/>
                 </div>
 
             </div>

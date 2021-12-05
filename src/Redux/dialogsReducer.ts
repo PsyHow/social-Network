@@ -12,9 +12,9 @@ const initialState = {
     messages: [
         { id: v1(), message: "Hi" },
         { id: v1(), message: "Hello" },
-        { id: v1(), message: "Yopta" },
-        { id: v1(), message: "Ku" },
-        { id: v1(), message: "Cho kogo?" },
+        { id: v1(), message: "How are you?" },
+        { id: v1(), message: "Awesome" },
+        { id: v1(), message: "What's new ?" },
     ] as Array<MessagesType>,
 }
 

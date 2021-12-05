@@ -21,7 +21,7 @@ export type PhotosType = {
     large: string | null
 }
 export type PostType = {
-    id: string,
+    id: number,
     message: string,
     likesCount: number
 }

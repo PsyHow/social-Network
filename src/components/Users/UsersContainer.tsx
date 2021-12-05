@@ -1,4 +1,4 @@
-import { connect }      from "react-redux";
+import { connect } from "react-redux";
 import { AppStateType } from "../../Redux/redux-store";
 import {
     follow,
@@ -6,11 +6,11 @@ import {
     requestUsers,
     setCurrentPage,
     unFollow,
-}                       from "../../Redux/usersReducer";
-import React            from "react";
-import { Users }        from "./Users";
-import { Preloader }    from "../common/Preloader/Preloader";
-import { compose }      from "redux";
+} from "../../Redux/usersReducer";
+import React from "react";
+import { Users } from "./Users";
+import { Preloader } from "../common/Preloader/Preloader";
+import { compose } from "redux";
 import {
     currentPage,
     followingProgress,
@@ -18,20 +18,9 @@ import {
     getUsers,
     isFetching,
     totalUsersCount,
-}                       from "../../Redux/users-selectors";
-import { UsersType }    from "../../types/types";
+} from "../../Redux/users-selectors";
+import { UsersType } from "../../types/types";
 
-// const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
-//     return {
-//         usersPage: state.usersPage.users,
-//         pageSize: state.usersPage.pageSize,
-//         totalUsersCount: state.usersPage.totalUsersCount,
-//         currentPage: state.usersPage.currentPage,
-//         isFetching: state.usersPage.isFetching,
-//         followProgress: state.usersPage.followingProgress,
-//     }
-//
-// }
 
 const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
     return {
@@ -44,14 +33,17 @@ const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
     }
 }
 
+
 export class UsersAPIComponent extends React.Component<UsersPropsType> {
 
     componentDidMount() {
-        this.props.getUsers(this.props.currentPage, this.props.pageSize)
+        const { currentPage, pageSize } = this.props
+        this.props.getUsers(currentPage, pageSize)
     }
 
     onPageChanged = (pageNumber: number) => {
-        this.props.getUsers(pageNumber, this.props.pageSize)
+        const { pageSize } = this.props
+        this.props.getUsers(pageNumber, pageSize)
     }
 
     render() {

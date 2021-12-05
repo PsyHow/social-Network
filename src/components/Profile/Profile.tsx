@@ -1,7 +1,7 @@
-import React               from "react";
-import { ProfileInfo }         from "./ProfileInfo/ProfileInfo";
+import React from "react";
+import { ProfileInfo } from "./ProfileInfo/ProfileInfo";
 import { MyPostContainer } from "./MyPosts/MyPostContainer";
-import styles              from "./Profile.module.css"
+import styles from "./Profile.module.css"
 import { UserProfileType } from "../../types/types";
 
 

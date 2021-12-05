@@ -1,16 +1,17 @@
-import React                             from "react";
-import styles                            from "./MyPosts.module.css";
-import Post                              from "./Post/Post";
+import React from "react";
+import styles from "./MyPosts.module.css";
+import Post from "./Post/Post";
 import { AddPostForm, FormPostDataType } from "./AddPostForm/AddPostForm";
-import { PostType }                      from "../../../types/types";
+import { PostType } from "../../../types/types";
 
 
+export const MyPost = React.memo(({ addPost, posts }: PropsType) => {
 
-export const MyPost = (props: PropsType) => {
-    const myPosts = props.posts.map(p => <Post key={ p.id } message={ p.message } likescount={ p.likesCount }/>)
+    const myPosts = posts.map(p => <Post key={ p.id } message={ p.message }
+                                         likescount={ p.likesCount }/>)
 
     const addNewPost = (formData: FormPostDataType) => {
-        props.addPost(formData.newPostMessage)
+        addPost(formData.newPostMessage)
     }
 
     return (
@@ -22,7 +23,7 @@ export const MyPost = (props: PropsType) => {
         </div>
 
     )
-}
+})
 
 //types
 type PropsType = {

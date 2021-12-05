@@ -1,5 +1,5 @@
-import { usersAPI }     from "../api/Api";
-import { UsersType }    from "../types/types";
+import { usersAPI } from "../api/Api";
+import { UsersType } from "../types/types";
 import { AppThunkType } from "./redux-store";
 
 const initialState = {
@@ -70,39 +70,36 @@ export const followingInProgress = (isFetching: boolean, userId: number) => ( {
 
 //thunk
 export const requestUsers = (page: number, pageSize: number): AppThunkType =>
-    (dispatch) => {
+    async (dispatch) => {
         dispatch(toggleIsFetching(true))
         dispatch(setCurrentPage(page))
-        usersAPI.getUsers(page, pageSize)
-            .then(data => {
-                dispatch(toggleIsFetching(false))
-                dispatch(setUsers(data.items))
-                dispatch(setTotalUsersCount(data.totalCount))
-            })
+
+        const data = await usersAPI.getUsers(page, pageSize)
+        dispatch(toggleIsFetching(false))
+        dispatch(setUsers(data.items))
+        dispatch(setTotalUsersCount(data.totalCount))
     }
 
 export const follow = (userId: number): AppThunkType =>
-    (dispatch) => {
+    async (dispatch) => {
         dispatch(followingInProgress(true, userId))
-        usersAPI.unfollowUser(userId)
-            .then(data => {
-                if(data.resultCode === 0) {
-                    dispatch(unFollowSuccess(userId))
-                }
-                dispatch(followingInProgress(false, userId))
-            })
+        const response = await usersAPI.unfollowUser(userId)
+
+        if(response.resultCode === 0) {
+            dispatch(unFollowSuccess(userId))
+        }
+        dispatch(followingInProgress(false, userId))
     }
 
 export const unFollow = (userId: number): AppThunkType =>
-    (dispatch) => {
+    async (dispatch) => {
         dispatch(followingInProgress(true, userId))
-        usersAPI.followUser(userId)
-            .then(data => {
-                if(data.resultCode === 0) {
-                    dispatch(followSuccess(userId))
-                }
-                dispatch(followingInProgress(false, userId))
-            })
+        const response = await usersAPI.followUser(userId)
+
+        if(response.resultCode === 0) {
+            dispatch(followSuccess(userId))
+        }
+        dispatch(followingInProgress(false, userId))
     }
 
 //types
@@ -116,5 +113,3 @@ export type UsersActionType = ReturnType<typeof followSuccess>
     | ReturnType<typeof followingInProgress>
 
 type InitialStateType = typeof initialState
-
-

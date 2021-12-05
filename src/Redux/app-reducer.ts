@@ -1,5 +1,5 @@
 import { getAuthUserData } from "./authReducer";
-import { AppThunkType }    from "./redux-store";
+import { AppThunkType } from "./redux-store";
 
 const initialState = {
     initialized: false,
