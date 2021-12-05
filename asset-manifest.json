@@ -1,23 +1,23 @@
 {
   "files": {
-    "main.css": "/social-Network/static/css/main.d9850088.chunk.css",
-    "main.js": "/social-Network/static/js/main.d30ea2ef.chunk.js",
-    "main.js.map": "/social-Network/static/js/main.d30ea2ef.chunk.js.map",
-    "runtime-main.js": "/social-Network/static/js/runtime-main.1ce3a8ca.js",
-    "runtime-main.js.map": "/social-Network/static/js/runtime-main.1ce3a8ca.js.map",
-    "static/js/2.818eef10.chunk.js": "/social-Network/static/js/2.818eef10.chunk.js",
-    "static/js/2.818eef10.chunk.js.map": "/social-Network/static/js/2.818eef10.chunk.js.map",
-    "static/js/3.45baed20.chunk.js": "/social-Network/static/js/3.45baed20.chunk.js",
-    "static/js/3.45baed20.chunk.js.map": "/social-Network/static/js/3.45baed20.chunk.js.map",
+    "main.css": "/social-Network/static/css/main.52e3e096.chunk.css",
+    "main.js": "/social-Network/static/js/main.89804f37.chunk.js",
+    "main.js.map": "/social-Network/static/js/main.89804f37.chunk.js.map",
+    "runtime-main.js": "/social-Network/static/js/runtime-main.18a77368.js",
+    "runtime-main.js.map": "/social-Network/static/js/runtime-main.18a77368.js.map",
+    "static/js/2.2ddaf485.chunk.js": "/social-Network/static/js/2.2ddaf485.chunk.js",
+    "static/js/2.2ddaf485.chunk.js.map": "/social-Network/static/js/2.2ddaf485.chunk.js.map",
+    "static/js/3.d42ade0e.chunk.js": "/social-Network/static/js/3.d42ade0e.chunk.js",
+    "static/js/3.d42ade0e.chunk.js.map": "/social-Network/static/js/3.d42ade0e.chunk.js.map",
     "index.html": "/social-Network/index.html",
-    "static/css/main.d9850088.chunk.css.map": "/social-Network/static/css/main.d9850088.chunk.css.map",
-    "static/js/2.818eef10.chunk.js.LICENSE.txt": "/social-Network/static/js/2.818eef10.chunk.js.LICENSE.txt",
+    "static/css/main.52e3e096.chunk.css.map": "/social-Network/static/css/main.52e3e096.chunk.css.map",
+    "static/js/2.2ddaf485.chunk.js.LICENSE.txt": "/social-Network/static/js/2.2ddaf485.chunk.js.LICENSE.txt",
     "static/media/Rocket.9dd581ae.gif": "/social-Network/static/media/Rocket.9dd581ae.gif"
   },
   "entrypoints": [
-    "static/js/runtime-main.1ce3a8ca.js",
-    "static/js/2.818eef10.chunk.js",
-    "static/css/main.d9850088.chunk.css",
-    "static/js/main.d30ea2ef.chunk.js"
+    "static/js/runtime-main.18a77368.js",
+    "static/js/2.2ddaf485.chunk.js",
+    "static/css/main.52e3e096.chunk.css",
+    "static/js/main.89804f37.chunk.js"
   ]
 }
