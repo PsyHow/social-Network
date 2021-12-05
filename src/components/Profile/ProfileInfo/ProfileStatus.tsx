@@ -1,7 +1,8 @@
 import React, { ChangeEvent } from "react";
 
 
-class ProfileStatus extends React.Component<PropsType> {
+class ProfileStatus extends React.PureComponent<PropsType> {
+
     state = {
         editMode: false,
         status: this.props.status,
@@ -27,15 +28,17 @@ class ProfileStatus extends React.Component<PropsType> {
     }
 
     componentDidUpdate(prevProps: Readonly<PropsType>, prevState: Readonly<{}>) {
-        if(prevProps.status !== this.props.status) {
+
+        const { status } = this.props;
+
+        if(prevProps.status !== status) {
             this.setState({
-                status: this.props.status,
+                status: status,
             })
         }
     }
 
     render() {
-        console.log('render')
         return (
             <div>
                 { !this.state.editMode

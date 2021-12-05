@@ -5,7 +5,9 @@ import { AddPostForm, FormPostDataType } from "./AddPostForm/AddPostForm";
 import { PostType } from "../../../types/types";
 
 
-export const MyPost = React.memo(({ addPost, posts }: PropsType) => {
+export const MyPost = React.memo((props: PropsType) => {
+
+    const { posts, addPost } = props;
 
     const myPosts = posts.map(p => <Post key={ p.id } message={ p.message }
                                          likescount={ p.likesCount }/>)

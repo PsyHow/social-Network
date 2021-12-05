@@ -1,9 +1,9 @@
-import React                                   from "react";
-import style                                   from "./Dialogs.module.css"
-import { DialogsItem }                         from "./DialogsItem/DialogsItem";
-import { Message }                             from "./Message/Message";
+import React from "react";
+import style from "./Dialogs.module.css"
+import { DialogsItem } from "./DialogsItem/DialogsItem";
+import { Message } from "./Message/Message";
 import { AddMessageForm, FormDialogsDataType } from "./AddMessageForm/AddMessageForm";
-import { DialogsType, MessagesType }           from "../../types/types";
+import { DialogsType, MessagesType } from "../../types/types";
 
 
 export const Dialogs = (props: PropsType) => {

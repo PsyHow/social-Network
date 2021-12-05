@@ -11,15 +11,18 @@ import { UserProfileType } from "../../types/types";
 class ProfileContainer extends React.Component<PropsType> {
 
     componentDidMount() {
-        let userId = this.props.match.params.userId
+
+        const { match, authorizedUserId, SetUserProfile, getStatus, history } = this.props;
+
+        let userId = match.params.userId
         if(!userId) {
-            userId = JSON.stringify(this.props.authorizedUserId)
+            userId = JSON.stringify(authorizedUserId)
             if(!userId) {
-                this.props.history.push("/login")
+                history.push("/login")
             }
         }
-        this.props.SetUserProfile(userId)
-        this.props.getStatus(userId)
+        SetUserProfile(userId)
+        getStatus(userId)
     }
 
     render() {
