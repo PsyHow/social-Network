@@ -1,4 +1,4 @@
-import axios                          from "axios";
+import axios from "axios";
 import { UserProfileType, UsersType } from "../types/types";
 
 
