@@ -1,9 +1,3 @@
-import React from "react";
+import { FC } from 'react';
 
-export const Settings = () => {
-    return (
-        <div>
-            Settings
-        </div>
-    )
-}
+export const Settings: FC = () => <div>Settings</div>;

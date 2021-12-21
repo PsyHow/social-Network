@@ -1,40 +1,30 @@
-import React from "react";
-import styles from "./MyPosts.module.css";
-import Post from "./Post/Post";
-import { AddPostForm, FormPostDataType } from "./AddPostForm/AddPostForm";
-import { PostType } from "../../../types/types";
+import { FC, memo } from 'react';
 
+import { AddPostForm, FormPostDataType } from './AddPostForm/AddPostForm';
+import styles from './MyPosts.module.css';
+import { Post } from './Post/Post';
 
-export const MyPost = React.memo((props: PropsType) => {
+import { PostType } from 'types';
 
-    const { posts, addPost } = props;
+export const MyPost: FC<PropsType> = memo(({ posts, addPost }) => {
+  const myPosts = posts.map(p => (
+    <Post key={p.id} message={p.message} likesCount={p.likesCount} />
+  ));
 
-    const myPosts = posts.map(p => <Post key={ p.id } message={ p.message }
-                                         likescount={ p.likesCount }/>)
+  const addNewPost = (formData: FormPostDataType) => {
+    addPost(formData.newPostMessage);
+  };
 
-    const addNewPost = (formData: FormPostDataType) => {
-        addPost(formData.newPostMessage)
-    }
+  return (
+    <div>
+      <div className={styles.posts}>{myPosts}</div>
+      <AddPostForm onSubmit={addNewPost} />
+    </div>
+  );
+});
 
-    return (
-        <div>
-            <div className={ styles.posts }>
-                { myPosts }
-            </div>
-            <AddPostForm onSubmit={ addNewPost }/>
-        </div>
-
-    )
-})
-
-//types
+// types
 type PropsType = {
-    addPost: (newPostMessage: string) => void
-    posts: Array<PostType>
-}
-
-
-
-
-
-
+  addPost: (newPostMessage: string) => void;
+  posts: PostType[];
+};

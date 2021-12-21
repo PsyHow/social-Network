@@ -1,27 +1,27 @@
-import { sendMessage } from "../../Redux/dialogsReducer";
-import { Dialogs }     from "./Dialogs";
-import { connect }       from "react-redux";
-import { AppStateType }  from "../../Redux/redux-store";
-import { ComponentType } from "react";
-import { withAuthRedirect }          from "../../hoc/withAuthRedirect";
-import { compose }                   from "redux";
-import { DialogsType, MessagesType } from "../../types/types";
+import { ComponentType } from 'react';
 
+import { connect } from 'react-redux';
+import { compose } from 'redux';
 
-const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
-    return {
-        dialogs: state.dialogsPage.dialogs,
-        messages: state.dialogsPage.messages,
-    }
-}
+import { Dialogs } from './Dialogs';
+
+import { sendMessage, AppStateType } from 'BLL';
+import { withAuthRedirect } from 'hoc';
+import { getDialogs, getMessages } from 'selectors';
+import { DialogsType, MessagesType } from 'types';
+
+const mapStateToProps = (state: AppStateType): MapStateToPropsType => ({
+  dialogs: getDialogs(state),
+  messages: getMessages(state),
+});
 // important type compose with generic <React.ComponentType>
-export default compose<ComponentType>(
-    connect(mapStateToProps, { sendMessage }),
-    withAuthRedirect,
-)(Dialogs)
+export const DialogsContainer = compose<ComponentType>(
+  connect(mapStateToProps, { sendMessage }),
+  withAuthRedirect,
+)(Dialogs);
 
-//types
+// types
 type MapStateToPropsType = {
-    dialogs: Array<DialogsType>
-    messages: Array<MessagesType>
-}
+  dialogs: DialogsType[];
+  messages: MessagesType[];
+};

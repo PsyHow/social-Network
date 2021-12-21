@@ -1,11 +1,11 @@
-import preloader from "../../../assets/images/Rocket.gif";
-import React from "react";
-import styles from './Preloader.module.css'
+import { FC } from 'react';
 
-export const Preloader = () => {
-    return (
-        <div>
-            <img alt={ 'preloader' } src={ preloader } className={ styles.img }/>
-        </div>
-    )
-}
+import preloader from '../../../assets/images/Rocket.gif';
+
+import styles from './Preloader.module.css';
+
+export const Preloader: FC = () => (
+  <div>
+    <img alt="preloader" src={preloader} className={styles.img} />
+  </div>
+);

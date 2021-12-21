@@ -1,26 +1,34 @@
-import { maxLengthCreator, required }          from "../../../../utils/validators/validators";
-import { Field, InjectedFormProps, reduxForm } from "redux-form";
-import { TextArea }                            from "../../../common/FormsControl/FormsControl";
-import React                                   from "react";
+import React from 'react';
 
-const maxLength = maxLengthCreator(10)
-const AddPostFormC = (props: InjectedFormProps<FormPostDataType>) => {
-    return <>
-        <form onSubmit={ props.handleSubmit }>
-            <div>
-                <Field component={ TextArea } name={ 'newPostMessage' } placeholder={ 'Enter your message' }
-                       validate={ [required, maxLength] }/>
-            </div>
-            <div>
-                <button>Send post</button>
-            </div>
-        </form>
-    </>
-}
+import { Field, InjectedFormProps, reduxForm } from 'redux-form';
 
-export const AddPostForm = reduxForm<FormPostDataType>({ form: 'PostMessageForm' })(AddPostFormC)
+import { TextArea } from '../../../common/FormsControl/FormsControl';
 
-//types
+import { maxMessageLength } from 'constants/constants';
+import { maxLengthCreator, required } from 'utils';
+
+const maxLength = maxLengthCreator(maxMessageLength);
+const AddPostFormC = ({ handleSubmit }: InjectedFormProps<FormPostDataType>) => (
+  <form onSubmit={handleSubmit}>
+    <div>
+      <Field
+        component={TextArea}
+        name="newPostMessage"
+        placeholder="Enter your message"
+        validate={[required, maxLength]}
+      />
+    </div>
+    <div>
+      <button type="submit">Send post</button>
+    </div>
+  </form>
+);
+
+export const AddPostForm = reduxForm<FormPostDataType>({ form: 'PostMessageForm' })(
+  AddPostFormC,
+);
+
+// types
 export type FormPostDataType = {
-    newPostMessage: string
-}
+  newPostMessage: string;
+};

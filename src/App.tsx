@@ -1,83 +1,71 @@
-import React, { ComponentType } from "react";
-import "./App.css";
-import { Nav } from "./components/Navigation/Navigation";
-import { Route, withRouter } from "react-router-dom";
-import { News } from "./components/News/News";
-import { Settings } from "./components/Settings/Settings";
-import { Music } from "./components/Music/Music";
-import DialogsContainer from "./components/Dialogs/DialogsContainer";
-import UsersContainer from "./components/Users/UsersContainer";
-import ProfileContainer from "./components/Profile/ProfileContainer";
-import HeaderContainer from "./components/Header/HeaderContainer";
-import Login from "./components/login/Login";
-import { connect } from "react-redux";
-import { AppStateType } from "./Redux/redux-store";
-import { Preloader } from "./components/common/Preloader/Preloader";
-import { compose } from "redux";
-import { initializeApp } from "./Redux/app-reducer";
+import { Component, ComponentType } from 'react';
 
+import './App.css';
+import { connect } from 'react-redux';
+import { Route, withRouter } from 'react-router-dom';
+import { compose } from 'redux';
 
-// export const SiteBar = () => {
-//     return (
-//         <div className={ 'sitebar' }>
-//             <h2>Friends</h2>
-//             <img
-//                 src={ 'https://cdn1.iconfinder.com/data/icons/user-interface-design-flat/60/017_-_Male_User-ui-user-interface-avatar-512.png' }/>
-//             <div>Andrei</div>
-//             <img
-//                 src={ 'https://cdn1.iconfinder.com/data/icons/user-interface-design-flat/60/017_-_Male_User-ui-user-interface-avatar-512.png' }/>
-//             <div>Andrei</div>
-//             <img
-//                 src={ 'https://cdn1.iconfinder.com/data/icons/user-interface-design-flat/60/017_-_Male_User-ui-user-interface-avatar-512.png' }/>
-//             <div>Andrei</div>
-//         </div>
-//     )
-// }
+import { AppStateType, initializeApp } from 'BLL';
+import {
+  UserContainerFunc,
+  ProfileContainerFunc,
+  DialogsContainer,
+  HeaderContainerFunc,
+  LoginContainer,
+  Music,
+  Nav,
+  News,
+  Preloader,
+  Settings,
+} from 'components';
+import { ROUTING_PATH } from 'enums';
 
+class App extends Component<AppPropsType> {
+  componentDidMount() {
+    const { initializeApp } = this.props;
+    initializeApp();
+  }
 
-class App extends React.Component<AppPropsType> {
-
-    componentDidMount() {
-        this.props.initializeApp()
+  render() {
+    const { initialized } = this.props;
+    if (!initialized) {
+      return <Preloader />;
     }
-
-    render() {
-        if(!this.props.initialized) {
-            return <Preloader/>
-        }
-        return (
-            <div className={ 'app-wrapper' }>
-                <HeaderContainer/>
-                <Nav/>
-                <div className={ 'app-wrapper-content' }>
-                    <Route path={ '/dialogs' } render={ () => <DialogsContainer/> }/>
-                    <Route path={ '/profile/:userId?' } render={ () => <ProfileContainer/> }/>
-                    <Route path={ '/users' } render={ () => <UsersContainer/> }/>
-                    <Route path={ '/news' } component={ News }/>
-                    <Route path={ '/settings' } component={ Settings }/>
-                    <Route path={ '/music' } component={ Music }/>
-                    <Route path={ '/login' } render={ () => <Login/> }/>
-                </div>
-            </div>
-        );
-    }
+    return (
+      <div className="app-wrapper">
+        <HeaderContainerFunc />
+        <Nav />
+        <div className="app-wrapper-content">
+          <Route path={ROUTING_PATH.DIALOGS} render={() => <DialogsContainer />} />
+          <Route
+            path={`${ROUTING_PATH.PROFILE}:userId?`}
+            render={() => <ProfileContainerFunc />}
+          />
+          <Route path={ROUTING_PATH.USERS} render={() => <UserContainerFunc />} />
+          <Route path={ROUTING_PATH.NEWS} component={News} />
+          <Route path={ROUTING_PATH.SETTINGS} component={Settings} />
+          <Route path={ROUTING_PATH.MUSIC} component={Music} />
+          <Route path={ROUTING_PATH.LOGIN} render={() => <LoginContainer />} />
+        </div>
+      </div>
+    );
+  }
 }
 
-const mapStateToProps = (state: AppStateType): MapStateToPropsType => ( {
-    initialized: state.app.initialized,
-} )
+const mapStateToProps = (state: AppStateType): MapStateToPropsType => ({
+  initialized: state.app.initialized,
+});
 
 export default compose<ComponentType>(
-    withRouter,
-    connect(mapStateToProps, { initializeApp }),
-)(App)
+  withRouter,
+  connect(mapStateToProps, { initializeApp }),
+)(App);
 
-//types
+// types
 type MapDispatchToPropsType = {
-    initializeApp: () => void
-}
+  initializeApp: () => void;
+};
 type MapStateToPropsType = {
-    initialized: boolean
-}
-type AppPropsType = MapDispatchToPropsType & MapStateToPropsType
-
+  initialized: boolean;
+};
+type AppPropsType = MapDispatchToPropsType & MapStateToPropsType;

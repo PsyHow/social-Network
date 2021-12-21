@@ -1,21 +1,19 @@
-import { addPost } from "../../../Redux/profileReducer";
-import { MyPost } from "./MyPost";
-import { connect } from "react-redux";
-import { AppStateType } from "../../../Redux/redux-store";
-import { PostType } from "../../../types/types";
+import { connect } from 'react-redux';
 
+import { MyPost } from './MyPost';
 
-const mapStateToProps = (state: AppStateType): MatStateToPropsType => {
-    return {
-        posts: state.profilePage.post,
-    }
-}
+import { addPost, AppStateType } from 'BLL';
+import { PostType } from 'types';
+
+const mapStateToProps = (state: AppStateType): MatStateToPropsType => ({
+  posts: state.profilePage.post,
+});
 
 export const MyPostContainer = connect(mapStateToProps, {
-    addPost,
-})(MyPost)
+  addPost,
+})(MyPost);
 
-//types
+// types
 type MatStateToPropsType = {
-    posts: Array<PostType>,
-}
+  posts: PostType[];
+};

@@ -1,35 +1,43 @@
-import React from "react";
-import style from "./FormsControl.module.css"
-import { WrappedFieldProps } from "redux-form";
-import { WrappedFieldMetaProps } from "redux-form/lib/Field"
+import { FC } from 'react';
 
+import { WrappedFieldProps } from 'redux-form';
+import { WrappedFieldMetaProps } from 'redux-form/lib/Field';
 
-const FormControl: React.FC<FormControlPropsType> = (props) => {
+import style from './FormsControl.module.css';
 
-    const { meta, children } = props
-    const hasError = meta.touched && meta.error
-    return (
-        <div className={ style.formControl + ' ' + ( hasError ? style.error : '' ) }>
-            <div>
-                { children }
-            </div>
-            { hasError && <span>{ meta.error }</span> }
-        </div>
-    )
-}
+const FormControl: FC<FormControlPropsType> = ({ meta, children }) => {
+  const hasError = meta.touched && meta.error;
+  return (
+    <div className={`${style.formControl} ${hasError ? style.error : ''}`}>
+      <div>{children}</div>
+      {hasError && <span>{meta.error}</span>}
+    </div>
+  );
+};
 
-export const TextArea: React.FC<WrappedFieldProps> = (props) => {
-    const { input, meta, ...restProps } = props
-    return <FormControl { ...props }><textarea { ...input } { ...restProps }/></FormControl>
-}
+export const TextArea: FC<WrappedFieldProps> = props => {
+  const { input, ...restProps } = props;
+  return (
+    // eslint-disable-next-line react/jsx-props-no-spreading
+    <FormControl {...props}>
+      {/* eslint-disable-next-line react/jsx-props-no-spreading */}
+      <textarea {...input} {...restProps} />
+    </FormControl>
+  );
+};
 
-export const Input: React.FC<WrappedFieldProps> = (props) => {
-    const { input, meta, ...restProps } = props
-    return <FormControl { ...props }><input { ...input } { ...restProps }/></FormControl>
-}
+export const Input: FC<WrappedFieldProps> = props => {
+  const { input, ...restProps } = props;
+  return (
+    // eslint-disable-next-line react/jsx-props-no-spreading
+    <FormControl {...props}>
+      {/* eslint-disable-next-line react/jsx-props-no-spreading */}
+      <input {...input} {...restProps} />
+    </FormControl>
+  );
+};
 
-//types
+// types
 type FormControlPropsType = {
-    meta: WrappedFieldMetaProps
-}
-
+  meta: WrappedFieldMetaProps;
+};

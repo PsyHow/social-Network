@@ -1,27 +1,27 @@
-import React, { ComponentType } from "react";
-import { Redirect } from "react-router-dom";
-import { connect } from "react-redux";
-import { AppStateType } from "../Redux/redux-store";
+import { ComponentType, FC } from 'react';
+
+import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
+
+import { AppStateType } from 'BLL';
 
 type MapStateToPropsType = {
-    isAuth: boolean
-}
+  isAuth: boolean;
+};
 
-const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
-    return {
-        isAuth: state.auth.isAuth,
-    }
-}
+const mapStateToProps = (state: AppStateType): MapStateToPropsType => ({
+  isAuth: state.auth.isAuth,
+});
 
 export function withAuthRedirect<T>(Component: ComponentType<T>) {
-    const RedirectComponent = (props: MapStateToPropsType) => {
-        const { isAuth, ...restProps } = props
-        if(!isAuth) return <Redirect to={ '/login' }/>
+  const RedirectComponent: FC<MapStateToPropsType> = ({ isAuth, ...restProps }) => {
+    if (!isAuth) return <Redirect to="/login" />;
 
-        return <Component { ...restProps as T }/>
-    }
+    // eslint-disable-next-line react/jsx-props-no-spreading
+    return <Component {...(restProps as T)} />;
+  };
 
-    const ConnectedRedirectComponent = connect(mapStateToProps)(RedirectComponent)
+  const ConnectedRedirectComponent = connect(mapStateToProps)(RedirectComponent);
 
-    return ConnectedRedirectComponent
+  return ConnectedRedirectComponent;
 }

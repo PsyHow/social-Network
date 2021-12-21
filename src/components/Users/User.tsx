@@ -1,61 +1,64 @@
-import React from "react";
-import style from "./Users.module.css";
-import userPhoto from "../../assets/images/user.png";
-import { NavLink } from "react-router-dom";
-import { UsersType } from "../../types/types";
+import { FC } from 'react';
 
+import { NavLink } from 'react-router-dom';
 
-export const User = (props: PropsType) => {
+import style from './Users.module.css';
 
-    const { user, followProgress, follow, unFollow } = props
+import userPhoto from 'assets/images/user.png';
+import { UsersType } from 'types';
 
+export const User: FC<PropsType> = ({ user, followProgress, follow, unFollow }) => (
+  <div className={style.items}>
+    <NavLink to={`/profile/${user.id}`}>
+      <div>
+        <img
+          alt="photoProfile"
+          src={user.photos.small !== null ? user.photos.small : userPhoto}
+        />
+      </div>
+    </NavLink>
+    <div>
+      {user.followed ? (
+        <button
+          type="submit"
+          disabled={followProgress.some(id => id === user.id)}
+          className={style.button}
+          onClick={() => {
+            follow(user.id);
+          }}
+        >
+          UnFollow
+        </button>
+      ) : (
+        <button
+          type="submit"
+          disabled={followProgress.some(id => id === user.id)}
+          className={style.button}
+          onClick={() => {
+            unFollow(user.id);
+          }}
+        >
+          Follow
+        </button>
+      )}
+    </div>
 
-    return (
-        <div className={ style.items }>
-            <NavLink to={ '/profile/' + user.id }>
-                <div>
-                    <img alt={ 'photoProfile' }
-                         src={ user.photos.small !== null ? user.photos.small : userPhoto }/>
-                </div>
-            </NavLink>
-            <div>
-                { user.followed
-                    ? <button disabled={ followProgress.some(id => id === user.id) }
-                              className={ style.button }
-                              onClick={ () => {
-                                  follow(user.id)
-                              } }>
-                        UnFollow
-                    </button>
+    <div className={style.userInfo}>
+      <div>{user.name}</div>
+      <div>{user.status}</div>
+    </div>
 
-                    : <button disabled={ followProgress.some(id => id === user.id) }
-                              className={ style.button }
-                              onClick={ () => {
-                                  unFollow(user.id)
-                              } }>
-                        Follow
-                    </button>
-                }
-            </div>
+    <div>
+      <div>u.location?.country</div>
+      <div>u.location?.city</div>
+    </div>
+  </div>
+);
 
-            <div className={ style.userInfo }>
-                <div>{ user.name }</div>
-                <div>{ user.status }</div>
-            </div>
-
-            <div>
-                <div>{ "u.location?.country" }</div>
-                <div>{ "u.location?.city" }</div>
-            </div>
-
-        </div>
-    )
-}
-
-//types
+// types
 type PropsType = {
-    user: UsersType
-    followProgress: Array<number>
-    follow: (id: number) => void
-    unFollow: (id: number) => void
-}
+  user: UsersType;
+  followProgress: number[];
+  follow: (id: number) => void;
+  unFollow: (id: number) => void;
+};

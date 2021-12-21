@@ -1,9 +1,3 @@
-import React from "react";
+import { FC } from 'react';
 
-export const Music = () => {
-    return (
-        <div>
-            Music
-        </div>
-    )
-}
+export const Music: FC = () => <div>Music</div>;

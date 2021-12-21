@@ -1,31 +1,43 @@
-import React from "react";
-import { NavLink } from "react-router-dom";
-import style from "./Navigation.module.css";
+import { FC } from 'react';
 
-export const Nav = () => {
-    return (
-        <nav className={ style.nav }>
-            <div className={ style.item }>
-                <NavLink to={ "/users" } activeClassName={ style.active }>Users</NavLink>
-            </div>
-            <div className={ style.item }>
-                <NavLink to={ "/profile" } activeClassName={ style.active }>Profile</NavLink>
-            </div>
-            <div className={ style.item }>
-                <NavLink to={ "/dialogs" } activeClassName={ style.active }>Messages</NavLink>
-            </div>
-            <div className={ style.item }>
-                <NavLink to={ "/news" } activeClassName={ style.active }>News</NavLink>
-            </div>
-            <div className={ style.item }>
-                <NavLink to={ "/music" } activeClassName={ style.active }>Music</NavLink>
-            </div>
-            <div className={ style.item }>
-                <NavLink to={ "/settings" } activeClassName={ style.active }>Settings</NavLink>
-            </div>
-            <div className={ style.item }>
+import { NavLink } from 'react-router-dom';
 
-            </div>
-        </nav>
-    )
-}
+import style from './Navigation.module.css';
+
+import { ROUTING_PATH } from 'enums';
+
+export const Nav: FC = () => (
+  <nav className={style.nav}>
+    <div className={style.item}>
+      <NavLink to={ROUTING_PATH.USERS} activeClassName={style.active}>
+        Users
+      </NavLink>
+    </div>
+    <div className={style.item}>
+      <NavLink to={ROUTING_PATH.PROFILE} activeClassName={style.active}>
+        Profile
+      </NavLink>
+    </div>
+    <div className={style.item}>
+      <NavLink to={ROUTING_PATH.DIALOGS} activeClassName={style.active}>
+        Messages
+      </NavLink>
+    </div>
+    <div className={style.item}>
+      <NavLink to={ROUTING_PATH.NEWS} activeClassName={style.active}>
+        News
+      </NavLink>
+    </div>
+    <div className={style.item}>
+      <NavLink to={ROUTING_PATH.MUSIC} activeClassName={style.active}>
+        Music
+      </NavLink>
+    </div>
+    <div className={style.item}>
+      <NavLink to={ROUTING_PATH.SETTINGS} activeClassName={style.active}>
+        Settings
+      </NavLink>
+    </div>
+    <div className={style.item} />
+  </nav>
+);

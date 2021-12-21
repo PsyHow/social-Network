@@ -1,49 +1,50 @@
-import React, { ChangeEvent, useEffect, useState } from "react";
+import { ChangeEvent, FC, useEffect, useState } from 'react';
 
+export const ProfileStatusWithHooks: FC<PropsType> = ({ status, updateStatus }) => {
+  const [editMode, setEditMode] = useState(false);
+  const [myStatus, setMyStatus] = useState(status);
 
-export const ProfileStatusWithHooks = (props: PropsType) => {
+  useEffect(() => {
+    setMyStatus(status);
+  }, [status]);
 
-    const { status, updateStatus } = props
+  const activateMode = () => {
+    setEditMode(true);
+  };
 
-    const [editMode, setEditMode] = useState(false);
-    const [myStatus, setMyStatus] = useState(status);
+  const diactivateMode = () => {
+    setEditMode(false);
+    updateStatus(myStatus);
+  };
 
-    useEffect(() => {
-        setMyStatus(status)
-    }, [status])
+  const onStatusChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setMyStatus(e.currentTarget.value);
+  };
 
-    const activateMode = () => { setEditMode(true) };
-
-    const diactivateMode = () => {
-        setEditMode(false)
-        updateStatus(myStatus)
-    }
-
-    const onStatusChange = (e: ChangeEvent<HTMLInputElement>) => {
-        setMyStatus(e.currentTarget.value)
-    }
-
-    return (
-        <div>
-            { !editMode &&
-            <div style={ { marginTop: '20px' } }>
-                <span onDoubleClick={ activateMode }>{ status || 'Enter your status' }</span>
-            </div>
-            }
-            { editMode &&
-            <div style={ { marginTop: '20px' } }>
-                <input onBlur={ diactivateMode }
-                       autoFocus={ true }
-                       onChange={ onStatusChange }
-                       value={ myStatus }/>
-            </div>
-            }
+  return (
+    <div>
+      {!editMode && (
+        <div style={{ marginTop: '20px' }}>
+          <span onDoubleClick={activateMode}>{status || 'Enter your status'}</span>
         </div>
-    )
-}
+      )}
+      {editMode && (
+        <div style={{ marginTop: '20px' }}>
+          <input
+            onBlur={diactivateMode}
+            // eslint-disable-next-line jsx-a11y/no-autofocus
+            autoFocus
+            onChange={onStatusChange}
+            value={myStatus}
+          />
+        </div>
+      )}
+    </div>
+  );
+};
 
-//types
+// types
 type PropsType = {
-    status: string
-    updateStatus: (status: string) => void
-}
+  status: string;
+  updateStatus: (status: string) => void;
+};

@@ -1,26 +1,21 @@
-import React from "react";
-import { ProfileInfo } from "./ProfileInfo/ProfileInfo";
-import { MyPostContainer } from "./MyPosts/MyPostContainer";
-import styles from "./Profile.module.css"
-import { UserProfileType } from "../../types/types";
+import { FC } from 'react';
 
+import { MyPostContainer } from './MyPosts/MyPostContainer';
+import styles from './Profile.module.css';
+import { ProfileInfo } from './ProfileInfo/ProfileInfo';
 
-export const Profile = (props: PropsType) => {
+import { Nullable, UserProfileType } from 'types';
 
-    const { profile, status, updateStatus } = props
-    return (
-        <div className={ styles.profileWrapper }>
-            <ProfileInfo profile={ profile }
-                         status={ status }
-                         updateStatus={ updateStatus }/>
-            <MyPostContainer/>
-        </div>
-    )
-}
+export const Profile: FC<PropsType> = ({ profile, status, updateStatus }) => (
+  <div className={styles.profileWrapper}>
+    <ProfileInfo profile={profile} status={status} updateStatus={updateStatus} />
+    <MyPostContainer />
+  </div>
+);
 
-//types
+// types
 type PropsType = {
-    profile: null | UserProfileType
-    status: string
-    updateStatus: (status: string) => void
-}
+  profile: Nullable<UserProfileType>;
+  status: string;
+  updateStatus: (status: string) => void;
+};

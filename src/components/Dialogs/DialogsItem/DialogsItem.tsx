@@ -1,22 +1,27 @@
-import React       from "react";
-import { NavLink } from "react-router-dom";
-import style       from "../Dialogs.module.css"
+import { FC } from 'react';
 
+import { NavLink } from 'react-router-dom';
 
-export const DialogsItem = (props: propsType) => {
-    const path = "/dialogs/" + props.id;
+import style from '../Dialogs.module.css';
 
-    return (
-        <div className={ style.dialog }>
-            <img alt={'avatar'}
-                src={ "https://cdn1.iconfinder.com/data/icons/user-interface-design-flat/60/017_-_Male_User-ui-user-interface-avatar-512.png" }/>
-            <NavLink activeClassName={ style.active } to={ path }>{ props.name }</NavLink>
-        </div>
-    )
-}
+export const DialogsItem: FC<PropsType> = ({ id, name }) => {
+  const path = `/dialogs/${id}`;
 
-//types
-type propsType = {
-    id: string
-    name: string
-}
+  return (
+    <div className={style.dialog}>
+      <img
+        alt="avatar"
+        src="https://cdn1.iconfinder.com/data/icons/user-interface-design-flat/60/017_-_Male_User-ui-user-interface-avatar-512.png"
+      />
+      <NavLink activeClassName={style.active} to={path}>
+        {name}
+      </NavLink>
+    </div>
+  );
+};
+
+// types
+type PropsType = {
+  id: string;
+  name: string;
+};
