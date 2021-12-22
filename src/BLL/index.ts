@@ -5,4 +5,4 @@ export { store } from './redux-store';
 export * from './userReducer';
 export * from './profileReducer';
 export * from './authReducer';
-export * from './dialogs_reducer';
+export * from './dialogsReducer';

@@ -1,4 +1,4 @@
-import { Nullable } from 'types/Nullable';
+import { Nullable } from 'types';
 
 export const setAuthUserData = (
   id: Nullable<number>,

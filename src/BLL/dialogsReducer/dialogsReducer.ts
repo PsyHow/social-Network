@@ -1,6 +1,6 @@
 import { v1 } from 'uuid';
 
-import { DialogsPageActionType, InitialStateType } from 'BLL/dialogs_reducer/Types';
+import { DialogsPageActionType, InitialStateType } from 'BLL/dialogsReducer/Types';
 import { DialogsType, MessagesType } from 'types/types';
 
 export const initialState = {

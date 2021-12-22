@@ -1,5 +1,5 @@
 import { InitialStateType, SetUserDataACType } from 'BLL/authReducer/Types';
-import { Nullable } from 'types/Nullable';
+import { Nullable } from 'types';
 
 export const initialState = {
   id: null as Nullable<number>,

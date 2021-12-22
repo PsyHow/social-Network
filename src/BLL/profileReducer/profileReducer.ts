@@ -1,6 +1,5 @@
-import { InitialStateType, ProfileActionType } from 'BLL/profileReducer/Types';
-import { Nullable } from 'types/Nullable';
-import { PostType, UserProfileType } from 'types/types';
+import { InitialStateType, ProfileActionType } from 'BLL';
+import { Nullable, PostType, UserProfileType } from 'types';
 
 export const initialState = {
   post: [

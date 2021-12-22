@@ -1,5 +1,4 @@
 import { usersAPI } from 'api/Api';
-import { AppThunkType } from 'BLL/redux-store';
 import {
   followingInProgress,
   followSuccess,
@@ -8,7 +7,8 @@ import {
   setUsers,
   toggleIsFetching,
   unFollowSuccess,
-} from 'BLL/userReducer/Actions';
+  AppThunkType,
+} from 'BLL';
 import { okResult } from 'constants/constants';
 
 export const requestUsers =

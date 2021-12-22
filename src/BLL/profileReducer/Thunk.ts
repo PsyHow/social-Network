@@ -1,6 +1,5 @@
 import { profileAPI } from 'api/Api';
-import { setStatus, setUserProfile } from 'BLL/profileReducer/Actions';
-import { AppThunkType } from 'BLL/redux-store';
+import { setStatus, setUserProfile, AppThunkType } from 'BLL';
 import { okResult } from 'constants/constants';
 
 export const SetUserProfile =

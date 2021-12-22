@@ -3,14 +3,14 @@ import { reducer as formReducer } from 'redux-form';
 import thunk, { ThunkAction } from 'redux-thunk';
 
 import { AppActionType } from './appReducer/Types';
-import { DialogsPageActionType } from './dialogs_reducer/Types';
-import { ProfileActionType } from './profileReducer/Types';
+import { DialogsPageActionType } from './dialogsReducer/Types';
 import { UsersActionType } from './userReducer/Types';
 
 import { appReducer } from 'BLL/appReducer/appReducer';
 import { authReducer } from 'BLL/authReducer/authReducer';
 import { SetUserDataACType } from 'BLL/authReducer/Types';
-import { dialogsReducer } from 'BLL/dialogs_reducer/dialogsReducer';
+import { dialogsReducer } from 'BLL/dialogsReducer/dialogsReducer';
+import { ProfileActionType } from 'BLL/profileReducer';
 import { profileReducer } from 'BLL/profileReducer/profileReducer';
 import { UsersReducer } from 'BLL/userReducer/usersReducer';
 

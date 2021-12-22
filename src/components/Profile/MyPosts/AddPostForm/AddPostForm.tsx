@@ -2,8 +2,7 @@ import React from 'react';
 
 import { Field, InjectedFormProps, reduxForm } from 'redux-form';
 
-import { TextArea } from '../../../common/FormsControl/FormsControl';
-
+import { TextArea } from 'components';
 import { maxMessageLength } from 'constants/constants';
 import { maxLengthCreator, required } from 'utils';
 
