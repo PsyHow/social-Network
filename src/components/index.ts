@@ -1,10 +1,7 @@
-export { DialogsContainer } from './Dialogs';
 export { Preloader, Paginator, Input, TextArea } from './common';
 export { Music } from './Music/Music';
 export { Nav } from './Navigation/Navigation';
 export { News } from './News/News';
 export { Settings } from './Settings/Settings';
 export { HeaderContainerFunc } from './Header';
-export { LoginContainer } from './login/Login';
-export { ProfileContainerFunc } from './Profile/ProfileContainer';
 export { UserContainerFunc } from './Users/UsersContainer';

@@ -1,4 +1,4 @@
-import { Component, ComponentType } from 'react';
+import React, { Component, ComponentType, Suspense } from 'react';
 
 import './App.css';
 import { connect } from 'react-redux';
@@ -8,10 +8,7 @@ import { compose } from 'redux';
 import { AppStateType, initializeApp } from 'BLL';
 import {
   UserContainerFunc,
-  ProfileContainerFunc,
-  DialogsContainer,
   HeaderContainerFunc,
-  LoginContainer,
   Music,
   Nav,
   News,
@@ -19,6 +16,12 @@ import {
   Settings,
 } from 'components';
 import { ROUTING_PATH } from 'enums';
+
+const DialogsContainer = React.lazy(() => import('components/Dialogs/DialogsContainer'));
+const ProfileContainerFunc = React.lazy(
+  () => import('components/Profile/ProfileContainer'),
+);
+const LoginContainer = React.lazy(() => import('components/login/Login'));
 
 class App extends Component<AppPropsType> {
   componentDidMount() {
@@ -36,16 +39,20 @@ class App extends Component<AppPropsType> {
         <HeaderContainerFunc />
         <Nav />
         <div className="app-wrapper-content">
-          <Route path={ROUTING_PATH.DIALOGS} render={() => <DialogsContainer />} />
-          <Route
-            path={`${ROUTING_PATH.PROFILE}:userId?`}
-            render={() => <ProfileContainerFunc />}
-          />
+          <Suspense fallback={<Preloader />}>
+            <section>
+              <Route path={ROUTING_PATH.DIALOGS} render={() => <DialogsContainer />} />
+              <Route
+                path={`${ROUTING_PATH.PROFILE}:userId?`}
+                render={() => <ProfileContainerFunc />}
+              />
+              <Route path={ROUTING_PATH.LOGIN} render={() => <LoginContainer />} />
+            </section>
+          </Suspense>
           <Route path={ROUTING_PATH.USERS} render={() => <UserContainerFunc />} />
           <Route path={ROUTING_PATH.NEWS} component={News} />
           <Route path={ROUTING_PATH.SETTINGS} component={Settings} />
           <Route path={ROUTING_PATH.MUSIC} component={Music} />
-          <Route path={ROUTING_PATH.LOGIN} render={() => <LoginContainer />} />
         </div>
       </div>
     );

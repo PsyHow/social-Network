@@ -1,1 +1,0 @@
-export { DialogsContainer } from './DialogsContainer';

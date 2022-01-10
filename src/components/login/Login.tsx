@@ -27,7 +27,7 @@ const MapStateToProps = (state: AppStateType): MapStateToPropsType => ({
   isAuth: state.auth.isAuth,
 });
 
-export const LoginContainer = connect(MapStateToProps, { login, logout })(Login);
+const LoginContainer = connect(MapStateToProps, { login, logout })(Login);
 
 // types
 type MapDispatchToPropsType = {
@@ -37,3 +37,5 @@ type MapStateToPropsType = {
   isAuth: boolean;
 };
 type LoginPropsType = MapDispatchToPropsType & MapStateToPropsType;
+
+export default LoginContainer;

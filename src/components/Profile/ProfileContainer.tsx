@@ -44,7 +44,7 @@ const mapStateToProps = (state: AppStateType): MapStateToPropsType => ({
 });
 
 // important type compose with generic <React.ComponentType>
-export const ProfileContainerFunc = compose<ComponentType>(
+const ProfileContainerFunc = compose<ComponentType>(
   connect(mapStateToProps, { SetUserProfile, getStatus, updateStatus }),
   withRouter,
   withAuthRedirect,
@@ -67,3 +67,5 @@ type PathParamsType = {
   userId: string;
 };
 type PropsType = RouteComponentProps<PathParamsType> & ProfilePropsType;
+
+export default ProfileContainerFunc;
