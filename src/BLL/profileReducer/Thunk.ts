@@ -30,7 +30,7 @@ export const savePhoto =
   (file: File): AppThunkType =>
   async dispatch => {
     const data = await profileAPI.savePhoto(file);
-    if (data.data.resultCode === okResult) {
-      dispatch(savePhotoSuccess(data.data.data.photos));
+    if (data.resultCode === okResult) {
+      dispatch(savePhotoSuccess(data.data.photos));
     }
   };

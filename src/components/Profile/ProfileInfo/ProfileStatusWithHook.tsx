@@ -25,6 +25,7 @@ export const ProfileStatusWithHooks: FC<PropsType> = ({ status, updateStatus }) 
     <div>
       {!editMode && (
         <div style={{ marginTop: '20px' }}>
+          <b>Status: </b>
           <span onDoubleClick={activateMode}>{status || 'Enter your status'}</span>
         </div>
       )}

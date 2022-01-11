@@ -48,3 +48,7 @@
     display: flex;
     flex-direction: column;
 }
+
+.contacts {
+    padding-left: 20px;
+}

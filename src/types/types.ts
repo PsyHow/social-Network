@@ -7,6 +7,7 @@ export type UserProfileType = {
   fullName: string;
   contacts: ContactsType;
   photos: PhotosType;
+  aboutMe: string;
 };
 export type ContactsType = {
   github: string;
