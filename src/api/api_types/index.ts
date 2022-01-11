@@ -4,4 +4,5 @@ export type {
   UserResponseType,
   AuthUserType,
   FollowUnfollowType,
+  GetCaptchaUrlResponseType,
 } from './api_types';

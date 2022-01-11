@@ -6,6 +6,7 @@ export const initialState = {
   email: null as Nullable<string>,
   login: null as Nullable<string>,
   isAuth: false,
+  captchaUrl: null as Nullable<string>,
 };
 
 export const authReducer = (
@@ -14,6 +15,7 @@ export const authReducer = (
 ): InitialStateType => {
   switch (action.type) {
     case 'AUTH/SET_USER_DATA':
+    case 'AUTH/GET_CAPTCHA_URL_SUCCESS':
       return {
         ...state,
         ...action.payload,

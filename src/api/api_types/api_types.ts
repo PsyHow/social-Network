@@ -43,3 +43,7 @@ export type APIResponseType<D = {}> = {
   messages: Array<string>;
   resultCode: number;
 };
+
+export type GetCaptchaUrlResponseType = {
+  url: string;
+};

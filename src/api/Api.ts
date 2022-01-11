@@ -3,6 +3,7 @@ import axios from 'axios';
 import {
   AuthUserType,
   FollowUnfollowType,
+  GetCaptchaUrlResponseType,
   LoginRequestType,
   StatusResponseType,
   UserResponseType,
@@ -76,11 +77,24 @@ export const authAPI = {
     return instance.get<AuthUserType>(`auth/me`).then(response => response.data);
   },
 
-  login(email: string, password: string, rememberMe: boolean) {
-    return instance.post<LoginRequestType>(`auth/login`, { email, password, rememberMe });
+  login(email: string, password: string, rememberMe: boolean, captcha: string) {
+    return instance.post<LoginRequestType>(`auth/login`, {
+      email,
+      password,
+      rememberMe,
+      captcha,
+    });
   },
 
   logout() {
     return instance.delete<LoginRequestType>(`/auth/login`);
+  },
+};
+
+export const securityAPI = {
+  getCaptchaUrl() {
+    return instance
+      .get<GetCaptchaUrlResponseType>('security/get-captcha-url')
+      .then(res => res.data);
   },
 };
