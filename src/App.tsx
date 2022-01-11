@@ -1,4 +1,4 @@
-import React, { Component, ComponentType, Suspense } from 'react';
+import { Component, ComponentType, lazy, Suspense } from 'react';
 
 import './App.css';
 import { connect } from 'react-redux';
@@ -17,11 +17,9 @@ import {
 } from 'components';
 import { ROUTING_PATH } from 'enums';
 
-const DialogsContainer = React.lazy(() => import('components/Dialogs/DialogsContainer'));
-const ProfileContainerFunc = React.lazy(
-  () => import('components/Profile/ProfileContainer'),
-);
-const LoginContainer = React.lazy(() => import('components/login/Login'));
+const DialogsContainer = lazy(() => import('components/Dialogs/DialogsContainer'));
+const ProfileContainerFunc = lazy(() => import('components/Profile/ProfileContainer'));
+const LoginContainer = lazy(() => import('components/login/Login'));
 
 class App extends Component<AppPropsType> {
   componentDidMount() {
