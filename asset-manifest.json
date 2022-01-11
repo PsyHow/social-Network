@@ -1,14 +1,27 @@
 {
   "files": {
-    "main.css": "/social-Network/static/css/main.c067d7ee.css",
-    "main.js": "/social-Network/static/js/main.644744aa.js",
+    "main.css": "/social-Network/static/css/main.fad40e35.css",
+    "main.js": "/social-Network/static/js/main.21a60613.js",
+    "static/css/573.a2f390df.chunk.css": "/social-Network/static/css/573.a2f390df.chunk.css",
+    "static/js/573.90289a2f.chunk.js": "/social-Network/static/js/573.90289a2f.chunk.js",
+    "static/css/749.2f063ff5.chunk.css": "/social-Network/static/css/749.2f063ff5.chunk.css",
+    "static/js/749.2c69a80d.chunk.js": "/social-Network/static/js/749.2c69a80d.chunk.js",
+    "static/js/285.879b5d15.chunk.js": "/social-Network/static/js/285.879b5d15.chunk.js",
+    "static/js/704.1df868d8.chunk.js": "/social-Network/static/js/704.1df868d8.chunk.js",
+    "static/media/338-3388366_meme-for-steam-avatars-hd-png-download.png": "/social-Network/static/media/338-3388366_meme-for-steam-avatars-hd-png-download.548c958944dc98415a09.png",
     "static/media/Rocket.gif": "/social-Network/static/media/Rocket.9dd581aeb1d96f731653.gif",
     "index.html": "/social-Network/index.html",
-    "main.c067d7ee.css.map": "/social-Network/static/css/main.c067d7ee.css.map",
-    "main.644744aa.js.map": "/social-Network/static/js/main.644744aa.js.map"
+    "main.fad40e35.css.map": "/social-Network/static/css/main.fad40e35.css.map",
+    "main.21a60613.js.map": "/social-Network/static/js/main.21a60613.js.map",
+    "573.a2f390df.chunk.css.map": "/social-Network/static/css/573.a2f390df.chunk.css.map",
+    "573.90289a2f.chunk.js.map": "/social-Network/static/js/573.90289a2f.chunk.js.map",
+    "749.2f063ff5.chunk.css.map": "/social-Network/static/css/749.2f063ff5.chunk.css.map",
+    "749.2c69a80d.chunk.js.map": "/social-Network/static/js/749.2c69a80d.chunk.js.map",
+    "285.879b5d15.chunk.js.map": "/social-Network/static/js/285.879b5d15.chunk.js.map",
+    "704.1df868d8.chunk.js.map": "/social-Network/static/js/704.1df868d8.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.c067d7ee.css",
-    "static/js/main.644744aa.js"
+    "static/css/main.fad40e35.css",
+    "static/js/main.21a60613.js"
   ]
 }
