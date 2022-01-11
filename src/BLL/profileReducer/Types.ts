@@ -1,6 +1,7 @@
 import {
   addPost,
   deletePost,
+  savePhotoSuccess,
   setStatus,
   setUserProfile,
 } from 'BLL/profileReducer/Actions';
@@ -12,5 +13,6 @@ export type ProfileActionType =
   | AddPostType
   | ReturnType<typeof setUserProfile>
   | ReturnType<typeof setStatus>
-  | DeletePostType;
+  | DeletePostType
+  | ReturnType<typeof savePhotoSuccess>;
 export type InitialStateType = typeof initialState;

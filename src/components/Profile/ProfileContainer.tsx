@@ -7,12 +7,24 @@ import { compose } from 'redux';
 import { Profile } from './Profile';
 
 import { getStatus, SetUserProfile, updateStatus, AppStateType } from 'BLL';
+import { savePhoto } from 'BLL/profileReducer/Thunk';
 import { withAuthRedirect } from 'hoc';
 import { getAuthID, getIsAuth, getProfile, getProfileStatus } from 'selectors';
 import { Nullable, UserProfileType } from 'types';
 
 class ProfileContainer extends Component<PropsType> {
   componentDidMount() {
+    this.refreshProfile();
+  }
+
+  componentDidUpdate(prevProps: Readonly<PropsType>) {
+    const { match } = this.props;
+    if (match.params.userId !== prevProps.match.params.userId) {
+      this.refreshProfile();
+    }
+  }
+
+  refreshProfile() {
     const { match, authorizedUserId, SetUserProfile, getStatus, history } = this.props;
 
     let { userId } = match.params;
@@ -27,10 +39,16 @@ class ProfileContainer extends Component<PropsType> {
   }
 
   render() {
-    const { profile, status, updateStatus } = this.props;
+    const { profile, status, updateStatus, match, savePhoto } = this.props;
     return (
       <div>
-        <Profile profile={profile} status={status} updateStatus={updateStatus} />
+        <Profile
+          profile={profile}
+          status={status}
+          updateStatus={updateStatus}
+          isOwner={!match.params.userId}
+          savePhoto={savePhoto}
+        />
       </div>
     );
   }
@@ -45,7 +63,7 @@ const mapStateToProps = (state: AppStateType): MapStateToPropsType => ({
 
 // important type compose with generic <React.ComponentType>
 const ProfileContainerFunc = compose<ComponentType>(
-  connect(mapStateToProps, { SetUserProfile, getStatus, updateStatus }),
+  connect(mapStateToProps, { SetUserProfile, getStatus, updateStatus, savePhoto }),
   withRouter,
   withAuthRedirect,
 )(ProfileContainer);
@@ -56,6 +74,7 @@ type MapDispatchToPropsType = {
   SetUserProfile: (userId: string) => void;
   getStatus: (userId: string) => void;
   updateStatus: (status: string) => void;
+  savePhoto: (file: File) => void;
 };
 type MapStateToPropsType = {
   profile: Nullable<UserProfileType>;

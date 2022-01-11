@@ -6,9 +6,21 @@ import { ProfileInfo } from './ProfileInfo/ProfileInfo';
 
 import { Nullable, UserProfileType } from 'types';
 
-export const Profile: FC<PropsType> = ({ profile, status, updateStatus }) => (
+export const Profile: FC<PropsType> = ({
+  profile,
+  status,
+  updateStatus,
+  isOwner,
+  savePhoto,
+}) => (
   <div className={styles.profileWrapper}>
-    <ProfileInfo profile={profile} status={status} updateStatus={updateStatus} />
+    <ProfileInfo
+      isOwner={isOwner}
+      profile={profile}
+      status={status}
+      updateStatus={updateStatus}
+      savePhoto={savePhoto}
+    />
     <MyPostContainer />
   </div>
 );
@@ -18,4 +30,6 @@ type PropsType = {
   profile: Nullable<UserProfileType>;
   status: string;
   updateStatus: (status: string) => void;
+  isOwner: boolean;
+  savePhoto: (file: File) => void;
 };

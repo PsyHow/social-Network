@@ -7,6 +7,7 @@ import {
   StatusResponseType,
   UserResponseType,
 } from 'api';
+import { SavePhotoResponseType } from 'api/api_types/api_types';
 import { UserProfileType } from 'types';
 
 export const instance = axios.create({
@@ -50,6 +51,17 @@ export const profileAPI = {
 
   updateStatus(status: string) {
     return instance.put<StatusResponseType>('profile/status', { status });
+  },
+
+  savePhoto(file: File) {
+    const formData = new FormData();
+    formData.append('image', file);
+
+    return instance.put<SavePhotoResponseType>('profile/photo', formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
   },
 };
 

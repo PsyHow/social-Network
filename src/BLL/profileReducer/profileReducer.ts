@@ -40,6 +40,11 @@ export const profileReducer = (
         ...state,
         post: state.post.filter(p => p.id !== action.id),
       };
+    case 'PROFILE/SAVE_PHOTO/SUCCESS':
+      return {
+        ...state,
+        profile: { ...state.profile, photos: action.photos } as UserProfileType,
+      };
     default:
       return state;
   }

@@ -1,4 +1,4 @@
-import { UsersType } from 'types';
+import { PhotosType, UsersType } from 'types';
 
 export type LoginRequestType = {
   resultCode: number;
@@ -30,4 +30,10 @@ export type StatusResponseType = {
   resultCode: number;
   messages: string[];
   data: {};
+};
+
+export type SavePhotoResponseType = {
+  resultCode: number;
+  messages: string[];
+  photos: PhotosType;
 };

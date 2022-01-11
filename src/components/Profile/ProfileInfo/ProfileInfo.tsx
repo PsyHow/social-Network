@@ -1,4 +1,6 @@
-import { FC, useState } from 'react';
+import { ChangeEvent, FC, useState } from 'react';
+
+import profileImg from '../../../assets/images/338-3388366_meme-for-steam-avatars-hd-png-download.png';
 
 import styles from './ProfileInfo.module.css';
 import { ProfileStatusWithHooks } from './ProfileStatusWithHook';
@@ -6,12 +8,25 @@ import { ProfileStatusWithHooks } from './ProfileStatusWithHook';
 import { Preloader } from 'components';
 import { Nullable, UserProfileType } from 'types';
 
-export const ProfileInfo: FC<PropsType> = ({ status, profile, updateStatus }) => {
+export const ProfileInfo: FC<PropsType> = ({
+  status,
+  profile,
+  updateStatus,
+  isOwner,
+  savePhoto,
+}) => {
   const [toggle, setToggle] = useState<boolean>(true);
 
   if (!profile) {
     return <Preloader />;
   }
+
+  const onMainPhotoSelected = (event: ChangeEvent<HTMLInputElement>) => {
+    if (event.target.files && event.target.files.length) {
+      // eslint-disable-next-line @typescript-eslint/no-magic-numbers
+      savePhoto(event.target.files[0]);
+    }
+  };
 
   return (
     <div className={styles.wrapper}>
@@ -50,13 +65,8 @@ export const ProfileInfo: FC<PropsType> = ({ status, profile, updateStatus }) =>
       </div>
       <div className={styles.ava}>
         <div className={styles.img}>
-          <img
-            alt="avatar"
-            src={
-              profile.photos.large ||
-              'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRpQppfBCwxxoQg3WctXTif09_hUrdIItPqnA&usqp=CAU'
-            }
-          />
+          {isOwner && <input type="file" onChange={onMainPhotoSelected} />}
+          <img alt="avatar" src={profile.photos.large || profileImg} />
         </div>
       </div>
     </div>
@@ -68,4 +78,6 @@ type PropsType = {
   profile: Nullable<UserProfileType>;
   status: string;
   updateStatus: (status: string) => void;
+  isOwner: boolean;
+  savePhoto: (file: File) => void;
 };

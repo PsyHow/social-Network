@@ -1,5 +1,6 @@
 import { profileAPI } from 'api/Api';
-import { setStatus, setUserProfile, AppThunkType } from 'BLL';
+import { AppThunkType, setStatus, setUserProfile } from 'BLL';
+import { savePhotoSuccess } from 'BLL/profileReducer/Actions';
 import { okResult } from 'constants/constants';
 
 export const SetUserProfile =
@@ -22,5 +23,14 @@ export const updateStatus =
     const response = await profileAPI.updateStatus(status);
     if (response.data.resultCode === okResult) {
       dispatch(setStatus(status));
+    }
+  };
+
+export const savePhoto =
+  (file: File): AppThunkType =>
+  async dispatch => {
+    const response = await profileAPI.savePhoto(file);
+    if (response.data.resultCode === okResult) {
+      dispatch(savePhotoSuccess(response.data.photos));
     }
   };
