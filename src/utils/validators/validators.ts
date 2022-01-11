@@ -8,3 +8,5 @@ export const maxLengthCreator = (maxLength: number) => (value: string) => {
 
   return undefined;
 };
+
+export type FieldValidatorType = (value: string) => string | undefined;

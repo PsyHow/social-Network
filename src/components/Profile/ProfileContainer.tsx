@@ -7,7 +7,7 @@ import { compose } from 'redux';
 import { Profile } from './Profile';
 
 import { AppStateType, getStatus, updateStatus } from 'BLL';
-import { getUserProfile, savePhoto } from 'BLL/profileReducer/Thunk';
+import { getUserProfile, savePhoto, saveProfile } from 'BLL/profileReducer/Thunk';
 import { getAuthID, getIsAuth, getProfile, getProfileStatus } from 'selectors';
 import { Nullable, UserProfileType } from 'types';
 
@@ -41,7 +41,7 @@ class ProfileContainer extends Component<PropsType> {
   }
 
   render() {
-    const { profile, status, updateStatus, match, savePhoto } = this.props;
+    const { profile, status, updateStatus, match, savePhoto, saveProfile } = this.props;
     return (
       <div>
         <Profile
@@ -50,6 +50,7 @@ class ProfileContainer extends Component<PropsType> {
           updateStatus={updateStatus}
           isOwner={!match.params.userId}
           savePhoto={savePhoto}
+          saveProfile={saveProfile}
         />
       </div>
     );
@@ -65,7 +66,13 @@ const mapStateToProps = (state: AppStateType): MapStateToPropsType => ({
 
 // important type compose with generic <React.ComponentType>
 export default compose<ComponentType>(
-  connect(mapStateToProps, { getUserProfile, getStatus, updateStatus, savePhoto }),
+  connect(mapStateToProps, {
+    getUserProfile,
+    getStatus,
+    updateStatus,
+    savePhoto,
+    saveProfile,
+  }),
   withRouter,
 )(ProfileContainer);
 
@@ -75,6 +82,7 @@ type MapDispatchToPropsType = {
   getStatus: (userId: number) => void;
   updateStatus: (status: string) => void;
   savePhoto: (file: File) => void;
+  saveProfile: (profile: UserProfileType) => Promise<any>;
 };
 
 type MapStateToPropsType = {

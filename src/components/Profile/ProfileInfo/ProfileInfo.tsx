@@ -6,9 +6,10 @@ import styles from './ProfileInfo.module.css';
 import { ProfileStatusWithHooks } from './ProfileStatusWithHook';
 
 import { Preloader } from 'components';
+import ProfileDataForm from 'components/Profile/ProfileInfo/ProfileDataForm';
 import { ContactsType, Nullable, UserProfileType } from 'types';
 
-const Contact = ({ contactTitle, contactValue }: ContactPropsType) => (
+export const Contact = ({ contactTitle, contactValue }: ContactPropsType) => (
   <div className={styles.contacts}>
     <b>{contactTitle}</b>
     {contactValue}
@@ -50,17 +51,14 @@ const ProfileData: FC<ProfileDataProps> = ({ profile, isOwner, goToEditMode }) =
     </div>
   </div>
 );
-const ProfileDataForm: FC<ProfileDataProps> = () => (
-  <div>
-    FORM
-  </div>
-);
+
 export const ProfileInfo: FC<PropsType> = ({
   status,
   profile,
   updateStatus,
   isOwner,
   savePhoto,
+  saveProfile,
 }) => {
   const [editMode, setEditMode] = useState<boolean>(false);
 
@@ -75,6 +73,12 @@ export const ProfileInfo: FC<PropsType> = ({
     }
   };
 
+  const onSubmit = (formData: UserProfileType) => {
+    saveProfile(formData).then(() => {
+      setEditMode(false);
+    });
+  };
+
   return (
     <div className={styles.wrapper}>
       <div className={styles.description}>
@@ -82,7 +86,11 @@ export const ProfileInfo: FC<PropsType> = ({
           <ProfileStatusWithHooks status={status} updateStatus={updateStatus} />
 
           {editMode ? (
-            <ProfileDataForm profile={profile} />
+            <ProfileDataForm
+              initialValues={profile}
+              onSubmit={onSubmit}
+              profile={profile}
+            />
           ) : (
             <ProfileData
               profile={profile}
@@ -109,6 +117,7 @@ type PropsType = {
   updateStatus: (status: string) => void;
   isOwner: boolean;
   savePhoto: (file: File) => void;
+  saveProfile: (profile: UserProfileType) => Promise<any>;
 };
 
 type ContactPropsType = {
@@ -118,6 +127,6 @@ type ContactPropsType = {
 
 type ProfileDataProps = {
   profile: UserProfileType;
-  isOwner?: boolean;
-  goToEditMode?: () => void;
+  isOwner: boolean;
+  goToEditMode: () => void;
 };

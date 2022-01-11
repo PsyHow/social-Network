@@ -12,6 +12,7 @@ export const Profile: FC<PropsType> = ({
   updateStatus,
   isOwner,
   savePhoto,
+  saveProfile,
 }) => (
   <div className={styles.profileWrapper}>
     <ProfileInfo
@@ -20,6 +21,7 @@ export const Profile: FC<PropsType> = ({
       status={status}
       updateStatus={updateStatus}
       savePhoto={savePhoto}
+      saveProfile={saveProfile}
     />
     <MyPostContainer />
   </div>
@@ -32,4 +34,5 @@ type PropsType = {
   updateStatus: (status: string) => void;
   isOwner: boolean;
   savePhoto: (file: File) => void;
+  saveProfile: (profile: UserProfileType) => Promise<any>;
 };

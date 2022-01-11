@@ -1,9 +1,11 @@
 import { FC } from 'react';
 
-import { WrappedFieldProps } from 'redux-form';
+import { Field, WrappedFieldProps } from 'redux-form';
 import { WrappedFieldMetaProps } from 'redux-form/lib/Field';
 
 import style from './FormsControl.module.css';
+
+import { FieldValidatorType } from 'utils/validators/validators';
 
 const FormControl: FC<FormControlPropsType> = ({ meta, children }) => {
   const hasError = meta.touched && meta.error;
@@ -37,7 +39,32 @@ export const Input: FC<WrappedFieldProps> = props => {
   );
 };
 
+export function createField<FormKeysType extends string>(
+  placeholder: string | undefined,
+  name: FormKeysType,
+  validators: Array<FieldValidatorType>,
+  component: FC<WrappedFieldProps>,
+  props = {},
+  text = '',
+) {
+  return (
+    <div>
+      <Field
+        placeholder={placeholder}
+        name={name}
+        validate={validators}
+        component={component}
+        // eslint-disable-next-line react/jsx-props-no-spreading
+        {...props}
+      />{' '}
+      {text}
+    </div>
+  );
+}
+
 // types
 type FormControlPropsType = {
   meta: WrappedFieldMetaProps;
 };
+
+export type GetStringKeys<T> = Extract<keyof T, string>;

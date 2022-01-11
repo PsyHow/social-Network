@@ -65,6 +65,10 @@ export const profileAPI = {
       })
       .then(res => res.data);
   },
+
+  saveProfile(profile: UserProfileType) {
+    return instance.put<APIResponseType>('profile', profile).then(res => res.data);
+  },
 };
 
 export const authAPI = {
