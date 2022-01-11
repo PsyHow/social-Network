@@ -7,7 +7,7 @@ import {
   StatusResponseType,
   UserResponseType,
 } from 'api';
-import { SavePhotoResponseType } from 'api/api_types/api_types';
+import { APIResponseType, SavePhotoResponseType } from 'api/api_types/api_types';
 import { UserProfileType } from 'types';
 
 export const instance = axios.create({
@@ -39,13 +39,13 @@ export const usersAPI = {
 };
 
 export const profileAPI = {
-  setUserProfile(userId: string) {
+  setUserProfile(userId: number) {
     return instance
       .get<UserProfileType>(`profile/${userId}`)
       .then(response => response.data);
   },
 
-  getStatus(userId: string) {
+  getStatus(userId: number) {
     return instance.get<string>(`profile/status/${userId}`);
   },
 
@@ -57,11 +57,15 @@ export const profileAPI = {
     const formData = new FormData();
     formData.append('image', file);
 
-    return instance.put<SavePhotoResponseType>('profile/photo', formData, {
-      headers: {
-        'Content-Type': 'multipart/form-data',
+    return instance.put<APIResponseType<SavePhotoResponseType>>(
+      'profile/photo',
+      formData,
+      {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
       },
-    });
+    );
   },
 };
 

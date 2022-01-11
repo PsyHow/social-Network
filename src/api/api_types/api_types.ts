@@ -37,3 +37,9 @@ export type SavePhotoResponseType = {
   messages: string[];
   photos: PhotosType;
 };
+
+export type APIResponseType<D = {}> = {
+  data: D;
+  messages: Array<string>;
+  resultCode: number;
+};

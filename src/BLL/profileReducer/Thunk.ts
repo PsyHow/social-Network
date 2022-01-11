@@ -3,15 +3,15 @@ import { AppThunkType, setStatus, setUserProfile } from 'BLL';
 import { savePhotoSuccess } from 'BLL/profileReducer/Actions';
 import { okResult } from 'constants/constants';
 
-export const SetUserProfile =
-  (userId: string): AppThunkType =>
+export const getUserProfile =
+  (userId: number): AppThunkType =>
   async dispatch => {
-    const response = await profileAPI.setUserProfile(userId);
-    dispatch(setUserProfile(response));
+    const data = await profileAPI.setUserProfile(userId);
+    dispatch(setUserProfile(data));
   };
 
 export const getStatus =
-  (userId: string): AppThunkType =>
+  (userId: number): AppThunkType =>
   async dispatch => {
     const response = await profileAPI.getStatus(userId);
     dispatch(setStatus(response.data));
@@ -29,8 +29,8 @@ export const updateStatus =
 export const savePhoto =
   (file: File): AppThunkType =>
   async dispatch => {
-    const response = await profileAPI.savePhoto(file);
-    if (response.data.resultCode === okResult) {
-      dispatch(savePhotoSuccess(response.data.photos));
+    const data = await profileAPI.savePhoto(file);
+    if (data.data.resultCode === okResult) {
+      dispatch(savePhotoSuccess(data.data.data.photos));
     }
   };

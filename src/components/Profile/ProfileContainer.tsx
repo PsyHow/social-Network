@@ -6,9 +6,8 @@ import { compose } from 'redux';
 
 import { Profile } from './Profile';
 
-import { getStatus, SetUserProfile, updateStatus, AppStateType } from 'BLL';
-import { savePhoto } from 'BLL/profileReducer/Thunk';
-import { withAuthRedirect } from 'hoc';
+import { AppStateType, getStatus, updateStatus } from 'BLL';
+import { getUserProfile, savePhoto } from 'BLL/profileReducer/Thunk';
 import { getAuthID, getIsAuth, getProfile, getProfileStatus } from 'selectors';
 import { Nullable, UserProfileType } from 'types';
 
@@ -17,7 +16,7 @@ class ProfileContainer extends Component<PropsType> {
     this.refreshProfile();
   }
 
-  componentDidUpdate(prevProps: Readonly<PropsType>) {
+  componentDidUpdate(prevProps: PropsType) {
     const { match } = this.props;
     if (match.params.userId !== prevProps.match.params.userId) {
       this.refreshProfile();
@@ -25,17 +24,20 @@ class ProfileContainer extends Component<PropsType> {
   }
 
   refreshProfile() {
-    const { match, authorizedUserId, SetUserProfile, getStatus, history } = this.props;
-
-    let { userId } = match.params;
+    const { match, authorizedUserId, history, getUserProfile, getStatus } = this.props;
+    let userId: number | null = +match.params.userId;
     if (!userId) {
-      userId = JSON.stringify(authorizedUserId);
+      userId = authorizedUserId;
       if (!userId) {
         history.push('/login');
       }
     }
-    SetUserProfile(userId);
-    getStatus(userId);
+    if (!userId) {
+      console.error("ID should exists in URI params or in state ('authorizedUserId')");
+    } else {
+      getUserProfile(userId);
+      getStatus(userId);
+    }
   }
 
   render() {
@@ -62,29 +64,30 @@ const mapStateToProps = (state: AppStateType): MapStateToPropsType => ({
 });
 
 // important type compose with generic <React.ComponentType>
-const ProfileContainerFunc = compose<ComponentType>(
-  connect(mapStateToProps, { SetUserProfile, getStatus, updateStatus, savePhoto }),
+export default compose<ComponentType>(
+  connect(mapStateToProps, { getUserProfile, getStatus, updateStatus, savePhoto }),
   withRouter,
-  withAuthRedirect,
 )(ProfileContainer);
 
 // types
-type ProfilePropsType = MapDispatchToPropsType & MapStateToPropsType;
 type MapDispatchToPropsType = {
-  SetUserProfile: (userId: string) => void;
-  getStatus: (userId: string) => void;
+  getUserProfile: (userId: number) => void;
+  getStatus: (userId: number) => void;
   updateStatus: (status: string) => void;
   savePhoto: (file: File) => void;
 };
+
 type MapStateToPropsType = {
   profile: Nullable<UserProfileType>;
   status: string;
   authorizedUserId: Nullable<number>;
   isAuth: boolean;
 };
+
 type PathParamsType = {
   userId: string;
 };
-type PropsType = RouteComponentProps<PathParamsType> & ProfilePropsType;
 
-export default ProfileContainerFunc;
+type PropsType = RouteComponentProps<PathParamsType> &
+  MapDispatchToPropsType &
+  MapStateToPropsType;
