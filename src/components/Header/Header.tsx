@@ -1,33 +1,55 @@
 import { FC } from 'react';
 
-import { NavLink } from 'react-router-dom';
+import { Avatar, Button, Col, Layout, Menu, Row } from 'antd';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 
-import style from './Header.module.css';
-
+import { logout } from 'BLL';
 import { ROUTING_PATH } from 'enums';
-import { Nullable } from 'types';
+import { selectIsAuth, selectLogin } from 'selectors';
 
-export const Header: FC<PropsType> = ({ isAuth, login, logout }) => (
-  <header className={style.header}>
-    <img alt="logo" src="https://img.icons8.com/plasticine/2x/duolingo-logo.png" />
-    <div className={style.loginBlock}>
-      {isAuth ? (
-        <div>
-          {login} -{' '}
-          <button type="button" onClick={logout}>
-            Log out
-          </button>
-        </div>
-      ) : (
-        <NavLink to={ROUTING_PATH.LOGIN}>Login</NavLink>
-      )}
-    </div>
-  </header>
-);
+export const Header: FC = () => {
+  const isAuth = useSelector(selectIsAuth);
+  const login = useSelector(selectLogin);
+  const dispatch = useDispatch();
 
-// types
-type PropsType = {
-  isAuth: boolean;
-  login: Nullable<string>;
-  logout: () => void;
+  const { Header } = Layout;
+
+  const logoutHandle = () => {
+    dispatch(logout());
+  };
+
+  return (
+    <Header className="header">
+      <div className="logo" />
+      <Row>
+        <Col span={18}>
+          <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['2']}>
+            <Menu.Item key="1">
+              <Link to={ROUTING_PATH.USERS}>Users</Link>
+            </Menu.Item>
+          </Menu>
+        </Col>
+
+        {isAuth ? (
+          <>
+            <Col span={2}>
+              <Avatar alt={login || ''} size={40}>
+                Daddy
+              </Avatar>
+            </Col>
+            <Col span={4}>
+              <Button onClick={logoutHandle}>Log out</Button>
+            </Col>
+          </>
+        ) : (
+          <Col span={6}>
+            <Button>
+              <Link to={ROUTING_PATH.LOGIN}>Login</Link>
+            </Button>
+          </Col>
+        )}
+      </Row>
+    </Header>
+  );
 };

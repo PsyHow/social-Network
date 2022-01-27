@@ -1,1 +1,1 @@
-export { HeaderContainerFunc } from 'components/Header/HeaderContainerFunc';
+export { Header } from './Header';

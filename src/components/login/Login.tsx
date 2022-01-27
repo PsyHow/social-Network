@@ -29,7 +29,7 @@ const MapStateToProps = (state: AppStateType): MapStateToPropsType => ({
   captchaUrl: state.auth.captchaUrl,
 });
 
-const LoginContainer = connect(MapStateToProps, { login, logout })(Login);
+export const LoginContainer = connect(MapStateToProps, { login, logout })(Login);
 
 // types
 type MapDispatchToPropsType = {
@@ -40,5 +40,3 @@ type MapStateToPropsType = {
   captchaUrl: Nullable<string>;
 };
 type LoginPropsType = MapDispatchToPropsType & MapStateToPropsType;
-
-export default LoginContainer;

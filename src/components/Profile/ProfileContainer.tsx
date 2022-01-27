@@ -8,10 +8,10 @@ import { Profile } from './Profile';
 
 import { AppStateType, getStatus, updateStatus } from 'BLL';
 import { getUserProfile, savePhoto, saveProfile } from 'BLL/profileReducer/Thunk';
-import { getAuthID, getIsAuth, getProfile, getProfileStatus } from 'selectors';
+import { selectAuthID, selectIsAuth, getProfile, getProfileStatus } from 'selectors';
 import { Nullable, UserProfileType } from 'types';
 
-class ProfileContainer extends Component<PropsType> {
+class ProfileClassContainer extends Component<PropsType> {
   componentDidMount() {
     this.refreshProfile();
   }
@@ -60,12 +60,12 @@ class ProfileContainer extends Component<PropsType> {
 const mapStateToProps = (state: AppStateType): MapStateToPropsType => ({
   profile: getProfile(state),
   status: getProfileStatus(state),
-  authorizedUserId: getAuthID(state),
-  isAuth: getIsAuth(state),
+  authorizedUserId: selectAuthID(state),
+  isAuth: selectIsAuth(state),
 });
 
 // important type compose with generic <React.ComponentType>
-export default compose<ComponentType>(
+export const ProfileContainer = compose<ComponentType>(
   connect(mapStateToProps, {
     getUserProfile,
     getStatus,
@@ -74,7 +74,7 @@ export default compose<ComponentType>(
     saveProfile,
   }),
   withRouter,
-)(ProfileContainer);
+)(ProfileClassContainer);
 
 // types
 type MapDispatchToPropsType = {

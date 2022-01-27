@@ -1,25 +1,29 @@
-import { Component, ComponentType, lazy, Suspense } from 'react';
+import { Component, ComponentType } from 'react';
 
+import 'antd/dist/antd.css';
 import './App.css';
+import { LaptopOutlined, UserOutlined } from '@ant-design/icons';
+import { Breadcrumb, Layout, Menu } from 'antd';
 import { connect } from 'react-redux';
-import { Route, withRouter } from 'react-router-dom';
+import { Link, Route, withRouter } from 'react-router-dom';
 import { compose } from 'redux';
 
 import { AppStateType, initializeApp } from 'BLL';
 import {
-  UserContainerFunc,
-  HeaderContainerFunc,
+  Header,
   Music,
-  Nav,
   News,
   Preloader,
   Settings,
+  UserContainerFunc,
+  DialogsContainer,
+  LoginContainer,
+  ProfileContainer,
 } from 'components';
 import { ROUTING_PATH } from 'enums';
 
-const DialogsContainer = lazy(() => import('components/Dialogs/DialogsContainer'));
-const ProfileContainerFunc = lazy(() => import('components/Profile/ProfileContainer'));
-const LoginContainer = lazy(() => import('components/login/Login'));
+const { SubMenu } = Menu;
+const { Content, Footer, Sider } = Layout;
 
 class App extends Component<AppPropsType> {
   componentDidMount() {
@@ -33,26 +37,53 @@ class App extends Component<AppPropsType> {
       return <Preloader />;
     }
     return (
-      <div className="app-wrapper">
-        <HeaderContainerFunc />
-        <Nav />
-        <div className="app-wrapper-content">
-          <Suspense fallback={<Preloader />}>
-            <section>
+      <Layout>
+        <Header />
+        <Content style={{ padding: '0 50px' }}>
+          <Breadcrumb style={{ margin: '16px 0' }}>
+            <Breadcrumb.Item>Home</Breadcrumb.Item>
+            <Breadcrumb.Item>List</Breadcrumb.Item>
+            <Breadcrumb.Item>App</Breadcrumb.Item>
+          </Breadcrumb>
+          <Layout className="site-layout-background" style={{ padding: '24px 0' }}>
+            <Sider className="site-layout-background" width={200}>
+              <Menu mode="inline" style={{ height: '100%' }}>
+                <SubMenu key="sub1" icon={<UserOutlined />} title="My Profile">
+                  <Menu.Item key="1">
+                    <Link to={ROUTING_PATH.PROFILE}>Profile</Link>
+                  </Menu.Item>
+                  <Menu.Item key="2">
+                    <Link to={ROUTING_PATH.DIALOGS}>Messages</Link>
+                  </Menu.Item>
+                  <Menu.Item key="3">
+                    <Link to={ROUTING_PATH.NEWS}>News</Link>
+                  </Menu.Item>
+                </SubMenu>
+                <SubMenu key="sub2" icon={<LaptopOutlined />} title="Users">
+                  <Menu.Item key="5">
+                    <Link to={ROUTING_PATH.USERS}>Users</Link>
+                  </Menu.Item>
+                </SubMenu>
+              </Menu>
+            </Sider>
+            <Content style={{ padding: '0 24px', minHeight: 280 }}>
               <Route path={ROUTING_PATH.DIALOGS} render={() => <DialogsContainer />} />
               <Route
                 path={`${ROUTING_PATH.PROFILE}:userId?`}
-                render={() => <ProfileContainerFunc />}
+                render={() => <ProfileContainer />}
               />
               <Route path={ROUTING_PATH.LOGIN} render={() => <LoginContainer />} />
-            </section>
-          </Suspense>
-          <Route path={ROUTING_PATH.USERS} render={() => <UserContainerFunc />} />
-          <Route path={ROUTING_PATH.NEWS} component={News} />
-          <Route path={ROUTING_PATH.SETTINGS} component={Settings} />
-          <Route path={ROUTING_PATH.MUSIC} component={Music} />
-        </div>
-      </div>
+              <Route path={ROUTING_PATH.USERS} render={() => <UserContainerFunc />} />
+              <Route path={ROUTING_PATH.NEWS} component={News} />
+              <Route path={ROUTING_PATH.SETTINGS} component={Settings} />
+              <Route path={ROUTING_PATH.MUSIC} component={Music} />
+            </Content>
+          </Layout>
+        </Content>
+        <Footer style={{ textAlign: 'center' }}>
+          Ant Design ©2018 Created by Ant UED
+        </Footer>
+      </Layout>
     );
   }
 }
